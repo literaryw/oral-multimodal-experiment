@@ -11,7 +11,7 @@ import copy
 _PROJ = Path(__file__).resolve().parent.parent
 DATA_DIR = _PROJ / "data/TCGA-HNSC/integrated"
 OUT_DIR = _PROJ / "data/TCGA-HNSC/experiment_outputs"
-FIG_DIR = _PROJ / "paper/figures"
+FIG_DIR = _PROJ / "paper"
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 FIG_DIR.mkdir(parents=True, exist_ok=True)
 RANDOM_SEED = 42

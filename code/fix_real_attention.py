@@ -12,7 +12,7 @@ _PROJ = Path(__file__).resolve().parent.parent
 DATA_DIR = _PROJ / "data/TCGA-HNSC/integrated"
 OUT_DIR = _PROJ / "data/TCGA-HNSC/experiment_outputs"
 OUT_DIR.mkdir(parents=True, exist_ok=True)
-FIG_DIR = _PROJ / "paper/figures"
+FIG_DIR = _PROJ / "paper"
 RANDOM_SEED = 42
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 torch.manual_seed(RANDOM_SEED); np.random.seed(RANDOM_SEED)

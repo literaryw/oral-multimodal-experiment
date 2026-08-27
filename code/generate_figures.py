@@ -10,7 +10,7 @@ from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 from pathlib import Path
 
 _PROJ = Path(__file__).resolve().parent.parent
-FIG_DIR = _PROJ / "paper/figures"
+FIG_DIR = _PROJ / "paper"
 OUT_DIR = _PROJ / "data/TCGA-HNSC/experiment_outputs"
 FIG_DIR.mkdir(parents=True, exist_ok=True)
 
