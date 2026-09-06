@@ -57,6 +57,8 @@ python code\dndf_experiment.py
 
 ### Step 4: 真实性审计
 
+> ⚠️ **论文数值已绑定存档**：`fix_real_gradcam/fix_real_attention/fix_dndf_and_mi` 含非确定性训练与 MI 估计，重跑会产生与正文数值漂移的图并覆盖 `experiment_outputs/` 存档（2026-09-06 曾因此覆盖 MI json，已从 git 历史恢复）。**投稿期间勿重跑**；复现实验请只跑 Step 1-3 与 Step 6（这些协议已固定种子）。
+
 ```powershell
 # 真实Grad-CAM热图 (替代随机噪声)
 python code\fix_real_gradcam.py
@@ -64,22 +66,23 @@ python code\fix_real_gradcam.py
 # 真实Attention权重 (替代硬编码)
 python code\fix_real_attention.py
 
-# 真实DNDF参数 + 互信息计算
+# 真实DNDF参数 + 互信息计算 (MI输出带日期戳文件名, 不覆盖正文绑定版本)
 python code\fix_dndf_and_mi.py
 
 # 保存所有实验输出为JSON
 python code\save_experiment_outputs.py
 ```
 
-产出: `data/TCGA-HNSC/experiment_outputs/`
+产出: `data/TCGA-HNSC/experiment_outputs/`（正文绑定版本已入库 git）
 
 ### Step 5: 论文配图
 
 ```powershell
-# Fig1-4: 架构图/混淆矩阵/性能对比/消融
+# Fig1: 架构图
 python code\generate_figures.py
 
-# Fig5-7 已在Step 4中由各审计脚本独立生成(fix_real_*.py直接输出到paper/根目录)
+# Fig2-4 (文本权重/ DNDF路由 / Grad-CAM+MI) 已在Step 4中由各审计脚本独立生成
+# (fix_real_*.py 直接输出到paper/根目录, 文件名与正文 Figure 2-4 对齐)
 ```
 
 产出: `paper/` (配图与 main_cbm.tex 同目录)
