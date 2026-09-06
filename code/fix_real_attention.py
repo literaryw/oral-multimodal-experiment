@@ -188,9 +188,9 @@ def train_and_extract_attention():
     ax.legend(handles=legend_elements, loc='upper right', fontsize=10)
 
     plt.tight_layout()
-    plt.savefig(FIG_DIR / 'fig5_text_weights.pdf')
+    plt.savefig(FIG_DIR / 'fig2_text_weights.pdf')
     plt.close()
-    print(f"\n  Fig 5 (REAL text weights) saved to {FIG_DIR}")
+    print(f"\n  Fig 2 (REAL text weights) saved to {FIG_DIR}")
 
     # 保存模型
     torch.save(model.state_dict(), OUT_DIR / "text_attention_model.pt")
