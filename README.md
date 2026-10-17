@@ -116,6 +116,45 @@ python code\learning_curves_multiseed.py
 
 Output: `data/TCGA-HNSC/experiment_outputs/*.json` (the RNG is reset per model before each CV run; see each script's header comment for the protocol)
 
+### Step 7: Protocol-Controlled Re-run (the results reported in the paper)
+
+The manuscript's tables are produced by the `attention_v2_*` pipeline, which re-runs the whole comparison under nested cross-validation: early stopping is decided on an inner split of each training fold, and the held-out fold is touched only to compute the reported metrics. Run in this order:
+
+```powershell
+# 7a. Age units: render TCGA age_at_diagnosis (recorded in days) as whole years
+python code\fix_age_units.py
+
+# 7b. Feature bundle: token-level text embeddings + patch sequences
+#     (writes data/TCGA-HNSC/attention_v2/; the .npz payloads are ~96 MB and not committed)
+python code\prep_attention_v2.py
+
+# 7c. Main grid: 3 cohorts x 5 configurations x 3 seeds x 5 folds
+python code\attention_v2_experiments.py                               # full grid
+python code\attention_v2_experiments.py --cohort strict --seeds 42    # smoke test
+
+# 7d. Text ablations, cross-modality MI, leave-one-group-out, modality dropout
+python code\attention_v2_aux.py
+python code\attention_v2_loso_moddrop.py
+
+# 7e. Representation-matched controls, structured baseline, matched MI, skip-path ablation
+python code\attention_v2_rep_match.py
+python code\attention_v2_structured_baseline.py
+python code\attention_v2_mi_matched.py
+python code\attention_v2_skip_ablation.py
+
+# 7f. Per-sample McNemar, all-metric paired bootstrap, table bodies
+python code\attention_v2_analysis.py
+python code\attention_v2_tables.py
+
+# 7g. Figures 1 and 4
+python code\fig1_regenerate.py
+python code\fig4_regenerate.py
+```
+
+Output: `data/TCGA-HNSC/experiment_outputs/attention_v2_*.json`. Every file stores per-fold metrics **and** per-sample out-of-fold predictions and probabilities, so the exact McNemar tests, the paired bootstrap intervals and the PR-AUC values can be recomputed without retraining.
+
+**Environment used for the reported numbers**: `torch 2.12.0+cu126` on an NVIDIA RTX 4060, with `cudnn.deterministic = True` and the cuDNN autotuner disabled. BiomedBERT feature extraction runs on CPU. The seed is reset before every model's cross-validation loop, and one seed determines both the fold partition and the initialization (see the manuscript's Section 3.7 for why this makes the seed-to-seed spread an upper bound on initialization variance).
+
 ## File Inventory
 
 | Script                            | Stage       | Purpose                                          |
@@ -147,3 +186,17 @@ Output: `data/TCGA-HNSC/experiment_outputs/*.json` (the RNG is reset per model b
 | `gradcam_oral_expanded.py`        | Audit       | Extended Grad-CAM (G1/G3 + faithfulness)         |
 | `save_experiment_outputs.py`      | Audit       | Experiment output JSON export                    |
 | `generate_figures.py`             | Figures     | Fig 1-4 generation (loaded from JSON)            |
+| `fix_age_units.py`                | R16-R20     | Age in years rather than TCGA days               |
+| `prep_attention_v2.py`            | R16-R20     | Token-level text + patch-sequence bundle         |
+| `attention_v2_models.py`          | R16-R20     | Model definitions (degenerate + genuine heads)   |
+| `attention_v2_experiments.py`     | R16-R20     | 3 cohorts x 5 configurations x 3 seeds, nested CV |
+| `attention_v2_aux.py`             | R16-R20     | Text ablations + cross-modality MI               |
+| `attention_v2_loso_moddrop.py`    | R16-R20     | Leave-one-group-out + modality dropout           |
+| `attention_v2_rep_match.py`       | R16-R20     | Representation-matched controls + parameter counts |
+| `attention_v2_structured_baseline.py` | R16-R20 | Structured-data baseline (with / without diagnosis) |
+| `attention_v2_mi_matched.py`      | R16-R20     | Dimension-matched mutual information             |
+| `attention_v2_skip_ablation.py`   | R16-R20     | Cross-attention skip-path ablation (parameter-matched) |
+| `attention_v2_analysis.py`        | R16-R20     | Per-sample McNemar + all-metric bootstrap        |
+| `attention_v2_tables.py`          | R16-R20     | LaTeX table bodies                               |
+| `fig1_regenerate.py`              | R16-R20     | Figure 1 (evaluated configurations + protocol)   |
+| `fig4_regenerate.py`              | R16-R20     | Figure 4 (Grad-CAM panels + MI matrix)           |

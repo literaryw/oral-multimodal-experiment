@@ -1,0 +1,13 @@
+{
+  "n_samples": 499,
+  "n_low_grade": 370,
+  "n_high_grade": 129,
+  "n_g1": 62,
+  "n_g2": 308,
+  "n_g3": 122,
+  "n_g4": 7,
+  "img_dim": 1024,
+  "text_dim": 768,
+  "random_seed": 42,
+  "cv_folds": 5
+}

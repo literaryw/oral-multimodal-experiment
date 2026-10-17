@@ -1,0 +1,151 @@
+{
+  "method": "Leave-One-Anatomic-Group-Out (4-fold)",
+  "groups": {
+    "0": "Tongue",
+    "1": "Floor of Mouth",
+    "2": "Buccal+Mouth",
+    "3": "Gingiva+Palate+Lip"
+  },
+  "group_sizes": {
+    "Tongue": 131,
+    "Floor of Mouth": 56,
+    "Buccal+Mouth": 41,
+    "Gingiva+Palate+Lip": 18
+  },
+  "Image-Only (UNI)": {
+    "Tongue": {
+      "n_test": 131,
+      "n_high_test": 24,
+      "accuracy": 0.6946564885496184,
+      "high_f1": 0.3103448275862069,
+      "low_f1": 0.803921568627451,
+      "auc": 0.5989096573208723
+    },
+    "Floor of Mouth": {
+      "n_test": 56,
+      "n_high_test": 12,
+      "accuracy": 0.6071428571428571,
+      "high_f1": 0.15384615384615385,
+      "low_f1": 0.7441860465116279,
+      "auc": 0.3712121212121212
+    },
+    "Buccal+Mouth": {
+      "n_test": 41,
+      "n_high_test": 6,
+      "accuracy": 0.6097560975609756,
+      "high_f1": 0.2,
+      "low_f1": 0.7419354838709677,
+      "auc": 0.48095238095238096
+    },
+    "Gingiva+Palate+Lip": {
+      "n_test": 18,
+      "n_high_test": 7,
+      "accuracy": 0.6666666666666666,
+      "high_f1": 0.5,
+      "low_f1": 0.75,
+      "auc": 0.5844155844155843
+    }
+  },
+  "Text-Only (BiomedBERT)": {
+    "Tongue": {
+      "n_test": 131,
+      "n_high_test": 24,
+      "accuracy": 0.816793893129771,
+      "high_f1": 0.25,
+      "low_f1": 0.8956521739130435,
+      "auc": 0.5389408099688474
+    },
+    "Floor of Mouth": {
+      "n_test": 56,
+      "n_high_test": 12,
+      "accuracy": 0.625,
+      "high_f1": 0.46153846153846156,
+      "low_f1": 0.7123287671232876,
+      "auc": 0.6401515151515151
+    },
+    "Buccal+Mouth": {
+      "n_test": 41,
+      "n_high_test": 6,
+      "accuracy": 0.8048780487804879,
+      "high_f1": 0.5555555555555556,
+      "low_f1": 0.875,
+      "auc": 0.8428571428571429
+    },
+    "Gingiva+Palate+Lip": {
+      "n_test": 18,
+      "n_high_test": 7,
+      "accuracy": 0.7777777777777778,
+      "high_f1": 0.75,
+      "low_f1": 0.8,
+      "auc": 0.8311688311688311
+    }
+  },
+  "Cross-Attention Fusion": {
+    "Tongue": {
+      "n_test": 131,
+      "n_high_test": 24,
+      "accuracy": 0.816793893129771,
+      "high_f1": 0.0,
+      "low_f1": 0.8991596638655462,
+      "auc": 0.4700155763239876
+    },
+    "Floor of Mouth": {
+      "n_test": 56,
+      "n_high_test": 12,
+      "accuracy": 0.7678571428571429,
+      "high_f1": 0.3157894736842105,
+      "low_f1": 0.8602150537634409,
+      "auc": 0.634469696969697
+    },
+    "Buccal+Mouth": {
+      "n_test": 41,
+      "n_high_test": 6,
+      "accuracy": 0.8536585365853658,
+      "high_f1": 0.0,
+      "low_f1": 0.9210526315789473,
+      "auc": 0.3904761904761905
+    },
+    "Gingiva+Palate+Lip": {
+      "n_test": 18,
+      "n_high_test": 7,
+      "accuracy": 0.6111111111111112,
+      "high_f1": 0.0,
+      "low_f1": 0.7586206896551724,
+      "auc": 0.35064935064935066
+    }
+  },
+  "Late Fusion": {
+    "Tongue": {
+      "n_test": 131,
+      "n_high_test": 24,
+      "accuracy": 0.2748091603053435,
+      "high_f1": 0.3262411347517731,
+      "low_f1": 0.21487603305785125,
+      "auc": 0.5743769470404985
+    },
+    "Floor of Mouth": {
+      "n_test": 56,
+      "n_high_test": 12,
+      "accuracy": 0.7678571428571429,
+      "high_f1": 0.23529411764705882,
+      "low_f1": 0.8631578947368421,
+      "auc": 0.6628787878787878
+    },
+    "Buccal+Mouth": {
+      "n_test": 41,
+      "n_high_test": 6,
+      "accuracy": 0.8536585365853658,
+      "high_f1": 0.0,
+      "low_f1": 0.9210526315789473,
+      "auc": 0.6428571428571428
+    },
+    "Gingiva+Palate+Lip": {
+      "n_test": 18,
+      "n_high_test": 7,
+      "accuracy": 0.6111111111111112,
+      "high_f1": 0.2222222222222222,
+      "low_f1": 0.7407407407407407,
+      "auc": 0.41558441558441556
+    }
+  }
+}
