@@ -1,0 +1,77 @@
+{
+  "crossattn": {
+    "accuracy": 0.6910569105691057,
+    "auc": 0.46110017611105353,
+    "brier": 0.2321046299249418,
+    "ece": 0.265710895987061,
+    "high_prob_stats": {
+      "actual_high_mean": 0.46274131354020565,
+      "actual_high_std": 0.03726032348485564,
+      "actual_low_mean": 0.46543429466673564,
+      "actual_low_std": 0.03265599134671453
+    },
+    "temperature_scaling": {
+      "best_t": 1.0,
+      "auc_after": 0.46110017611105353,
+      "ece_after": 0.265710895987061
+    },
+    "calibration_curve": {
+      "frac_positive": [
+        0.2019704433497537,
+        0.18604651162790697
+      ],
+      "mean_predicted": [
+        0.45290774620812513,
+        0.5215025100597116
+      ]
+    }
+  },
+  "textonly": {
+    "accuracy": 0.7113821138211383,
+    "auc": 0.5442867502330881,
+    "brier": 0.22717927080270575,
+    "ece": 0.2200081309654307,
+    "high_prob_stats": {
+      "actual_high_mean": 0.3698469873551013,
+      "actual_high_std": 0.27481292821255116,
+      "actual_low_mean": 0.32413804791377254,
+      "actual_low_std": 0.24711604521014635
+    },
+    "temperature_scaling": {
+      "best_t": 1.0,
+      "auc_after": 0.5442867502330881,
+      "ece_after": 0.2200081309654307
+    },
+    "calibration_curve": {
+      "frac_positive": [
+        0.22033898305084745,
+        0.15151515151515152,
+        0.125,
+        0.18518518518518517,
+        0.03225806451612903,
+        0.4583333333333333,
+        0.3076923076923077,
+        0.14285714285714285,
+        0.2857142857142857,
+        0.3333333333333333
+      ],
+      "mean_predicted": [
+        0.045371383932711146,
+        0.14396779239177704,
+        0.23642758978530765,
+        0.35305490648304977,
+        0.44646228225000445,
+        0.5525813351074854,
+        0.6349572264231168,
+        0.7530538184302193,
+        0.8457898667880467,
+        0.9386124014854431
+      ]
+    }
+  },
+  "_interpretation": {
+    "auc_gap": "CrossAttn AUC 0.461 vs TextOnly AUC 0.544",
+    "root_cause": "CrossAttn outputs High-Grade probability near 0 for almost all samples. Mean High-Grade prob: Low-Grade samples=0.4654, High-Grade samples=0.4627. The model collapses to predict Low-Grade; argmax is correct for Low-Grade cases but the probability ordering within High-Grade cases is random \u2192 AUC < 0.5.",
+    "temperature_scaling_verdict": "Temperature scaling cannot fix fundamentally collapsed probabilities (AUC: 0.461 -> 0.461)."
+  }
+}

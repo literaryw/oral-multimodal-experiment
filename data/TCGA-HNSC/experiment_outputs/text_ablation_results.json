@@ -1,0 +1,59 @@
+{
+  "Full (diagnosis + TNM + demographics)": {
+    "accuracy": 0.6954,
+    "macro_f1": 0.6027,
+    "auc": 0.6188,
+    "low_f1": 0.7946,
+    "high_f1": 0.4109,
+    "confusion_matrix": [
+      [
+        294,
+        76
+      ],
+      [
+        76,
+        53
+      ]
+    ]
+  },
+  "TNM only": {
+    "accuracy": 0.5952,
+    "macro_f1": 0.5354,
+    "auc": 0.5574,
+    "low_f1": 0.7021,
+    "high_f1": 0.3688,
+    "confusion_matrix": [
+      [
+        238,
+        132
+      ],
+      [
+        70,
+        59
+      ]
+    ]
+  },
+  "Demographics only (age, gender)": {
+    "accuracy": 0.6593,
+    "macro_f1": 0.5704,
+    "auc": 0.5943,
+    "low_f1": 0.7658,
+    "high_f1": 0.375,
+    "confusion_matrix": [
+      [
+        278,
+        92
+      ],
+      [
+        78,
+        51
+      ]
+    ]
+  },
+  "_metadata": {
+    "dataset": "TCGA-HNSC full cohort (n=499, Low=370/High=129)",
+    "protocol": "per-variant RNG reset (seed=42), pooled 5-fold CV",
+    "method": "TNM-only / demographics-only texts are verbatim substrings of the recovered original clinical text (text_metadata.csv), re-encoded with the original BiomedBERT settings (CLS, max_length=256); Full row reuses the main-table text features",
+    "full_reconstruction_cosine_mean": 1.0
+  }
+}

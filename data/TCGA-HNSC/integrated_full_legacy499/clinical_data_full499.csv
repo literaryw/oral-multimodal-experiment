@@ -1,0 +1,769 @@
+case_id,primary_diagnosis,tumor_grade,ajcc_stage,ajcc_t,ajcc_n,ajcc_m,age_at_diagnosis,gender,race
+TCGA-BB-4227,"Squamous cell carcinoma, NOS",,,,,,24407.0,male,white
+TCGA-BB-4227,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N2b,,24322.0,male,white
+TCGA-CR-6478,"Squamous cell carcinoma, NOS",G3,,,,,24244.0,female,white
+TCGA-CR-6478,"Squamous cell carcinoma, NOS",,,,,,,female,white
+TCGA-BB-4228,"Squamous cell carcinoma, NOS",GX,Stage III,T3,NX,,18536.0,male,white
+TCGA-BA-4075,"Squamous cell carcinoma, NOS",G2,Stage III,T3,N0,M0,17951.0,male,black or african american
+TCGA-BA-4075,"Squamous cell carcinoma, NOS",,Stage IVA,T4a,N1,M0,,male,black or african american
+TCGA-BA-4075,"Squamous cell carcinoma, NOS",,,,,,18187.0,male,black or african american
+TCGA-CX-7082,"Squamous cell carcinoma, NOS",,Stage I,T1a,N0,M0,,male,white
+TCGA-CX-7082,"Squamous cell carcinoma, NOS",G2,Stage IVA,T2,N2b,,30174.0,male,white
+TCGA-CN-6997,"Squamous cell carcinoma, NOS",,Stage IVA,T3,N2c,M0,24319.0,male,white
+TCGA-CN-6997,"Squamous cell carcinoma, NOS",G3,Stage IVA,T3,N2c,,24298.0,male,white
+TCGA-CN-6997,Not Reported,,,,,,,male,white
+TCGA-CN-6997,"Squamous cell carcinoma, NOS",,,,,,24577.0,male,white
+TCGA-DQ-5629,Not Reported,,,,,,,male,white
+TCGA-DQ-5629,"Squamous cell carcinoma, NOS",G2,,TX,NX,,23550.0,male,white
+TCGA-BB-4224,"Squamous cell carcinoma, NOS",,,,,,19294.0,male,white
+TCGA-BB-4224,"Squamous cell carcinoma, NOS",G2,Stage IVA,T2,N2b,,19119.0,male,white
+TCGA-CQ-A4C7,"Squamous cell carcinoma, NOS",,,,,,32401.0,male,white
+TCGA-CQ-A4C7,"Squamous cell carcinoma, NOS",G3,Stage III,T3,N1,M0,32194.0,male,white
+TCGA-CQ-A4C7,Not Reported,,,,,,,male,white
+TCGA-BA-4077,"Squamous cell carcinoma, NOS",,Stage IVA,T4,N2a,M0,,female,white
+TCGA-BA-4077,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N0,M0,16536.0,female,white
+TCGA-BA-6871,Clear cell carcinoma,,,,,,,male,white
+TCGA-BA-6871,Not Reported,,,,,,,male,white
+TCGA-BA-6871,"Squamous cell carcinoma, NOS",G2,,TX,NX,,27708.0,male,white
+TCGA-CN-6024,"Squamous cell carcinoma, NOS",,,,,,24415.0,male,white
+TCGA-CN-6024,"Adenocarcinoma, NOS",,,,,,,male,white
+TCGA-CN-6024,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N2c,M0,24259.0,male,white
+TCGA-CV-7406,"Squamous cell carcinoma, NOS",GX,Stage II,T2,N0,,18250.0,male,white
+TCGA-DQ-7588,"Squamous cell carcinoma, NOS",,,,,,24185.0,male,white
+TCGA-DQ-7588,Not Reported,,,,,,,male,white
+TCGA-DQ-7588,"Squamous cell carcinoma, NOS",G3,,TX,NX,,24106.0,male,white
+TCGA-DQ-7588,"Squamous cell carcinoma, NOS",,,,,,24429.0,male,white
+TCGA-CQ-7067,"Squamous cell carcinoma, NOS",G3,Stage I,T1,N0,,27707.0,female,white
+TCGA-CQ-7067,Not Reported,,,,,,,female,white
+TCGA-CQ-6221,"Follicular lymphoma, NOS",,,,,,,male,white
+TCGA-CQ-6221,"Malignant lymphoma, large B-cell, diffuse, NOS",,,,,,,male,white
+TCGA-CQ-6221,"Squamous cell carcinoma, NOS",G3,,T2,NX,,29026.0,male,white
+TCGA-IQ-7631,"Squamous cell carcinoma, NOS",G1,Stage II,T2,N0,,22151.0,female,white
+TCGA-CV-7416,"Squamous cell carcinoma, NOS",GX,Stage IVA,T4a,,,10936.0,female,white
+TCGA-CV-7568,"Squamous cell carcinoma, NOS",GX,Stage IVA,T4a,NX,,17670.0,female,white
+TCGA-BB-4223,"Squamous cell carcinoma, NOS",G3,Stage IVA,T2,N2b,M0,17608.0,male,white
+TCGA-CQ-6225,"Squamous cell carcinoma, NOS",G2,Stage III,T3,N0,,23988.0,male,white
+TCGA-CQ-6225,"Squamous cell carcinoma, NOS",,,,,,24168.0,male,white
+TCGA-CV-7437,"Squamous cell carcinoma, NOS",GX,Stage II,T2,NX,,28221.0,male,not reported
+TCGA-DQ-7589,Not Reported,,,,,,,male,white
+TCGA-DQ-7589,"Squamous cell carcinoma, NOS",G4,,TX,NX,,25606.0,male,white
+TCGA-CV-7440,"Squamous cell carcinoma, NOS",GX,Stage II,T2,NX,,13992.0,male,white
+TCGA-CR-6472,"Papillary adenocarcinoma, NOS",,,,,,,male,white
+TCGA-CR-6472,"Squamous cell carcinoma, NOS",G3,,,,,21654.0,male,white
+TCGA-CX-7219,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N2c,,17222.0,male,black or african american
+TCGA-CX-7219,"Papillary carcinoma, follicular variant",,,,,,,male,black or african american
+TCGA-HD-7229,"Squamous cell carcinoma, NOS",,,,,,22238.0,male,white
+TCGA-HD-7229,"Squamous cell carcinoma, NOS",G3,Stage IVA,T4a,N0,,22076.0,male,white
+TCGA-HD-7229,"Squamous cell carcinoma, NOS",,,,,,22238.0,male,white
+TCGA-BA-5557,Not Reported,,,,,,,female,not reported
+TCGA-BA-5557,"Squamous cell carcinoma, NOS",G2,Stage III,T1,N1,,15247.0,female,not reported
+TCGA-CN-6992,"Papillary adenocarcinoma, NOS",,,,,,,male,white
+TCGA-CN-6992,"Squamous cell carcinoma, NOS",G2,Stage IVA,T3,N2b,,22598.0,male,white
+TCGA-HD-8635,"Squamous cell carcinoma, NOS",,Stage 0,Tis,,,22096.0,female,white
+TCGA-HD-8635,"Squamous cell carcinoma, NOS",G2,Stage III,T1,N1,MX,22340.0,female,white
+TCGA-BA-6870,"Squamous cell carcinoma, NOS",G2,,TX,NX,,22222.0,female,black or african american
+TCGA-CQ-7068,Not Reported,,,,,,30678.0,female,white
+TCGA-CQ-7068,"Squamous cell carcinoma, NOS",G2,Stage II,T2,N0,,29530.0,female,white
+TCGA-CQ-7068,"Squamous cell carcinoma, NOS",,,T1,NX,M0,,female,white
+TCGA-CV-7410,"Squamous cell carcinoma, NOS",GX,Stage III,T2,N1,,22302.0,male,white
+TCGA-BA-5559,"Squamous cell carcinoma, NOS",,,,,,,male,white
+TCGA-BA-5559,Not Reported,,,,,,28141.0,male,white
+TCGA-BA-5559,"Squamous cell carcinoma, NOS",,,,,,27900.0,male,white
+TCGA-BA-5559,"Squamous cell carcinoma, NOS",G3,,TX,NX,,26286.0,male,white
+TCGA-HD-8634,"Squamous cell carcinoma, NOS",G2,Stage I,T1,N0,MX,18718.0,female,white
+TCGA-HD-8634,Not Reported,,,,,,,female,white
+TCGA-CQ-5323,"Squamous cell carcinoma, NOS",G2,Stage I,T1,N0,,30173.0,male,white
+TCGA-CQ-5323,"Verrucous carcinoma, NOS",,Stage II,T2,N0,M0,,male,white
+TCGA-DQ-7593,"Squamous cell carcinoma, NOS",G4,,TX,NX,,21439.0,male,white
+TCGA-DQ-7593,"Melanoma, NOS",,,,,,,male,white
+TCGA-BB-4225,"Squamous cell carcinoma, NOS",G3,,TX,NX,,26687.0,male,white
+TCGA-CN-6021,"Squamous cell carcinoma, NOS",G2,,TX,NX,,23212.0,female,white
+TCGA-CN-6021,Combined small cell carcinoma,,Stage I,T1,N0,M0,,female,white
+TCGA-CN-6023,"Papillary adenocarcinoma, NOS",,Stage IVA,T1a,N1b,M0,,male,white
+TCGA-CN-6023,"Squamous cell carcinoma, NOS",GX,Stage IVA,T3,N2c,M0,26769.0,male,white
+TCGA-CN-4727,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N0,,20748.0,male,white
+TCGA-CN-4727,"Papillary adenocarcinoma, NOS",,Stage IV,TX,N1,M0,,male,white
+TCGA-CN-6022,"Squamous cell carcinoma, NOS",,,,,,18072.0,male,white
+TCGA-CN-6022,"Squamous cell carcinoma, NOS",G3,Stage IVA,T4a,N1,M0,17971.0,male,white
+TCGA-CN-6022,"Papillary adenocarcinoma, NOS",,Stage I,T1a,N0,M0,,male,white
+TCGA-CV-7089,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N2c,,27149.0,male,white
+TCGA-F7-A620,"Squamous cell carcinoma, keratinizing, NOS",G1,Stage III,T3,N1,M0,17475.0,male,white
+TCGA-BB-7862,"Squamous cell carcinoma, NOS",G3,Stage IVA,T3,N2c,,24823.0,male,white
+TCGA-CN-A63W,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N2c,MX,17693.0,female,white
+TCGA-CR-7389,"Squamous cell carcinoma, NOS",G2,,TX,NX,,20169.0,male,black or african american
+TCGA-CN-4741,"Squamous cell carcinoma, NOS",,,,,,29674.0,male,white
+TCGA-CN-4741,"Squamous cell carcinoma, NOS",,,,,,29222.0,male,white
+TCGA-CN-4741,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N0,M0,27506.0,male,white
+TCGA-CV-7255,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N0,,11931.0,female,white
+TCGA-QK-AA3K,"Squamous cell carcinoma, NOS",G2,Stage IVA,T3,N2b,MX,22093.0,male,black or african american
+TCGA-HD-A6I0,"Squamous cell carcinoma, keratinizing, NOS",G1,Stage IVA,T4a,N1,MX,20491.0,male,white
+TCGA-QK-A64Z,"Squamous cell carcinoma, NOS",,,,,,29590.0,female,white
+TCGA-QK-A64Z,"Squamous cell carcinoma, NOS",G1,Stage IVA,T4,NX,MX,29037.0,female,white
+TCGA-CN-5365,"Squamous cell carcinoma, NOS",G2,Stage IVB,T2,N3,,14190.0,male,white
+TCGA-CV-5431,"Squamous cell carcinoma, NOS",G3,Stage IVA,T3,N2c,,26953.0,male,white
+TCGA-CV-7424,"Squamous cell carcinoma, NOS",G2,Stage IVA,T3,N2b,,24775.0,male,asian
+TCGA-CN-4726,"Squamous cell carcinoma, NOS",,,,,,25273.0,male,white
+TCGA-CN-4726,"Squamous cell carcinoma, NOS",G2,Stage IVA,T3,N2b,,25194.0,male,white
+TCGA-P3-A6SX,"Squamous cell carcinoma, NOS",G2,Stage III,T2,N1,MX,24715.0,male,white
+TCGA-UF-A7JH,"Squamous cell carcinoma, NOS",G1,Stage IVA,T4a,N0,M0,21558.0,male,black or african american
+TCGA-CV-6938,"Squamous cell carcinoma, NOS",G1,Stage II,T2,NX,,31825.0,male,white
+TCGA-F7-A623,"Squamous cell carcinoma, NOS",G1,Stage IVA,T1,N2b,M0,25592.0,male,white
+TCGA-CV-7435,"Squamous cell carcinoma, NOS",G2,Stage IVA,T3,N2b,,21049.0,female,white
+TCGA-CQ-6223,"Squamous cell carcinoma, NOS",G2,Stage II,T2,N0,,25266.0,male,white
+TCGA-CV-A45X,"Squamous cell carcinoma, NOS",G2,Stage IVA,T2,N2b,M0,17464.0,male,white
+TCGA-CV-A461,"Squamous cell carcinoma, NOS",G2,,,,,23955.0,male,white
+TCGA-CV-6955,"Squamous cell carcinoma, NOS",G3,Stage II,T2,NX,,27261.0,female,white
+TCGA-CN-6011,"Squamous cell carcinoma, NOS",G3,Stage IVA,T4a,N0,,21016.0,male,white
+TCGA-T2-A6WZ,"Squamous cell carcinoma, NOS",G2,,T3,N2b,,19397.0,male,white
+TCGA-T2-A6WZ,"Squamous cell carcinoma, NOS",,,,,,19626.0,male,white
+TCGA-CN-4737,"Squamous cell carcinoma, NOS",G2,Stage IVA,T2,N2b,,7301.0,male,white
+TCGA-CR-7368,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N1,M0,19876.0,male,white
+TCGA-BA-A6D8,"Squamous cell carcinoma, NOS",,,,,,22627.0,male,black or african american
+TCGA-BA-A6D8,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N2c,M0,21778.0,male,black or african american
+TCGA-CN-5356,"Squamous cell carcinoma, NOS",G2,Stage III,T3,N0,,20540.0,male,white
+TCGA-CV-7427,"Squamous cell carcinoma, NOS",,,,,,30257.0,female,white
+TCGA-CV-7427,"Squamous cell carcinoma, NOS",G1,Stage II,T2,NX,,26975.0,female,white
+TCGA-IQ-A61L,"Squamous cell carcinoma, keratinizing, NOS",,,,,,26662.0,female,white
+TCGA-IQ-A61L,"Squamous cell carcinoma, keratinizing, NOS",G1,Stage II,T2,N0,M0,26506.0,female,white
+TCGA-CV-7261,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N0,,20992.0,male,white
+TCGA-D6-A6EK,"Squamous cell carcinoma, keratinizing, NOS",G1,Stage III,T2,N1,M0,24558.0,male,white
+TCGA-CV-A45O,"Squamous cell carcinoma, NOS",G2,,,,,20868.0,male,white
+TCGA-CQ-A4CH,"Squamous cell carcinoma, NOS",,,,,,21809.0,male,asian
+TCGA-CQ-A4CH,"Squamous cell carcinoma, NOS",G2,Stage II,T2,N0,M0,21455.0,male,asian
+TCGA-CQ-A4CH,"Squamous cell carcinoma, NOS",,,,,,21665.0,male,asian
+TCGA-CQ-7063,"Squamous cell carcinoma, NOS",,Stage I,T1,NX,M0,,female,white
+TCGA-CQ-7063,"Squamous cell carcinoma, NOS",,,,,,22883.0,female,white
+TCGA-CQ-7063,"Squamous cell carcinoma in situ, NOS",,Stage I,Tis,NX,MX,21787.0,female,white
+TCGA-CQ-7063,"Squamous cell carcinoma, NOS",G1,Stage I,T1,NX,M0,21723.0,female,white
+TCGA-D6-A6EO,"Squamous cell carcinoma, keratinizing, NOS",G2,Stage IVA,T4a,N0,M0,16185.0,male,white
+TCGA-TN-A7HJ,"Squamous cell carcinoma, keratinizing, NOS",G2,Stage IVA,T4a,N2b,M0,18809.0,male,white
+TCGA-F7-A622,"Squamous cell carcinoma, keratinizing, NOS",,,,,,,male,white
+TCGA-F7-A622,"Squamous cell carcinoma, keratinizing, NOS",G1,Stage III,T3,NX,M0,27456.0,male,white
+TCGA-BB-7871,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N2c,,23409.0,female,white
+TCGA-BB-7871,"Squamous cell carcinoma, NOS",,,,,,23837.0,female,white
+TCGA-F7-8298,"Squamous cell carcinoma, NOS",G1,Stage I,T1,N0,M0,21445.0,male,white
+TCGA-UF-A7JA,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N1,M0,24121.0,female,white
+TCGA-CV-6936,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N2c,,25020.0,male,white
+TCGA-CV-6936,"Squamous cell carcinoma, NOS",,,,,,25177.0,male,white
+TCGA-CN-4733,"Squamous cell carcinoma, NOS",G3,Stage III,T1,N1,,22561.0,male,white
+TCGA-CV-7245,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N0,,22646.0,male,white
+TCGA-BA-6868,"Squamous cell carcinoma, NOS",,,,,,19952.0,male,black or african american
+TCGA-BA-6868,"Squamous cell carcinoma, NOS",G2,,TX,NX,,19608.0,male,black or african american
+TCGA-CN-5355,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N0,,23670.0,male,black or african american
+TCGA-UF-A71B,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4,N0,M0,18404.0,male,white
+TCGA-MZ-A5BI,"Squamous cell carcinoma, NOS",,,,,,19500.0,male,white
+TCGA-CV-A45U,"Squamous cell carcinoma, NOS",,,,,,22810.0,male,white
+TCGA-CV-A45U,"Squamous cell carcinoma, NOS",G1,Stage IVA,T4,N2b,M0,21746.0,male,white
+TCGA-CQ-6229,"Squamous cell carcinoma, NOS",G2,Stage II,T2,N0,,22541.0,male,white
+TCGA-D6-8568,"Squamous cell carcinoma, keratinizing, NOS",G2,Stage II,T2,N0,M0,22796.0,male,white
+TCGA-CV-A45Q,"Squamous cell carcinoma, NOS",G1,,,,,25379.0,female,white
+TCGA-CN-A641,"Squamous cell carcinoma, keratinizing, NOS",G2,Stage IVA,T4a,N2b,MX,17454.0,male,white
+TCGA-CV-7099,"Squamous cell carcinoma, NOS",G2,Stage II,T2,NX,,31134.0,female,white
+TCGA-IQ-7632,"Squamous cell carcinoma, NOS",G1,Stage IVA,T4a,N0,M0,24986.0,female,white
+TCGA-CV-5966,"Squamous cell carcinoma, NOS",G3,Stage IVA,T4a,N1,,23119.0,female,white
+TCGA-CN-A63Y,"Squamous cell carcinoma, NOS",G2,Stage II,T2,N0,MX,17125.0,male,white
+TCGA-BA-7269,"Squamous cell carcinoma, NOS",G1,Stage III,T2,N1,,22609.0,male,white
+TCGA-CN-5367,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N2b,M0,22246.0,female,white
+TCGA-CV-7434,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N1,,23465.0,male,white
+TCGA-BA-A4II,"Squamous cell carcinoma, NOS",G1,Stage II,T2,N0,M0,17011.0,male,white
+TCGA-BA-A4II,"Squamous cell carcinoma, NOS",,,,,,17929.0,male,white
+TCGA-BA-A4II,"Squamous cell carcinoma, NOS",,Stage I,T1,N0,M0,17093.0,male,white
+TCGA-BA-A4II,"Squamous cell carcinoma, NOS",,,,,,17208.0,male,white
+TCGA-CQ-6218,"Squamous cell carcinoma, NOS",G2,Stage IVA,T3,N2b,,19096.0,female,white
+TCGA-CN-A6V7,"Squamous cell carcinoma, large cell, nonkeratinizing, NOS",GX,Stage IVA,T2,N2b,MX,14895.0,male,white
+TCGA-CN-4729,"Squamous cell carcinoma, NOS",G2,Stage III,T2,N1,,26713.0,male,white
+TCGA-CQ-A4CB,"Squamous cell carcinoma, keratinizing, NOS",G2,Stage III,T1,N1,M0,21574.0,male,not reported
+TCGA-F7-A50J,"Squamous cell carcinoma, keratinizing, NOS",G2,Stage III,T3,N0,M0,24758.0,female,white
+TCGA-CN-6994,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N0,,24778.0,male,white
+TCGA-D6-8569,"Squamous cell carcinoma, keratinizing, NOS",G2,Stage II,T2,N0,M0,19212.0,male,white
+TCGA-MT-A51W,"Squamous cell carcinoma, NOS",G2,Stage I,T1,N0,M0,19098.0,female,white
+TCGA-CN-A49A,"Squamous cell carcinoma, keratinizing, NOS",,,,,,22366.0,male,white
+TCGA-CN-A49A,"Squamous cell carcinoma, keratinizing, NOS",G2,Stage IVB,T4b,N0,MX,21995.0,male,white
+TCGA-CN-A49A,"Squamous cell carcinoma, keratinizing, NOS",,,,,,22339.0,male,white
+TCGA-CV-A465,"Squamous cell carcinoma, NOS",G1,Stage III,T3,N0,M0,9015.0,male,white
+TCGA-BB-7864,"Squamous cell carcinoma, NOS",G2,Stage IVA,T2,N2c,,22317.0,male,white
+TCGA-T2-A6X2,"Squamous cell carcinoma, keratinizing, NOS",G1,Stage III,T3,N0,MX,30013.0,male,white
+TCGA-4P-AA8J,"Squamous cell carcinoma, keratinizing, NOS",G2,Stage IVA,T2,N2c,MX,24222.0,male,black or african american
+TCGA-BA-4078,"Squamous cell carcinoma, NOS",G2,,,,,30480.0,male,white
+TCGA-BA-4078,"Squamous cell carcinoma, NOS",,,,,,,male,white
+TCGA-F7-A50I,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N0,M0,26373.0,male,white
+TCGA-DQ-7590,"Squamous cell carcinoma, NOS",G4,,TX,NX,,18718.0,male,white
+TCGA-MT-A67G,"Squamous cell carcinoma, NOS",G2,Stage IVA,T1,N2b,MX,19394.0,female,white
+TCGA-BA-4076,"Squamous cell carcinoma, NOS",G2,,TX,NX,,14405.0,male,white
+TCGA-BA-4076,"Squamous cell carcinoma, NOS",,,,,,14691.0,male,white
+TCGA-P3-A6T4,"Squamous cell carcinoma, keratinizing, NOS",G2,Stage IVA,T4a,N1,MX,20027.0,male,white
+TCGA-BB-7872,"Squamous cell carcinoma, NOS",G3,Stage I,T1,N0,,23185.0,male,asian
+TCGA-BA-A6DA,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N2c,M0,15004.0,female,white
+TCGA-F7-7848,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N1,M0,17251.0,male,white
+TCGA-DQ-5631,"Squamous cell carcinoma, NOS",G3,,TX,NX,,19172.0,male,white
+TCGA-DQ-5631,"Squamous cell carcinoma, NOS",,,,,,19619.0,male,white
+TCGA-CR-7391,"Squamous cell carcinoma, NOS",G1,Stage I,T1,N0,M0,13508.0,female,white
+TCGA-CV-6436,"Squamous cell carcinoma, NOS",G1,Stage IVA,T4a,N0,,22885.0,male,white
+TCGA-HD-8314,Basaloid squamous cell carcinoma,G4,Stage III,T1,N1,,21517.0,male,white
+TCGA-F7-A50G,"Squamous cell carcinoma, NOS",G1,Stage III,T3,N1,M0,24285.0,male,white
+TCGA-CV-A6JO,"Squamous cell carcinoma, NOS",,,,,,25504.0,male,white
+TCGA-CV-A6JO,"Squamous cell carcinoma, NOS",G2,Stage IVA,T3,N2c,M0,25377.0,male,white
+TCGA-CV-A45Y,"Squamous cell carcinoma, NOS",,,,,,24760.0,male,american indian or alaska native
+TCGA-CV-A45Y,"Squamous cell carcinoma, NOS",G3,Stage IVA,T4a,N0,M0,22442.0,male,american indian or alaska native
+TCGA-QK-A8Z9,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N2b,M0,20471.0,male,black or african american
+TCGA-QK-A8Z9,"Squamous cell carcinoma, NOS",,,,,,20676.0,male,black or african american
+TCGA-CR-7370,"Squamous cell carcinoma, NOS",G2,,TX,NX,,26468.0,female,white
+TCGA-CV-6943,"Squamous cell carcinoma, NOS",G2,Stage III,T3,NX,,27310.0,male,white
+TCGA-CV-7103,"Squamous cell carcinoma, NOS",G2,Stage IVA,T2,N2b,,18219.0,male,white
+TCGA-CV-6956,"Squamous cell carcinoma, NOS",G2,Stage III,T3,N1,,24720.0,male,white
+TCGA-CN-6989,"Squamous cell carcinoma, NOS",,,,,,24091.0,male,white
+TCGA-CN-6989,Not Reported,,,,,,23951.0,male,white
+TCGA-CN-6989,"Squamous cell carcinoma, NOS",,,,,,24296.0,male,white
+TCGA-CN-6989,"Squamous cell carcinoma, NOS",G2,Stage IVA,T3,N2c,,23515.0,male,white
+TCGA-CN-6989,"Squamous cell carcinoma, NOS",,,,,,24404.0,male,white
+TCGA-CV-7178,"Squamous cell carcinoma, NOS",G3,Stage IVA,T4a,N2,,23430.0,female,white
+TCGA-UF-A719,"Squamous cell carcinoma, NOS",G1,Stage II,T2,N0,M0,19797.0,male,Unknown
+TCGA-F7-A61W,"Squamous cell carcinoma, keratinizing, NOS",G2,Stage IVA,T2,N2b,M0,18879.0,male,asian
+TCGA-CV-5973,"Squamous cell carcinoma, NOS",G3,Stage III,T3,N1,,22771.0,female,white
+TCGA-CV-7250,"Squamous cell carcinoma, NOS",,,,,,23600.0,male,white
+TCGA-CV-7250,"Squamous cell carcinoma, NOS",G1,Stage IVA,T4a,N0,,23489.0,male,white
+TCGA-CV-7100,"Squamous cell carcinoma, NOS",G3,Stage III,T2,N1,,24183.0,male,white
+TCGA-IQ-A61H,"Squamous cell carcinoma, keratinizing, NOS",G2,Stage II,T2,N0,MX,27990.0,male,white
+TCGA-CV-7428,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N2b,,17429.0,male,white
+TCGA-CV-7238,"Squamous cell carcinoma, NOS",G2,Stage II,T2,N0,,25471.0,female,white
+TCGA-CR-7402,"Squamous cell carcinoma, NOS",G2,,TX,NX,,25138.0,male,white
+TCGA-MZ-A7D7,"Squamous cell carcinoma, NOS",,,,,,19313.0,male,white
+TCGA-MZ-A7D7,"Squamous cell carcinoma, NOS",,Stage IVA,T3,N2b,MX,18974.0,male,white
+TCGA-CN-6020,"Squamous cell carcinoma, NOS",G2,Stage III,T2,N1,,21232.0,male,black or african american
+TCGA-CN-4728,"Squamous cell carcinoma, NOS",G2,Stage IVA,T3,N2b,,20660.0,male,white
+TCGA-CV-A45V,"Squamous cell carcinoma, NOS",G1,Stage IVA,T4,N0,M0,31936.0,female,white
+TCGA-HD-A4C1,"Squamous cell carcinoma, NOS",G1,Stage IVA,T4a,N2b,MX,15096.0,female,black or african american
+TCGA-CN-4723,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N0,,24815.0,male,white
+TCGA-UF-A71D,"Papillary carcinoma, follicular variant",,Stage I,T1,N0,M0,19844.0,female,white
+TCGA-UF-A71D,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N0,M0,19747.0,female,white
+TCGA-CR-7393,"Squamous cell carcinoma, NOS",G2,Stage III,T1,N1,M0,9750.0,male,white
+TCGA-CR-6481,"Squamous cell carcinoma, NOS",G2,,,,,17203.0,male,white
+TCGA-BB-7863,"Squamous cell carcinoma, NOS",G2,Stage III,T3,N0,,15899.0,female,white
+TCGA-CV-6962,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,NX,,24103.0,male,white
+TCGA-CV-7243,"Squamous cell carcinoma, NOS",G2,Stage III,T2,N1,,18466.0,male,white
+TCGA-CV-7097,"Squamous cell carcinoma, NOS",G3,Stage II,T2,NX,,19382.0,male,white
+TCGA-HL-7533,"Squamous cell carcinoma, NOS",G3,,,,,23950.0,male,white
+TCGA-CR-6474,"Squamous cell carcinoma, NOS",G2,Stage IVA,T2,N2b,M0,18840.0,male,white
+TCGA-CR-6474,"Squamous cell carcinoma, NOS",,,,,,19060.0,male,white
+TCGA-BA-5558,"Squamous cell carcinoma, NOS",G1,,TX,NX,,23984.0,male,white
+TCGA-CQ-5330,"Squamous cell carcinoma, NOS",G3,Stage IVA,T3,N2b,,25255.0,female,white
+TCGA-CV-7254,"Squamous cell carcinoma, NOS",G3,Stage II,T2,NX,,20306.0,male,white
+TCGA-CV-A6K2,"Squamous cell carcinoma, NOS",,,,,,29248.0,male,white
+TCGA-CV-A6K2,"Squamous cell carcinoma, NOS",G1,Stage IVA,T4,N0,M0,29114.0,male,white
+TCGA-CV-A6K2,"Squamous cell carcinoma, NOS",,,,,,29248.0,male,white
+TCGA-C9-A47Z,"Squamous cell carcinoma, NOS",G1,Stage III,T2,N1,M0,26592.0,female,asian
+TCGA-BA-A8YP,"Squamous cell carcinoma, keratinizing, NOS",G2,Stage IVB,T4a,N3,M0,18355.0,male,black or african american
+TCGA-CR-5247,"Squamous cell carcinoma, NOS",G2,,TX,NX,,17810.0,male,black or african american
+TCGA-CN-A63T,"Squamous cell carcinoma, NOS",G3,Stage IVA,T3,N2b,MX,22201.0,male,white
+TCGA-CQ-5332,"Squamous cell carcinoma, NOS",G2,Stage III,T3,N0,,32032.0,male,white
+TCGA-HD-7917,"Squamous cell carcinoma, keratinizing, NOS",G1,Stage II,T2,N0,,22979.0,male,white
+TCGA-CV-5430,"Squamous cell carcinoma, NOS",,,,,,23360.0,male,white
+TCGA-CV-5430,"Squamous cell carcinoma, NOS",G3,Stage IVA,T4a,N2a,,22577.0,male,white
+TCGA-BA-5151,"Squamous cell carcinoma, NOS",G1,Stage IVA,T4a,N0,,26569.0,male,white
+TCGA-BA-5151,Not Reported,,,,,,27086.0,male,white
+TCGA-CR-7401,"Squamous cell carcinoma, NOS",G2,Stage I,T1,N0,M0,23420.0,male,white
+TCGA-BA-A6DB,"Squamous cell carcinoma, keratinizing, NOS",,,,,,9175.0,female,white
+TCGA-BA-A6DB,"Squamous cell carcinoma, keratinizing, NOS",G1,Stage I,T1,N0,M0,8967.0,female,white
+TCGA-CR-7395,"Squamous cell carcinoma, NOS",G2,Stage II,T2,N0,M0,29527.0,female,white
+TCGA-CV-5977,"Squamous cell carcinoma, NOS",G2,Stage IVA,T3,N2b,,24115.0,male,white
+TCGA-CR-5248,"Squamous cell carcinoma, NOS",,,,,,20558.0,male,white
+TCGA-CR-5248,"Squamous cell carcinoma, NOS",,,,,,20377.0,male,white
+TCGA-CR-5248,"Squamous cell carcinoma, NOS",G3,,TX,NX,,19441.0,male,white
+TCGA-CV-7104,"Squamous cell carcinoma, keratinizing, NOS",G2,Stage IVA,T2,N2b,,22349.0,female,white
+TCGA-D6-6824,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N0,,22633.0,male,white
+TCGA-KU-A6H7,"Squamous cell carcinoma, NOS",G2,Stage IVA,T2,N2a,M0,20314.0,female,white
+TCGA-BA-5152,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N0,M0,20783.0,male,white
+TCGA-CQ-5329,"Squamous cell carcinoma, NOS",G2,Stage II,T2,N0,,17028.0,female,white
+TCGA-CN-6010,Not Reported,,,,,,20015.0,male,white
+TCGA-CN-6010,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N2c,,19475.0,male,white
+TCGA-CV-A6JU,"Squamous cell carcinoma, NOS",G2,Stage IVB,T4b,N0,M0,22591.0,female,white
+TCGA-CN-A6V1,"Squamous cell carcinoma, NOS",GX,Stage IVA,T2,N2a,MX,21730.0,male,white
+TCGA-CN-A6V1,"Squamous cell carcinoma, NOS",,,,,,21730.0,male,white
+TCGA-BB-A6UM,"Squamous cell carcinoma, NOS",GX,Stage III,T1,N2,MX,19194.0,male,white
+TCGA-CN-5361,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N2a,M0,29383.0,male,white
+TCGA-CN-5361,Not Reported,,,,,,31445.0,male,white
+TCGA-BA-A6DF,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N0,M0,29283.0,female,white
+TCGA-CQ-7069,"Squamous cell carcinoma, NOS",G2,Stage II,T2,N0,M0,28138.0,female,white
+TCGA-DQ-5624,"Squamous cell carcinoma, NOS",G2,,TX,NX,,15867.0,female,white
+TCGA-CQ-5333,"Squamous cell carcinoma, NOS",G3,Stage II,T2,N0,,27110.0,male,white
+TCGA-CQ-5333,"Squamous cell carcinoma, NOS",,,,,,27286.0,male,white
+TCGA-CV-7438,"Squamous cell carcinoma, NOS",G3,Stage I,T1,NX,,32021.0,female,white
+TCGA-CN-4734,"Squamous cell carcinoma, NOS",G2,Stage II,T2,N0,,25753.0,male,white
+TCGA-RS-A6TO,"Squamous cell carcinoma, keratinizing, NOS",,,,,,30442.0,female,white
+TCGA-RS-A6TO,"Squamous cell carcinoma, keratinizing, NOS",G2,Stage IVA,T4,N2c,M0,30104.0,female,white
+TCGA-DQ-7596,"Squamous cell carcinoma, NOS",G4,,,,,17846.0,male,white
+TCGA-DQ-7596,"Squamous cell carcinoma, NOS",,,,,,17983.0,male,white
+TCGA-DQ-7596,"Squamous cell carcinoma, NOS",,,,,,17983.0,male,white
+TCGA-IQ-A61O,"Squamous cell carcinoma, spindle cell",GX,Stage IVA,T2,N2b,MX,15920.0,male,white
+TCGA-CN-4736,"Squamous cell carcinoma, NOS",,,,,,25892.0,female,white
+TCGA-CN-4736,"Squamous cell carcinoma, NOS",G2,,T1,NX,,25683.0,female,white
+TCGA-IQ-A61I,"Squamous cell carcinoma, large cell, nonkeratinizing, NOS",G3,Stage IVA,T1,N2b,M0,23035.0,male,black or african american
+TCGA-CV-5440,"Squamous cell carcinoma, NOS",G3,Stage IVA,T4a,N2b,,19197.0,male,white
+TCGA-BA-A4IH,Basaloid squamous cell carcinoma,G3,,T2,N1,M0,21094.0,male,white
+TCGA-UF-A71E,"Squamous cell carcinoma, NOS",G3,Stage IVA,T4a,N0,M0,23071.0,male,white
+TCGA-BA-6873,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N2b,,10512.0,male,white
+TCGA-BA-6873,"Squamous cell carcinoma, NOS",,,,,,10578.0,male,white
+TCGA-UF-A7JV,"Squamous cell carcinoma, NOS",,,,,,23040.0,female,white
+TCGA-UF-A7JV,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N2b,M0,22985.0,female,white
+TCGA-UF-A7JV,"Papillary carcinoma, follicular variant",,Stage I,T1,N0,M0,22985.0,female,white
+TCGA-MT-A7BN,"Squamous cell carcinoma, NOS",,,,,,27341.0,male,white
+TCGA-MT-A7BN,"Squamous cell carcinoma, NOS",G3,Stage IVA,,,,27162.0,male,white
+TCGA-P3-A6T3,"Squamous cell carcinoma, keratinizing, NOS",,,,,,18385.0,male,white
+TCGA-P3-A6T3,"Squamous cell carcinoma, keratinizing, NOS",G2,Stage IVA,T3,N2,MX,18143.0,male,white
+TCGA-QK-A6IH,"Squamous cell carcinoma, NOS",G2,Stage IVB,T4b,N2b,M0,23936.0,female,white
+TCGA-QK-A6IH,"Squamous cell carcinoma, NOS",,,,,,24184.0,female,white
+TCGA-QK-A6IH,"Squamous cell carcinoma, NOS",,,,,,24164.0,female,white
+TCGA-CV-5971,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N2a,,22279.0,male,white
+TCGA-CV-7446,"Squamous cell carcinoma, NOS",G2,Stage IVA,T2,N2b,,24170.0,male,white
+TCGA-CQ-A4CD,"Squamous cell carcinoma, NOS",G3,Stage IVA,T4a,N0,M0,25497.0,male,white
+TCGA-CR-7383,"Squamous cell carcinoma, NOS",,,,,,29576.0,female,white
+TCGA-CR-7383,"Squamous cell carcinoma, NOS",G2,Stage I,T1,N0,M0,29122.0,female,white
+TCGA-CV-7177,"Squamous cell carcinoma, NOS",G2,Stage II,T2,NX,,30180.0,female,white
+TCGA-CV-5443,"Squamous cell carcinoma, NOS",G3,Stage III,T3,N0,,23287.0,male,black or african american
+TCGA-CX-A4AQ,"Squamous cell carcinoma, NOS",G3,Stage IVA,T2,N2b,M0,20709.0,male,white
+TCGA-BA-A6DL,"Squamous cell carcinoma, NOS",G2,,T0,N0,M0,21886.0,male,white
+TCGA-BA-A6DI,"Squamous cell carcinoma, keratinizing, NOS",G2,,TX,NX,M0,22857.0,male,black or african american
+TCGA-BA-A6DI,"Squamous cell carcinoma, keratinizing, NOS",,,,,,23123.0,male,black or african american
+TCGA-CQ-5334,"Squamous cell carcinoma, NOS",,,,,,32074.0,male,white
+TCGA-CQ-5334,"Squamous cell carcinoma, NOS",G2,Stage IVA,T3,N2b,,32024.0,male,white
+TCGA-CV-A45P,"Squamous cell carcinoma, NOS",G2,Stage I,T1,N0,M0,30297.0,female,white
+TCGA-CV-A45P,"Squamous cell carcinoma, NOS",,,,,,30936.0,female,white
+TCGA-CV-A45P,"Squamous cell carcinoma, NOS",,,,,,30936.0,female,white
+TCGA-CV-A468,"Squamous cell carcinoma, keratinizing, NOS",G2,Stage IVA,T4a,N2a,M0,15372.0,male,not reported
+TCGA-CR-6470,"Squamous cell carcinoma, NOS",G2,Stage II,T2,N0,M0,14133.0,male,white
+TCGA-UF-A7JK,"Squamous cell carcinoma, keratinizing, NOS",,,,,,22037.0,male,Unknown
+TCGA-UF-A7JK,"Squamous cell carcinoma, keratinizing, NOS",G2,Stage IVA,T4a,N2b,M0,21696.0,male,Unknown
+TCGA-CR-7394,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N0,M0,25581.0,male,white
+TCGA-CV-5970,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N2b,,21890.0,male,white
+TCGA-IQ-A61E,"Squamous cell carcinoma, NOS",G2,Stage III,T3,N0,MX,20417.0,female,white
+TCGA-CV-A6K0,"Squamous cell carcinoma, NOS",G3,Stage I,T1,N0,M0,21488.0,male,white
+TCGA-CV-A6K0,"Squamous cell carcinoma, NOS",,,,,,21634.0,male,white
+TCGA-CQ-7065,"Squamous cell carcinoma, NOS",G2,Stage II,T2,N0,,14676.0,male,asian
+TCGA-CQ-7065,"Squamous cell carcinoma, NOS",,,,,,14906.0,male,asian
+TCGA-UF-A718,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N0,M0,22836.0,male,white
+TCGA-CQ-7072,"Squamous cell carcinoma, NOS",G3,Stage II,T2,N0,M0,18841.0,male,white
+TCGA-CN-A63U,"Squamous cell carcinoma, NOS",G3,Stage IVA,T3,N2b,MX,18272.0,male,white
+TCGA-CN-5374,"Squamous cell carcinoma, NOS",,,,,,21833.0,female,white
+TCGA-CN-5374,"Squamous cell carcinoma, NOS",G3,Stage IVA,T2,N2,M0,20464.0,female,white
+TCGA-CN-6017,"Squamous cell carcinoma, NOS",G2,Stage IVA,T3,N2b,,20358.0,male,white
+TCGA-CQ-6224,"Squamous cell carcinoma, NOS",G3,Stage IVA,T2,N2b,,19051.0,male,white
+TCGA-BB-4217,"Squamous cell carcinoma, NOS",G3,Stage IVA,T4a,N2c,M0,25020.0,male,black or african american
+TCGA-T3-A92M,"Squamous cell carcinoma, NOS",,,,,,19664.0,male,black or african american
+TCGA-T3-A92M,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N2c,MX,19247.0,male,black or african american
+TCGA-CQ-A4CI,Basaloid squamous cell carcinoma,,,,,,27181.0,male,white
+TCGA-CQ-A4CI,Basaloid squamous cell carcinoma,G3,Stage III,T2,N1,M0,26664.0,male,white
+TCGA-CQ-5331,"Squamous cell carcinoma, NOS",G2,,T2,NX,,26901.0,female,white
+TCGA-CV-A464,"Squamous cell carcinoma, NOS",,,,,,17697.0,male,white
+TCGA-CV-A464,"Squamous cell carcinoma, NOS",G2,Stage III,T3,N0,M0,17669.0,male,white
+TCGA-CV-7183,"Squamous cell carcinoma, NOS",G1,Stage II,T2,N0,,19358.0,male,white
+TCGA-CV-7430,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N0,,20763.0,male,white
+TCGA-CQ-A4CA,"Squamous cell carcinoma, NOS",G2,Stage II,T2,N0,M0,,male,not reported
+TCGA-CQ-5326,"Squamous cell carcinoma, NOS",G3,Stage IVA,T4a,N2c,,24473.0,male,white
+TCGA-CV-A460,"Squamous cell carcinoma, NOS",G3,,T1,N2,M0,26539.0,male,white
+TCGA-CV-A460,Not Reported,,,,,,27964.0,male,white
+TCGA-CX-7085,"Squamous cell carcinoma, NOS",,,,,,28313.0,female,white
+TCGA-CX-7085,"Squamous cell carcinoma, NOS",,,,,,28529.0,female,white
+TCGA-CX-7085,"Squamous cell carcinoma, NOS",G2,Stage I,T1,N0,,28221.0,female,white
+TCGA-CQ-A4CE,"Squamous cell carcinoma, keratinizing, NOS",G2,Stage II,T2,N0,M0,27793.0,female,not reported
+TCGA-UF-A71A,"Squamous cell carcinoma, NOS",G1,Stage IVA,T4a,N2c,M0,24623.0,male,white
+TCGA-CQ-6228,"Squamous cell carcinoma, NOS",G2,Stage IVA,T1,N2b,,25942.0,female,white
+TCGA-CQ-6228,"Squamous cell carcinoma, NOS",,,,,,26215.0,female,white
+TCGA-IQ-A61K,"Squamous cell carcinoma, keratinizing, NOS",G2,Stage IVA,T3,N2b,M0,25697.0,female,white
+TCGA-CN-4740,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N0,M0,29186.0,female,white
+TCGA-CN-4740,"Squamous cell carcinoma, NOS",,,,,,29906.0,female,white
+TCGA-CN-4740,"Squamous cell carcinoma, NOS",,,,,,29410.0,female,white
+TCGA-CR-5243,"Squamous cell carcinoma, NOS",G3,,TX,NX,,18812.0,male,white
+TCGA-D6-6516,"Squamous cell carcinoma, NOS",G2,Stage I,T1,N0,,25242.0,male,white
+TCGA-CV-7235,"Squamous cell carcinoma, NOS",G3,Stage II,T2,N0,,24800.0,male,white
+TCGA-CV-A45Z,"Squamous cell carcinoma, NOS",G3,,T1,N0,M0,27397.0,male,white
+TCGA-CN-5366,"Squamous cell carcinoma, NOS",,,,,,19180.0,male,white
+TCGA-CN-5366,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N2c,M0,18904.0,male,white
+TCGA-CV-6939,"Squamous cell carcinoma, NOS",G3,Stage IVA,T4a,N2b,,21947.0,male,white
+TCGA-HD-7832,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N0,,19192.0,male,white
+TCGA-CR-6473,"Squamous cell carcinoma, NOS",G3,,,,,24857.0,male,white
+TCGA-CV-7248,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N2c,,23082.0,female,black or african american
+TCGA-CV-7432,"Squamous cell carcinoma, NOS",G1,Stage II,T2,N0,,28875.0,male,white
+TCGA-CN-4730,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N1,,22828.0,male,white
+TCGA-D6-6517,"Squamous cell carcinoma, NOS",,,,,,21952.0,male,white
+TCGA-D6-6517,"Squamous cell carcinoma, NOS",G2,Stage III,T3,N0,,21791.0,male,white
+TCGA-D6-A6EP,"Squamous cell carcinoma, large cell, nonkeratinizing, NOS",G3,Stage III,T3,N0,M0,22674.0,male,white
+TCGA-CN-A640,"Squamous cell carcinoma, NOS",G2,Stage IVA,T2,N2b,MX,14758.0,female,white
+TCGA-CV-7236,"Squamous cell carcinoma, NOS",G3,Stage IVA,T3,N2c,,28250.0,female,white
+TCGA-CR-6471,"Squamous cell carcinoma, NOS",,,,,,22098.0,male,white
+TCGA-CR-6471,"Squamous cell carcinoma, NOS",,,,,,22332.0,male,white
+TCGA-CR-6471,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N1,M0,21315.0,male,white
+TCGA-CR-6471,"Squamous cell carcinoma, NOS",,,,,,21813.0,male,white
+TCGA-P3-A5Q5,Basaloid squamous cell carcinoma,G3,Stage IVA,T2,N2,MX,19728.0,male,white
+TCGA-H7-7774,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N0,,27519.0,female,white
+TCGA-H7-7774,Not Reported,,,,,,27771.0,female,white
+TCGA-UF-A7JF,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N2a,M0,29468.0,male,white
+TCGA-CR-7382,"Squamous cell carcinoma, NOS",G2,Stage IVA,T2,N2c,M0,18078.0,male,white
+TCGA-CR-7382,"Squamous cell carcinoma, NOS",,,,,,18692.0,male,white
+TCGA-D6-A74Q,"Squamous cell carcinoma, keratinizing, NOS",G3,Stage IVA,T4a,N0,M0,24702.0,male,white
+TCGA-D6-6827,"Squamous cell carcinoma, NOS",G3,Stage I,T1,N0,,20175.0,female,white
+TCGA-CV-5442,"Squamous cell carcinoma, NOS",G3,Stage IVA,T4a,N2b,,28040.0,female,white
+TCGA-CV-7415,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N2c,,22062.0,male,white
+TCGA-QK-A6VC,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N1,M0,22865.0,female,black or african american
+TCGA-BA-6872,"Squamous cell carcinoma, NOS",G2,,TX,NX,,17296.0,male,white
+TCGA-CV-6937,"Squamous cell carcinoma, NOS",G2,Stage II,T2,N0,,26156.0,male,white
+TCGA-CV-7423,"Squamous cell carcinoma, NOS",G1,Stage II,T2,NX,,24071.0,male,white
+TCGA-CV-A6K1,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N0,M0,23848.0,male,white
+TCGA-CV-A6K1,Not Reported,,,,,,24249.0,male,white
+TCGA-CR-7377,"Squamous cell carcinoma, NOS",G3,Stage IVA,T4a,N2c,M0,21371.0,male,white
+TCGA-UP-A6WW,"Squamous cell carcinoma, NOS",G2,,,,,21427.0,male,white
+TCGA-CQ-5325,"Squamous cell carcinoma, NOS",,,,,,24037.0,male,white
+TCGA-CQ-5325,"Squamous cell carcinoma, NOS",,,,,,24422.0,male,white
+TCGA-CQ-5325,"Squamous cell carcinoma, NOS",G2,Stage I,T1,N0,,23833.0,male,white
+TCGA-WA-A7GZ,"Squamous cell carcinoma, keratinizing, NOS",G2,,T2,N0,,21207.0,male,white
+TCGA-CV-A463,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N0,M0,30095.0,female,white
+TCGA-D6-6823,"Squamous cell carcinoma, NOS",G2,Stage II,T2,N0,,18611.0,male,white
+TCGA-CV-A6JD,"Squamous cell carcinoma, NOS",G3,,,,,29988.0,female,white
+TCGA-T2-A6X0,"Squamous cell carcinoma, NOS",G2,,TX,,,18114.0,male,white
+TCGA-KU-A66S,Basaloid squamous cell carcinoma,,,,,,25843.0,female,white
+TCGA-KU-A66S,Basaloid squamous cell carcinoma,G2,Stage III,T1,N1,MX,25454.0,female,white
+TCGA-BB-A5HZ,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N1,M0,23906.0,male,white
+TCGA-BB-A5HZ,"Squamous cell carcinoma, NOS",,,,,,24344.0,male,white
+TCGA-CR-6491,Not Reported,,,,,,22624.0,male,black or african american
+TCGA-CR-6491,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N2b,M0,22125.0,male,black or african american
+TCGA-D6-A6EQ,"Squamous cell carcinoma, keratinizing, NOS",G3,Stage IVA,T4a,N1,M0,20876.0,male,white
+TCGA-CV-7411,"Squamous cell carcinoma, NOS",G1,Stage IVA,T4a,N0,,23696.0,female,white
+TCGA-CN-A6UY,"Squamous cell carcinoma, large cell, nonkeratinizing, NOS",G2,Stage IVA,T3,N2b,MX,20967.0,male,white
+TCGA-CR-6492,"Squamous cell carcinoma, NOS",G3,Stage III,T2,N1,M0,28600.0,male,white
+TCGA-P3-A5Q6,"Squamous cell carcinoma, NOS",G3,Stage IVA,T4a,N2b,MX,17917.0,male,white
+TCGA-P3-A5Q6,"Squamous cell carcinoma, NOS",,,,,,18197.0,male,white
+TCGA-P3-A5Q6,"Squamous cell carcinoma, NOS",,,,,,18289.0,male,white
+TCGA-DQ-7594,Not Reported,,,,,,18555.0,male,white
+TCGA-DQ-7594,"Squamous cell carcinoma, NOS",G4,,TX,NX,,17471.0,male,white
+TCGA-CV-6951,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N2c,,21166.0,male,white
+TCGA-T3-A92N,"Squamous cell carcinoma, NOS",G3,Stage IVA,T2,N2c,MX,28879.0,male,black or african american
+TCGA-T3-A92N,"Squamous cell carcinoma, NOS",,,,,,28925.0,male,black or african american
+TCGA-QK-A6VB,Not Reported,,,,,,24757.0,male,white
+TCGA-QK-A6VB,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N0,M0,24144.0,male,white
+TCGA-CQ-5327,"Squamous cell carcinoma, NOS",G2,Stage IVA,T3,N2c,,22307.0,female,asian
+TCGA-UF-A7JD,"Squamous cell carcinoma, NOS",G3,Stage IVA,T4,N2b,M0,26101.0,male,Unknown
+TCGA-QK-AA3J,Basaloid squamous cell carcinoma,G3,Stage I,T1,N0,M0,25469.0,male,black or african american
+TCGA-CR-7390,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N0,M0,24575.0,male,white
+TCGA-CV-7253,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N0,,21473.0,male,black or african american
+TCGA-UF-A7JJ,"Squamous cell carcinoma, keratinizing, NOS",G1,Stage IVA,T4a,N0,M0,25201.0,male,Unknown
+TCGA-CN-4739,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N0,M0,26081.0,male,white
+TCGA-CN-4739,"Squamous cell carcinoma, NOS",,,,,,27383.0,male,white
+TCGA-CN-4739,"Squamous cell carcinoma, NOS",,,,,,27383.0,male,white
+TCGA-CQ-A4C9,"Squamous cell carcinoma, NOS",,,,,,21019.0,male,not reported
+TCGA-CQ-A4C9,"Squamous cell carcinoma, NOS",G2,Stage III,T2,N1,M0,20732.0,male,not reported
+TCGA-CQ-A4C9,"Squamous cell carcinoma, NOS",,,,,,21439.0,male,not reported
+TCGA-CQ-A4C9,"Squamous cell carcinoma, NOS",,,,,,21418.0,male,not reported
+TCGA-H7-8502,"Squamous cell carcinoma, keratinizing, NOS",G2,Stage IVA,T4a,N2b,M0,18286.0,male,white
+TCGA-CN-A49B,"Squamous cell carcinoma, NOS",G3,Stage III,T3,N1,MX,26155.0,male,white
+TCGA-CR-5250,"Squamous cell carcinoma, NOS",G3,,TX,NX,,26097.0,male,white
+TCGA-CV-6948,"Squamous cell carcinoma, NOS",G2,Stage IVB,T4a,N3,,29153.0,female,white
+TCGA-CN-6013,"Squamous cell carcinoma, NOS",,,,,,21026.0,male,white
+TCGA-CN-6013,"Squamous cell carcinoma, NOS",G3,Stage IVA,T4a,N2b,,20703.0,male,white
+TCGA-CN-6013,"Squamous cell carcinoma, NOS",,,,,,21067.0,male,white
+TCGA-CN-6013,"Squamous cell carcinoma, NOS",,,,,,21318.0,male,white
+TCGA-CN-A497,"Squamous cell carcinoma, large cell, nonkeratinizing, NOS",G2,Stage III,T1,N1,MX,23310.0,male,Unknown
+TCGA-CQ-5324,"Squamous cell carcinoma, NOS",G2,Stage III,T3,N0,,21803.0,male,white
+TCGA-CV-6950,"Squamous cell carcinoma, NOS",,,,,,23807.0,male,white
+TCGA-CV-6950,"Squamous cell carcinoma, NOS",G2,Stage IVA,T3,N2c,,23549.0,male,white
+TCGA-CN-A6V3,"Papillary adenocarcinoma, NOS",,,,,,22480.0,male,white
+TCGA-CN-A6V3,"Squamous cell carcinoma, NOS",G3,Stage IVA,T3,N2b,M0,22397.0,male,white
+TCGA-F7-A61S,"Squamous cell carcinoma, keratinizing, NOS",G1,Stage III,T3,N0,M0,22655.0,male,white
+TCGA-F7-A61S,"Squamous cell carcinoma, keratinizing, NOS",,,,,,22868.0,male,white
+TCGA-CV-7180,"Squamous cell carcinoma, NOS",G2,Stage II,T2,NX,,12523.0,male,white
+TCGA-P3-A6T7,"Squamous cell carcinoma, NOS",G2,Stage IVA,T3,N2b,MX,20301.0,male,white
+TCGA-CN-5373,"Squamous cell carcinoma, NOS",G1,Stage I,T1,N0,,20143.0,female,white
+TCGA-CV-6952,"Squamous cell carcinoma, NOS",G1,Stage IVA,T3,N2b,,23892.0,female,white
+TCGA-BA-A6DE,"Squamous cell carcinoma, keratinizing, NOS",G2,Stage II,T2,N0,M0,25874.0,female,white
+TCGA-P3-A5QA,"Squamous cell carcinoma, NOS",,,,,,16726.0,male,Unknown
+TCGA-P3-A5QA,"Squamous cell carcinoma, NOS",G3,Stage I,T1,NX,MX,15125.0,male,Unknown
+TCGA-CR-7392,"Squamous cell carcinoma, NOS",G1,Stage IVA,T3,N2b,M0,24650.0,female,white
+TCGA-UF-A7J9,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N0,M0,27459.0,male,white
+TCGA-CR-6484,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N2,M0,24569.0,female,asian
+TCGA-CQ-6219,"Squamous cell carcinoma, NOS",,,,,,18773.0,female,white
+TCGA-CQ-6219,"Squamous cell carcinoma, NOS",G2,Stage IVA,T3,N2a,,18578.0,female,white
+TCGA-CV-A45T,"Squamous cell carcinoma, NOS",G3,,T1,N0,M0,23452.0,female,white
+TCGA-BA-5555,"Squamous cell carcinoma, NOS",,,,,,20204.0,male,black or african american
+TCGA-BA-5555,"Squamous cell carcinoma, NOS",G2,Stage IVA,T3,N2c,,19956.0,male,black or african american
+TCGA-CR-7369,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N2b,M0,21897.0,male,white
+TCGA-RS-A6TP,"Squamous cell carcinoma, large cell, nonkeratinizing, NOS",G3,Stage II,T2,N0,M0,21393.0,male,white
+TCGA-CV-7101,"Squamous cell carcinoma, NOS",G2,Stage II,T2,NX,,29550.0,male,white
+TCGA-QK-A8ZA,"Squamous cell carcinoma, NOS",G2,,T2,N2b,MX,21979.0,male,black or african american
+TCGA-TN-A7HI,"Squamous cell carcinoma, large cell, nonkeratinizing, NOS",G3,Stage IVA,T2,N2b,M0,20666.0,male,white
+TCGA-BA-A6DG,"Squamous cell carcinoma, NOS",G2,,TX,NX,MX,18052.0,male,white
+TCGA-CR-6467,"Squamous cell carcinoma, NOS",G3,Stage III,T2,N1,M0,21689.0,male,white
+TCGA-MZ-A6I9,"Squamous cell carcinoma, NOS",G2,,,,,24939.0,male,white
+TCGA-MZ-A6I9,"Squamous cell carcinoma, NOS",,,,,,25420.0,male,white
+TCGA-MZ-A6I9,"Squamous cell carcinoma, NOS",,,,,,25290.0,male,white
+TCGA-MZ-A6I9,"Squamous cell carcinoma, NOS",,,,,,25422.0,male,white
+TCGA-MZ-A6I9,"Squamous cell carcinoma, NOS",,,,,,25185.0,male,white
+TCGA-P3-A6SW,"Squamous cell carcinoma, NOS",G3,Stage IVB,T3,N3,MX,18536.0,male,white
+TCGA-CV-6940,"Squamous cell carcinoma, NOS",G2,Stage III,T2,N1,,29382.0,female,white
+TCGA-T2-A6WX,"Squamous cell carcinoma, keratinizing, NOS",G1,,,,,27005.0,female,white
+TCGA-CV-7433,"Squamous cell carcinoma, NOS",,,,,,18449.0,male,white
+TCGA-CV-7433,"Squamous cell carcinoma, NOS",,,,,,18588.0,male,white
+TCGA-CV-7433,"Squamous cell carcinoma, NOS",G3,Stage IVA,T4a,N2b,,18004.0,male,white
+TCGA-D6-6515,"Squamous cell carcinoma, NOS",G3,Stage II,T2,N0,,30099.0,female,white
+TCGA-D6-6515,"Squamous cell carcinoma, NOS",,,,,,30294.0,female,white
+TCGA-F7-A61V,"Squamous cell carcinoma, NOS",G1,Stage II,T2,N0,M0,19857.0,male,white
+TCGA-P3-A6T8,"Squamous cell carcinoma, NOS",G3,Stage IVA,T4a,N2,MX,19754.0,male,white
+TCGA-CR-6488,"Squamous cell carcinoma, NOS",G2,Stage II,T2,N0,,25176.0,female,white
+TCGA-CR-7386,"Squamous cell carcinoma, NOS",,,,,,26266.0,male,white
+TCGA-CR-7386,"Squamous cell carcinoma, NOS",G1,Stage IVA,T4a,N2c,M0,25238.0,male,white
+TCGA-CV-7407,"Squamous cell carcinoma, NOS",G2,Stage II,T2,NX,,24475.0,female,white
+TCGA-CN-6012,"Squamous cell carcinoma, NOS",G2,Stage IVA,T3,N2c,,24286.0,male,white
+TCGA-H7-A6C5,"Squamous cell carcinoma, keratinizing, NOS",G2,Stage II,T2,N0,M0,23808.0,male,white
+TCGA-H7-A6C5,Not Reported,,,,,,,male,white
+TCGA-CN-A49C,"Squamous cell carcinoma, large cell, nonkeratinizing, NOS",GX,,TX,NX,MX,24495.0,male,white
+TCGA-CV-A6JT,"Squamous cell carcinoma, NOS",G2,Stage II,T2,N0,M0,23806.0,male,white
+TCGA-CV-A45R,"Squamous cell carcinoma, keratinizing, NOS",G1,Stage III,T2,N1,M0,17125.0,male,white
+TCGA-DQ-5630,"Squamous cell carcinoma, NOS",G2,,TX,NX,,26855.0,male,white
+TCGA-D6-A4ZB,"Squamous cell carcinoma, keratinizing, NOS",G2,Stage III,T3,N0,M0,22455.0,male,white
+TCGA-HD-A6HZ,"Squamous cell carcinoma, NOS",G2,Stage III,T2,N1,MX,29045.0,female,white
+TCGA-WA-A7H4,"Squamous cell carcinoma, keratinizing, NOS",G3,Stage II,T2,N0,,25363.0,male,white
+TCGA-CV-7263,"Squamous cell carcinoma, NOS",G1,Stage II,T2,NX,,23513.0,male,black or african american
+TCGA-CR-7364,"Squamous cell carcinoma, NOS",G2,Stage III,T3,N0,M0,24192.0,male,white
+TCGA-CQ-6220,"Squamous cell carcinoma, NOS",G2,Stage III,T3,N0,,25366.0,male,white
+TCGA-CN-4738,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N0,M0,19621.0,male,white
+TCGA-CV-5436,"Squamous cell carcinoma, NOS",G2,Stage IVA,T3,N2b,,23923.0,male,not reported
+TCGA-CR-6487,"Squamous cell carcinoma, NOS",G3,Stage I,T1,N0,M0,18331.0,male,white
+TCGA-UF-A7JO,"Squamous cell carcinoma, NOS",,,,,,29476.0,female,white
+TCGA-UF-A7JO,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N0,M0,28951.0,female,white
+TCGA-KU-A6H8,"Squamous cell carcinoma, NOS",G3,Stage IVA,T2,N2b,M0,15066.0,male,white
+TCGA-KU-A6H8,"Squamous cell carcinoma, NOS",,,,,,15176.0,male,white
+TCGA-CV-6935,"Squamous cell carcinoma, NOS",G3,Stage IVA,T3,N2c,,24799.0,male,white
+TCGA-P3-A5QE,Basaloid squamous cell carcinoma,G2,Stage III,T2,N1,MX,18002.0,male,white
+TCGA-CR-7385,"Squamous cell carcinoma, NOS",G2,,T1,NX,M0,15477.0,male,white
+TCGA-BA-6869,"Squamous cell carcinoma, NOS",G2,Stage III,T3,N0,,22765.0,male,white
+TCGA-HD-A634,"Squamous cell carcinoma, NOS",G3,Stage IVA,T3,N2b,MX,20810.0,male,white
+TCGA-IQ-A6SG,"Squamous cell carcinoma, keratinizing, NOS",G2,Stage III,T3,N0,M0,22529.0,female,white
+TCGA-CN-A642,"Squamous cell carcinoma, NOS",G3,Stage IVB,T4a,N3,M0,21011.0,male,white
+TCGA-D6-6825,"Squamous cell carcinoma, NOS",G2,Stage I,T1,N0,,26976.0,male,white
+TCGA-CN-A499,"Squamous cell carcinoma, large cell, nonkeratinizing, NOS",G2,Stage II,T2,N0,MX,21971.0,female,white
+TCGA-CN-6016,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N1,,23664.0,male,white
+TCGA-CR-7397,"Squamous cell carcinoma, NOS",G2,Stage IVA,T3,N2b,M0,16351.0,male,white
+TCGA-BB-7861,"Squamous cell carcinoma, NOS",,Stage III,T1,N1,,20563.0,male,white
+TCGA-CV-6953,"Squamous cell carcinoma, NOS",,,,,,30986.0,female,white
+TCGA-CV-6953,"Squamous cell carcinoma, NOS",G1,Stage III,T3,N0,,29465.0,female,white
+TCGA-BA-5556,"Squamous cell carcinoma, NOS",G3,Stage II,T2,N0,,21444.0,female,white
+TCGA-P3-A6T6,"Squamous cell carcinoma, NOS",,,,,,19967.0,male,white
+TCGA-P3-A6T6,"Squamous cell carcinoma, NOS",G3,Stage IVA,T4a,NX,MX,19694.0,male,white
+TCGA-P3-A6T6,"Squamous cell carcinoma, NOS",,,,,,19967.0,male,white
+TCGA-P3-A6T2,"Squamous cell carcinoma, NOS",G2,Stage IVA,T3,N2b,MX,16588.0,male,white
+TCGA-BB-7870,"Squamous cell carcinoma, NOS",G3,Stage IVA,T4a,N0,,21443.0,male,white
+TCGA-BA-4074,"Squamous cell carcinoma, NOS",G3,Stage IVA,T2,N2c,M0,25282.0,male,white
+TCGA-BA-4074,"Squamous cell carcinoma, NOS",,,,,,25678.0,male,white
+TCGA-CR-7388,"Squamous cell carcinoma, NOS",,,,,,26338.0,female,white
+TCGA-CR-7388,"Squamous cell carcinoma, NOS",,,,,,26062.0,female,white
+TCGA-CR-7388,"Squamous cell carcinoma, NOS",G2,,TX,NX,,25728.0,female,white
+TCGA-CR-7365,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N0,M0,22101.0,male,white
+TCGA-CQ-7071,"Squamous cell carcinoma, NOS",G2,Stage III,T2,N1,M0,27928.0,female,white
+TCGA-IQ-A6SH,"Squamous cell carcinoma, NOS",G1,Stage III,T2,N1,M0,20109.0,male,black or african american
+TCGA-QK-A8Z8,"Squamous cell carcinoma, NOS",G2,Stage IVC,T3,N1,M1,22107.0,female,black or african american
+TCGA-CV-7409,"Squamous cell carcinoma, NOS",G3,Stage IVB,T4a,N3,,15888.0,male,black or african american
+TCGA-CX-7086,"Squamous cell carcinoma, NOS",G2,Stage III,T3,N1,,19434.0,male,black or african american
+TCGA-BB-A5HY,"Squamous cell carcinoma, NOS",,,,,,23870.0,male,white
+TCGA-BB-A5HY,"Squamous cell carcinoma, NOS",G3,Stage IVA,T3,N2b,M0,23640.0,male,white
+TCGA-BB-A5HY,"Squamous cell carcinoma, NOS",,,,,,23870.0,male,white
+TCGA-CN-6998,"Squamous cell carcinoma, NOS",,,,,,19691.0,male,white
+TCGA-CN-6998,"Squamous cell carcinoma, NOS",G2,Stage IVA,T3,N2b,,19447.0,male,white
+TCGA-CV-7413,"Squamous cell carcinoma, NOS",G2,Stage II,T2,N0,,27231.0,female,white
+TCGA-BA-5153,"Squamous cell carcinoma, NOS",,,,,,20265.0,male,white
+TCGA-BA-5153,"Squamous cell carcinoma, NOS",,,,,,20359.0,male,white
+TCGA-BA-5153,"Squamous cell carcinoma, NOS",G2,,T2,NX,,18743.0,male,white
+TCGA-CR-7376,"Squamous cell carcinoma, NOS",G2,Stage III,T2,N1,M0,30670.0,male,white
+TCGA-CV-7090,"Squamous cell carcinoma, NOS",G2,Stage II,T2,NX,,14515.0,male,white
+TCGA-CR-6493,"Squamous cell carcinoma, NOS",G2,Stage IVA,T3,N2b,,25432.0,male,black or african american
+TCGA-CR-6493,"Squamous cell carcinoma, NOS",,,,,,25679.0,male,black or african american
+TCGA-D6-A6ES,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N0,M0,18408.0,male,white
+TCGA-CV-A6JY,"Squamous cell carcinoma, NOS",G1,Stage IVA,T4a,N0,M0,25321.0,male,white
+TCGA-CN-5358,"Squamous cell carcinoma, NOS",G2,Stage II,T2,N0,,22138.0,male,white
+TCGA-CN-5358,"Squamous cell carcinoma, NOS",,,,,,22283.0,male,white
+TCGA-CN-4722,"Squamous cell carcinoma, NOS",G1,Stage II,T2,N0,,22299.0,female,white
+TCGA-CR-6477,"Squamous cell carcinoma, NOS",G2,,,,,20815.0,female,white
+TCGA-CV-A6JM,"Squamous cell carcinoma, NOS",,,,,,31254.0,male,white
+TCGA-CV-A6JM,"Squamous cell carcinoma, NOS",G2,,,,,31147.0,male,white
+TCGA-CV-A6JM,"Squamous cell carcinoma, NOS",,,,,,31254.0,male,white
+TCGA-BA-A6DJ,"Squamous cell carcinoma, keratinizing, NOS",,,,,,23207.0,male,asian
+TCGA-BA-A6DJ,"Squamous cell carcinoma, keratinizing, NOS",G2,Stage IVA,T4a,N2c,M0,22967.0,male,asian
+TCGA-CN-A63V,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N0,MX,21734.0,male,white
+TCGA-HD-7831,"Squamous cell carcinoma, NOS",,,,,,28001.0,male,white
+TCGA-HD-7831,"Squamous cell carcinoma, NOS",G2,Stage IVA,T2,N2,,27334.0,male,white
+TCGA-CN-5369,"Squamous cell carcinoma, NOS",G3,Stage IVA,T4a,N0,M0,32871.0,female,white
+TCGA-CV-A6JN,"Squamous cell carcinoma, NOS",G1,,,,,19635.0,male,white
+TCGA-CR-6480,"Squamous cell carcinoma, NOS",G2,,,,,19472.0,male,white
+TCGA-HD-7754,"Squamous cell carcinoma, NOS",G1,Stage IVA,T2,N2b,,25365.0,male,white
+TCGA-QK-A6IJ,"Squamous cell carcinoma, NOS",G3,Stage III,T2,N1,M0,25966.0,male,white
+TCGA-MT-A67D,"Squamous cell carcinoma, keratinizing, NOS",G2,Stage II,T2,N0,M0,20386.0,male,white
+TCGA-CN-5359,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N2b,M0,21858.0,male,white
+TCGA-CN-5359,"Squamous cell carcinoma, NOS",,,,,,22214.0,male,white
+TCGA-UF-A7JT,"Squamous cell carcinoma, NOS",,,,,,27093.0,female,white
+TCGA-UF-A7JT,"Squamous cell carcinoma, NOS",G3,Stage IVA,T4a,N0,M0,26375.0,female,white
+TCGA-HD-A633,"Squamous cell carcinoma, keratinizing, NOS",G2,Stage IVA,T4a,N0,MX,27057.0,male,white
+TCGA-HD-A633,"Squamous cell carcinoma, keratinizing, NOS",,,,,,27476.0,male,white
+TCGA-CN-5364,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N2c,M0,20362.0,male,white
+TCGA-CV-7414,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N2b,,28603.0,male,white
+TCGA-BA-A6DD,"Squamous cell carcinoma, keratinizing, NOS",,,,,,16497.0,male,black or african american
+TCGA-BA-A6DD,"Squamous cell carcinoma, keratinizing, NOS",G2,Stage IVA,T4a,N2c,M0,16401.0,male,black or african american
+TCGA-CV-6945,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N2,,15158.0,male,white
+TCGA-IQ-A61G,"Squamous cell carcinoma, keratinizing, NOS",G2,Stage IVA,T4a,N2c,MX,21066.0,male,white
+TCGA-IQ-A61G,"Squamous cell carcinoma, keratinizing, NOS",,,,,,21315.0,male,white
+TCGA-BB-7866,"Squamous cell carcinoma, NOS",GX,,TX,NX,,14810.0,male,white
+TCGA-CV-5441,"Squamous cell carcinoma, NOS",G3,Stage IVA,T4a,N2b,,21305.0,male,white
+TCGA-CR-5249,"Squamous cell carcinoma, NOS",GX,Stage II,T2,N0,M0,13047.0,female,white
+TCGA-UF-A7JS,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N2b,M0,21676.0,male,white
+TCGA-UF-A7JS,"Squamous cell carcinoma, NOS",,,,,,22195.0,male,white
+TCGA-BA-5149,"Squamous cell carcinoma, NOS",G2,Stage IVA,T3,N2c,,17177.0,male,white
+TCGA-BA-5149,"Squamous cell carcinoma, NOS",,,,,,17566.0,male,white
+TCGA-CV-5435,"Squamous cell carcinoma, NOS",,,,,,21210.0,male,white
+TCGA-CV-5435,"Squamous cell carcinoma, NOS",G3,Stage IVA,T4a,N2b,,20926.0,male,white
+TCGA-BB-A6UO,"Squamous cell carcinoma, NOS",,,,,,22718.0,female,white
+TCGA-BB-A6UO,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N2b,MX,22506.0,female,white
+TCGA-CR-7367,"Squamous cell carcinoma, NOS",G1,Stage IVA,T4a,N1,M0,19116.0,male,white
+TCGA-CR-7404,"Squamous cell carcinoma, NOS",,,,,,20296.0,male,white
+TCGA-CR-7404,"Squamous cell carcinoma, NOS",,,,,,19766.0,male,white
+TCGA-CR-7404,"Squamous cell carcinoma, NOS",,,,,,20463.0,male,white
+TCGA-CR-7404,"Squamous cell carcinoma, NOS",,,,,,20531.0,male,white
+TCGA-CR-7404,"Squamous cell carcinoma, NOS",G2,,TX,NX,,19532.0,male,white
+TCGA-CV-5979,"Squamous cell carcinoma, NOS",G2,Stage IVA,T2,N2b,,9567.0,male,white
+TCGA-CV-7425,"Squamous cell carcinoma, NOS",G1,Stage III,T3,NX,,28368.0,female,white
+TCGA-CV-7418,"Squamous cell carcinoma, NOS",,,,,,23299.0,male,black or african american
+TCGA-CV-7418,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N2b,,22805.0,male,black or african american
+TCGA-CV-6433,"Squamous cell carcinoma, NOS",G3,Stage II,T2,N0,,20855.0,male,white
+TCGA-IQ-A61J,"Squamous cell carcinoma, keratinizing, NOS",G1,Stage IVA,T2,N2b,M0,19913.0,male,white
+TCGA-QK-A6IF,"Squamous cell carcinoma, large cell, nonkeratinizing, NOS",GX,,,,,22463.0,male,white
+TCGA-QK-A6IF,"Squamous cell carcinoma, large cell, nonkeratinizing, NOS",,,,,,22965.0,male,white
+TCGA-QK-A6IF,"Squamous cell carcinoma, large cell, nonkeratinizing, NOS",,,,,,22965.0,male,white
+TCGA-CV-5976,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N2b,,18267.0,male,white
+TCGA-CV-7095,"Squamous cell carcinoma, NOS",G2,Stage II,T2,NX,,32022.0,female,not reported
+TCGA-DQ-7592,"Squamous cell carcinoma, NOS",G2,,TX,NX,,21041.0,male,american indian or alaska native
+TCGA-CR-7373,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N1,M0,24448.0,male,white
+TCGA-CV-5432,"Squamous cell carcinoma, NOS",G3,Stage III,T3,N0,,25006.0,male,white
+TCGA-CV-7252,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N0,,22934.0,female,black or african american
+TCGA-CV-5434,"Squamous cell carcinoma, NOS",,,,,,24041.0,male,black or african american
+TCGA-CV-5434,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N2b,,22182.0,male,black or african american
+TCGA-KU-A66T,"Squamous cell carcinoma, keratinizing, NOS",,,,,,19957.0,female,white
+TCGA-KU-A66T,"Squamous cell carcinoma, keratinizing, NOS",G2,Stage IVA,T4,N0,MX,19405.0,female,white
+TCGA-QK-A6V9,"Squamous cell carcinoma, NOS",G2,Stage II,T2,NX,M0,20461.0,male,white
+TCGA-BA-A4IF,Not Reported,,,,,,22098.0,male,white
+TCGA-BA-A4IF,"Squamous cell carcinoma, keratinizing, NOS",G2,,TX,NX,MX,21635.0,male,white
+TCGA-BA-A4IF,Not Reported,,,,,,22098.0,male,white
+TCGA-CR-7379,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N2b,M0,28763.0,female,white
+TCGA-CN-5363,"Squamous cell carcinoma, NOS",,,,,,17688.0,male,black or african american
+TCGA-CN-5363,"Squamous cell carcinoma, NOS",G3,Stage IVB,T4a,N3,M0,17635.0,male,black or african american
+TCGA-CV-7091,"Squamous cell carcinoma, NOS",G3,Stage I,T1,N0,,19938.0,male,white
+TCGA-CV-6933,"Squamous cell carcinoma, NOS",G2,Stage III,T3,N1,,19518.0,male,white
+TCGA-CV-7421,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N0,,27961.0,male,white
+TCGA-CV-6942,"Squamous cell carcinoma, NOS",G3,Stage II,T2,NX,,26941.0,female,white
+TCGA-CQ-6222,"Squamous cell carcinoma, NOS",G2,Stage IVA,T2,N2b,,23326.0,male,white
+TCGA-CV-5978,"Squamous cell carcinoma, NOS",G2,Stage IVB,T4a,N3,,19480.0,female,black or african american
+TCGA-CR-7398,"Squamous cell carcinoma, NOS",G2,Stage II,T2,N0,,19468.0,female,white
+TCGA-QK-A8Z7,Basaloid squamous cell carcinoma,,Stage IVA,T4a,N2c,M0,21711.0,male,black or african american
+TCGA-P3-A6T0,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N0,MX,17259.0,female,white
+TCGA-P3-A6T0,"Squamous cell carcinoma, NOS",,,,,,17624.0,female,white
+TCGA-CV-6960,"Squamous cell carcinoma, NOS",G3,Stage III,T3,N0,,18194.0,male,black or african american
+TCGA-CV-A45W,"Squamous cell carcinoma, NOS",G2,Stage II,T2,N0,M0,27743.0,male,white
+TCGA-CV-7422,"Squamous cell carcinoma, NOS",G3,Stage IVA,T4a,N1,,22098.0,female,white
+TCGA-CV-7422,"Squamous cell carcinoma, NOS",,,,,,22831.0,female,white
+TCGA-CV-A6JE,"Squamous cell carcinoma, NOS",G2,,,,,28658.0,male,white
+TCGA-CQ-A4CG,"Squamous cell carcinoma, NOS",G2,Stage III,T3,N0,M0,28637.0,female,white
+TCGA-CQ-A4CG,"Squamous cell carcinoma, NOS",,,,,,28987.0,female,white
+TCGA-D6-6826,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N2b,,23722.0,female,white
+TCGA-HD-7753,"Squamous cell carcinoma, NOS",G2,Stage I,T1,N0,,22774.0,male,black or african american
+TCGA-QK-A6IG,"Squamous cell carcinoma, NOS",,,,,,25503.0,male,white
+TCGA-QK-A6IG,"Squamous cell carcinoma, NOS",,,,,,25476.0,male,white
+TCGA-QK-A6IG,"Squamous cell carcinoma, NOS",G2,Stage III,T2,N1,M0,25334.0,male,white
+TCGA-C9-A480,"Squamous cell carcinoma, NOS",G1,Stage III,T3,N0,M0,16567.0,female,asian
+TCGA-CV-6941,"Squamous cell carcinoma, NOS",G2,Stage III,T3,N0,,18812.0,male,white
+TCGA-CN-A498,"Squamous cell carcinoma, keratinizing, NOS",,,,,,22656.0,female,white
+TCGA-CN-A498,"Squamous cell carcinoma, keratinizing, NOS",,,,,,22516.0,female,white
+TCGA-CN-A498,"Squamous cell carcinoma, keratinizing, NOS",G1,Stage III,T3,N0,MX,22330.0,female,white
+TCGA-CN-A498,"Squamous cell carcinoma, keratinizing, NOS",,,,,,22883.0,female,white
+TCGA-IQ-7630,"Squamous cell carcinoma, NOS",G3,Stage II,T2,N0,M0,18131.0,male,white
+TCGA-BB-8601,"Squamous cell carcinoma, NOS",,,,,,31345.0,male,black or african american
+TCGA-BB-8601,"Squamous cell carcinoma, NOS",,,,,,31161.0,male,black or african american
+TCGA-BB-8601,"Squamous cell carcinoma, NOS",G2,Stage III,T3,N1,MX,30721.0,male,black or african american
+TCGA-H7-A6C4,"Squamous cell carcinoma, keratinizing, NOS",,,,,,13372.0,female,white
+TCGA-H7-A6C4,"Squamous cell carcinoma, keratinizing, NOS",,,,,,13382.0,female,white
+TCGA-H7-A6C4,"Squamous cell carcinoma, keratinizing, NOS",G2,Stage IVA,T2,N2b,M0,13137.0,female,white
+TCGA-H7-A6C4,Not Reported,,,,,,,female,white
+TCGA-MT-A51X,"Squamous cell carcinoma, keratinizing, NOS",G1,Stage IVA,T1,N2b,M0,10976.0,male,white
+TCGA-CR-7399,"Squamous cell carcinoma, NOS",G3,Stage IVA,T3,N2c,M0,22182.0,female,white
+TCGA-CN-6995,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N0,,28850.0,male,white
+TCGA-MT-A67A,"Squamous cell carcinoma, NOS",G2,Stage I,T1,N0,MX,31161.0,female,white
+TCGA-CN-6019,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N0,,22485.0,male,white
+TCGA-QK-A6II,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N2c,M0,19113.0,male,white
+TCGA-QK-A6II,"Squamous cell carcinoma, NOS",,,,,,19289.0,male,white
+TCGA-CV-6959,"Squamous cell carcinoma, NOS",G2,Stage III,T3,N0,,17679.0,male,white
+TCGA-CV-6959,"Squamous cell carcinoma, NOS",,,,,,17782.0,male,white
+TCGA-CN-4725,"Squamous cell carcinoma, NOS",G2,Stage II,T2,N0,,22171.0,male,white
+TCGA-H7-8501,"Squamous cell carcinoma, keratinizing, NOS",GX,Stage IVA,T4a,N1,M0,19808.0,male,white
+TCGA-D6-A6EM,"Squamous cell carcinoma, NOS",G2,Stage III,T2,N1,M0,23865.0,female,white
+TCGA-D6-A6EM,"Squamous cell carcinoma, NOS",,,,,,24097.0,female,white
+TCGA-D6-A6EN,"Squamous cell carcinoma, NOS",G3,Stage III,T2,N1,M0,26294.0,male,white
+TCGA-QK-A8ZB,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N0,M0,25192.0,male,black or african american
+TCGA-BB-A5HU,"Basal cell carcinoma, NOS",,,,,,17532.0,male,white
+TCGA-BB-A5HU,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4,N2b,M0,17502.0,male,white
+TCGA-CQ-7064,"Squamous cell carcinoma, NOS",G2,Stage III,T3,N1,M0,30640.0,female,white
+TCGA-CV-5439,"Squamous cell carcinoma, NOS",G2,Stage IVA,T3,N2b,,22686.0,male,white
+TCGA-CV-5439,"Squamous cell carcinoma, NOS",,,,,,22897.0,male,white
+TCGA-DQ-7591,"Squamous cell carcinoma, NOS",G4,,TX,NX,,22798.0,male,white
+TCGA-DQ-7595,"Squamous cell carcinoma, NOS",G3,,TX,NX,,19530.0,male,white
+TCGA-CV-6954,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,NX,,21557.0,male,black or african american
+TCGA-CV-6961,"Squamous cell carcinoma, NOS",G3,Stage II,T2,N0,,22532.0,male,white
+TCGA-CR-7371,"Squamous cell carcinoma, NOS",G2,Stage III,T3,N1,M0,16568.0,female,white
+TCGA-CV-6003,"Squamous cell carcinoma, NOS",G2,Stage III,T2,N1,,18600.0,female,white
+TCGA-CN-6988,"Squamous cell carcinoma, NOS",G3,Stage IVA,T4a,N2b,,17308.0,male,white
+TCGA-CR-7374,"Squamous cell carcinoma, NOS",G2,,TX,NX,,24558.0,female,white
+TCGA-HD-8224,"Squamous cell carcinoma, NOS",G3,Stage IVA,T3,N2c,M0,23069.0,male,white
+TCGA-HD-8224,"Squamous cell carcinoma, NOS",,,,,,23240.0,male,white
+TCGA-CN-4735,"Squamous cell carcinoma, NOS",G3,Stage IVA,T3,N2b,,19107.0,male,white
+TCGA-CN-4742,"Squamous cell carcinoma, NOS",G3,Stage IVA,T4a,N2b,M0,17793.0,female,white
+TCGA-CV-7429,"Squamous cell carcinoma, NOS",G3,Stage IVA,T4a,N2b,,20188.0,male,white
+TCGA-P3-A5QF,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4,N2b,MX,18035.0,male,white
+TCGA-P3-A5QF,"Squamous cell carcinoma, NOS",,,,,,18175.0,male,white
+TCGA-CR-7372,"Squamous cell carcinoma, NOS",G1,Stage I,T1,N0,M0,16610.0,male,white
+TCGA-P3-A6T5,"Squamous cell carcinoma, NOS",,,,,,29554.0,female,white
+TCGA-P3-A6T5,"Squamous cell carcinoma, NOS",,,,,,29312.0,female,white
+TCGA-P3-A6T5,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N0,MX,28977.0,female,white
+TCGA-CR-6482,"Squamous cell carcinoma, NOS",G3,,,,,22741.0,male,black or african american
+TCGA-F7-A624,"Squamous cell carcinoma, NOS",G3,Stage II,T2,NX,M0,26667.0,male,white
+TCGA-CN-6996,"Squamous cell carcinoma, NOS",,,,,,21797.0,female,white
+TCGA-CN-6996,"Squamous cell carcinoma, NOS",G2,Stage IVA,T3,N2b,,21447.0,female,white
+TCGA-CN-6996,"Squamous cell carcinoma, NOS",,,,,,21894.0,female,white
+TCGA-QK-A652,"Squamous cell carcinoma, NOS",G2,Stage III,T1,N1,MX,22023.0,male,white
+TCGA-CV-7242,"Squamous cell carcinoma, NOS",G2,Stage II,T2,N0,,22136.0,female,white
+TCGA-TN-A7HL,"Squamous cell carcinoma, NOS",G2,Stage IVA,T3,N2b,M0,21731.0,male,white
+TCGA-CV-A6JZ,"Squamous cell carcinoma, NOS",,,,,,25575.0,male,white
+TCGA-CV-A6JZ,"Squamous cell carcinoma, NOS",G2,Stage II,T2,N0,M0,25182.0,male,white
+TCGA-CV-A6JZ,"Squamous cell carcinoma, NOS",,,,,,25575.0,male,white
+TCGA-CV-5444,"Squamous cell carcinoma, NOS",G3,Stage IVA,T4a,N1,,23650.0,male,black or african american
+TCGA-CV-6934,"Squamous cell carcinoma, NOS",G2,Stage IVA,T3,N2b,,24180.0,female,white
+TCGA-CN-4731,"Squamous cell carcinoma, NOS",G3,Stage IVA,T4a,N2c,,23194.0,female,white
+TCGA-CN-4731,Not Reported,,,,,,24015.0,female,white
+TCGA-CN-4731,"Squamous cell carcinoma, NOS",,,,,,23697.0,female,white
+TCGA-CN-4731,"Squamous cell carcinoma, NOS",,,,,,23437.0,female,white
+TCGA-CN-4731,Not Reported,,,,,,24070.0,female,white
+TCGA-MT-A67F,"Squamous cell carcinoma, keratinizing, NOS",G2,Stage IVA,T4,N0,MX,22057.0,female,white
+TCGA-F7-8489,"Squamous cell carcinoma, NOS",G1,Stage II,T2,N0,M0,17873.0,male,white
+TCGA-CR-7380,"Squamous cell carcinoma, NOS",G2,Stage IVB,T4b,N0,,21215.0,male,white
+TCGA-CR-7380,"Squamous cell carcinoma, NOS",,,,,,21776.0,male,white
+TCGA-DQ-5625,"Squamous cell carcinoma, NOS",,,,,,20269.0,female,white
+TCGA-DQ-5625,"Squamous cell carcinoma, NOS",,,,,,20269.0,female,white
+TCGA-DQ-5625,"Squamous cell carcinoma, NOS",G2,,TX,NX,,19211.0,female,white
+TCGA-UF-A7JC,"Squamous cell carcinoma, NOS",G1,Stage IVA,T3,N2b,M0,15452.0,male,white
+TCGA-UF-A7JC,"Squamous cell carcinoma, NOS",,,,,,15681.0,male,white
+TCGA-BA-A4IG,"Adenocarcinoma, NOS",,,,,,,male,white
+TCGA-BA-A4IG,"Squamous cell carcinoma, NOS",G3,,T1,NX,MX,28402.0,male,white
+TCGA-CN-5370,"Squamous cell carcinoma, NOS",,,,,,28672.0,male,white
+TCGA-CN-5370,"Squamous cell carcinoma, NOS",G3,Stage III,T3,N1,M0,28549.0,male,white
+TCGA-CN-6018,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N2b,,31242.0,female,white
+TCGA-D6-A4Z9,"Squamous cell carcinoma, keratinizing, NOS",G2,Stage IVA,T2,N2,M0,21659.0,male,white
+TCGA-BB-8596,"Squamous cell carcinoma, NOS",G3,Stage IVA,T4a,NX,MX,25408.0,female,white
+TCGA-CN-5360,"Squamous cell carcinoma, NOS",G2,Stage IVA,T4a,N0,M0,25034.0,male,white
+TCGA-CV-6441,"Squamous cell carcinoma, NOS",G3,Stage III,T3,N0,,22025.0,male,white
+TCGA-CV-6441,"Squamous cell carcinoma, NOS",,,,,,22120.0,male,white
+TCGA-H7-A76A,"Squamous cell carcinoma, keratinizing, NOS",G2,,TX,N2b,MX,20946.0,male,white
+TCGA-CV-7102,"Squamous cell carcinoma, NOS",G3,Stage IVA,T3,N2,,27805.0,female,white
+TCGA-CN-A6V6,"Squamous cell carcinoma, large cell, nonkeratinizing, NOS",GX,Stage IVA,T2,N2b,MX,21811.0,male,white
+TCGA-CQ-6227,"Squamous cell carcinoma, NOS",G2,Stage IVA,T3,N2c,,28466.0,male,white
+TCGA-CQ-A4C6,"Squamous cell carcinoma, NOS",G2,Stage II,T2,N0,M0,23205.0,male,asian
+TCGA-CV-7247,"Squamous cell carcinoma, NOS",G2,Stage III,T3,N0,,20433.0,male,white
