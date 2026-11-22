@@ -1,0 +1,460 @@
+{
+  "schema_version": 1,
+  "scope": "request-based archive verification; not public raw-source reconstruction",
+  "expected_cohorts": {
+    "full": 499,
+    "wide": 332,
+    "strict": 246
+  },
+  "ordering_authority": "data/TCGA-HNSC/attention_v2/cohort_index.json:case_ids",
+  "unresolved_upstream_revisions": [
+    "Lab-Rasool/TCGA feature dataset revision",
+    "BiomedBERT model revision used for historical encodings"
+  ],
+  "files": [
+    {
+      "path": "code/README.md",
+      "role": "analysis_code",
+      "size": 10678,
+      "sha256": "4de5095eb42e7dbae5f889e72c4937fe17935d8d5fa90f880618b55edf26c071"
+    },
+    {
+      "path": "code/fix_age_units.py",
+      "role": "analysis_code",
+      "size": 3186,
+      "sha256": "65fd0ad3f9f666d73ec4f4b3e60ce12b1dadf5c2db5f1c8c32ff590e9443576a"
+    },
+    {
+      "path": "code/prep_attention_v2.py",
+      "role": "analysis_code",
+      "size": 9465,
+      "sha256": "2d55dfb2d3df355615f152e512e975e75d5d7e93bf3f4bcc5db47cae64b810af"
+    },
+    {
+      "path": "code/attention_v2_models.py",
+      "role": "analysis_code",
+      "size": 6977,
+      "sha256": "cf246eee4e2f0d5c14688144fd20f447c2c11f7fd290a35f9c001db17f9e2451"
+    },
+    {
+      "path": "code/attention_v2_experiments.py",
+      "role": "analysis_code",
+      "size": 11408,
+      "sha256": "2823bd6f089f365dae7b09c54e1d546006be9a83120265b86cfd17d235429b7d"
+    },
+    {
+      "path": "code/attention_v2_aux.py",
+      "role": "analysis_code",
+      "size": 8663,
+      "sha256": "11e5ad3adead43058011a44fb6864257fd69815a3f085d1c28490a473c04d279"
+    },
+    {
+      "path": "code/attention_v2_loso_moddrop.py",
+      "role": "analysis_code",
+      "size": 7907,
+      "sha256": "9b80de6739757d3a537c34f20f9a061f81204717f8254a94e08d25c6d63d5119"
+    },
+    {
+      "path": "code/attention_v2_analysis.py",
+      "role": "analysis_code",
+      "size": 10532,
+      "sha256": "7f1cfdfd222a00c026a61de9f437380d8a7cdf7a74372b0b6b7469e2f06738c8"
+    },
+    {
+      "path": "code/attention_v2_rederive.py",
+      "role": "analysis_code",
+      "size": 9754,
+      "sha256": "19146f23af077ab788ea575121513b20013672d3ea3d03a4604646abb2611347"
+    },
+    {
+      "path": "code/attention_v2_tables.py",
+      "role": "analysis_code",
+      "size": 11188,
+      "sha256": "e1c7cb00a71b4ccf00995b3044876b28895d77ed28ac66d392463b03277e7764"
+    },
+    {
+      "path": "code/attention_v2_nodx_encode.py",
+      "role": "analysis_code",
+      "size": 5636,
+      "sha256": "cbe82516b006ebced4e9db25adc2735d688090765785feb082a36cfd7cea46f8"
+    },
+    {
+      "path": "code/attention_v2_nodx_fourcell.py",
+      "role": "analysis_code",
+      "size": 6951,
+      "sha256": "6fad4b3bef6a4f24edb871121bc45cf4ec0a1c812a9b13107f3a44c335be6e74"
+    },
+    {
+      "path": "code/replay_grade_followup.py",
+      "role": "analysis_code",
+      "size": 4582,
+      "sha256": "284953bd2177145f4c4bbe3359d43e0915a592126dff3cca7ee2f7ecf4800254"
+    },
+    {
+      "path": "code/attention_v2_rep_match.py",
+      "role": "analysis_code",
+      "size": 8103,
+      "sha256": "4edd54154408c4ab2252481d6030a8ba8f1c7d9c4e287c670e3bfed5066d5d32"
+    },
+    {
+      "path": "code/attention_v2_structured_baseline.py",
+      "role": "analysis_code",
+      "size": 7820,
+      "sha256": "fdbaff00e2a6fa99fc294727cbe09d836720877948a852f54782004872c5325c"
+    },
+    {
+      "path": "code/attention_v2_mi_matched.py",
+      "role": "analysis_code",
+      "size": 1885,
+      "sha256": "ed3de91fffe7bf177b10aa2d3abc12597da5eb41dde16142251472119fac5c70"
+    },
+    {
+      "path": "code/attention_v2_skip_ablation.py",
+      "role": "analysis_code",
+      "size": 7454,
+      "sha256": "0e8b6373ca9110f4210d9f5b00c3c9fd50791fe09d4130ab6c95c11ad48bb2dc"
+    },
+    {
+      "path": "code/build_case_slide_manifest.py",
+      "role": "analysis_code",
+      "size": 2092,
+      "sha256": "f2533cafaae07c9c827a8b59ad759bbc543575c2c168ae089d531d07607341eb"
+    },
+    {
+      "path": "code/build_manuscript_bundle_manifest.py",
+      "role": "analysis_code",
+      "size": 6532,
+      "sha256": "fccd89d58e774fe145513c9609e831d0616096529dc66cac74bd7e44cdab7ded"
+    },
+    {
+      "path": "code/verify_manuscript_bundle.py",
+      "role": "analysis_code",
+      "size": 12035,
+      "sha256": "04d15bca01fe0898a091cf4f8a6ba1d929caf8f0292a023d3d47fd4cd4d1169a"
+    },
+    {
+      "path": "code/fig1_regenerate.py",
+      "role": "analysis_code",
+      "size": 4613,
+      "sha256": "194df3f193ff56e5f396140e1dc73bd5238234fd7d89a48cdab532642676304d"
+    },
+    {
+      "path": "code/fig2_regenerate.py",
+      "role": "analysis_code",
+      "size": 4490,
+      "sha256": "e0ae3d734a5d5ade1871074959337e84338a023c8de2b10a23872ab9b262e20c"
+    },
+    {
+      "path": "code/fig3_regenerate.py",
+      "role": "analysis_code",
+      "size": 4376,
+      "sha256": "d0c0647992e62d568a14731eaeb8342a8f67d49a18cec760c68714522cf26238"
+    },
+    {
+      "path": "code/fig4_regenerate.py",
+      "role": "analysis_code",
+      "size": 2511,
+      "sha256": "b43403a62ada904c77a4288ee800ee7befcda4c271f39ea2386e5bf059e35520"
+    },
+    {
+      "path": "code/fix_real_attention.py",
+      "role": "analysis_code",
+      "size": 6045,
+      "sha256": "2b11df84bcf72ee8885fbf248094d6ed95c5c78a53399900681f52b00258434d"
+    },
+    {
+      "path": "code/fix_real_gradcam.py",
+      "role": "analysis_code",
+      "size": 11286,
+      "sha256": "669ae5346255e063cac668cd07a03655bc9d2f20e25631a7cf3231d20616b1be"
+    },
+    {
+      "path": "code/gradcam_oral_expanded.py",
+      "role": "analysis_code",
+      "size": 12365,
+      "sha256": "d6ae365653fea988082700ceaf19cf0c8990d908f583bda6fdb797c0b26ff6c8"
+    },
+    {
+      "path": "code/requirements_full.txt",
+      "role": "analysis_code",
+      "size": 1478,
+      "sha256": "ac86ae94cef57f4eea2bcb4ef8071f88723be3c2ced8aeb9f69dfe5185bdfd70"
+    },
+    {
+      "path": "data/TCGA-HNSC/clinical_data.csv",
+      "role": "retained_feature_inputs",
+      "size": 36099,
+      "sha256": "3899086f38b8d2bbd66c51666cfa565e38d252931b5fc058b107c842e780c725"
+    },
+    {
+      "path": "data/TCGA-HNSC/clinical_data_oral.csv",
+      "role": "retained_feature_inputs",
+      "size": 36099,
+      "sha256": "3899086f38b8d2bbd66c51666cfa565e38d252931b5fc058b107c842e780c725"
+    },
+    {
+      "path": "data/TCGA-HNSC/pretrained_features/Slide_Image_UNI.parquet",
+      "role": "retained_feature_inputs",
+      "size": 1858741682,
+      "sha256": "fdbc0d53f96932a0326a8f9524b73779a20d1e6ec4d73fe3a563d390579b48bd"
+    },
+    {
+      "path": "data/TCGA-HNSC/attention_v2/cohort_index.json",
+      "role": "retained_feature_inputs",
+      "size": 34756,
+      "sha256": "24d4093d2dcc65b750025be93352c39f171ee902383d2859697a7307e9f29536"
+    },
+    {
+      "path": "data/TCGA-HNSC/attention_v2/img_patches.npz",
+      "role": "retained_feature_inputs",
+      "size": 35246810,
+      "sha256": "21e45e50512cbe615c68833c39f9cc75ca28ccba1c511198d7dfe3828d1f1698"
+    },
+    {
+      "path": "data/TCGA-HNSC/attention_v2/text_tokens.npz",
+      "role": "retained_feature_inputs",
+      "size": 64200337,
+      "sha256": "5d159d5b559998d4da788c6009da6c7d921da9590969047a6f3a87228171d3fa"
+    },
+    {
+      "path": "data/TCGA-HNSC/attention_v2/text_tokens_nodx.npz",
+      "role": "retained_feature_inputs",
+      "size": 48299864,
+      "sha256": "df88d0b0811b24a8e97b19311e13dad7ee109456bc437a7f12e218334985a7ba"
+    },
+    {
+      "path": "data/TCGA-HNSC/attention_v2/text_tokens_nodx_meta.json",
+      "role": "retained_feature_inputs",
+      "size": 584,
+      "sha256": "db37a9f75902e1649ccb46c896f93ba30635a0fa8693992175e209094c315912"
+    },
+    {
+      "path": "data/TCGA-HNSC/integrated_full_legacy499/X_img_uni.npy",
+      "role": "retained_feature_inputs",
+      "size": 2044032,
+      "sha256": "71179eb395ba19ec6d0e8f85ebd39278f59f48e34e6131ab28a08eb2f44f05c9"
+    },
+    {
+      "path": "data/TCGA-HNSC/integrated_full_legacy499/X_text_biomedbert.npy",
+      "role": "retained_feature_inputs",
+      "size": 1533056,
+      "sha256": "aacb1217db509339701417c42e3c101ba2821f1bbe3465e987a666e81a50f35e"
+    },
+    {
+      "path": "data/TCGA-HNSC/integrated_full_legacy499/X_text_biomedbert_ageyears.npy",
+      "role": "retained_feature_inputs",
+      "size": 1533056,
+      "sha256": "b64b7dd21cfdb6b57857c24eee49de778ef8891b21b26d93922025a5f2c48105"
+    },
+    {
+      "path": "data/TCGA-HNSC/integrated_full_legacy499/y.npy",
+      "role": "retained_feature_inputs",
+      "size": 4120,
+      "sha256": "57d8c2ebce5ba196ba353b83846cc5b465464cbde4a5a80253b2d47fd89fe20d"
+    },
+    {
+      "path": "data/TCGA-HNSC/integrated_full_legacy499/text_metadata_499era.csv",
+      "role": "retained_feature_inputs",
+      "size": 71150,
+      "sha256": "a1528f771cb84650efe33cf33b46e1af9011287a3bc984822ffc4b0d0fa5198a"
+    },
+    {
+      "path": "data/TCGA-HNSC/integrated_full_legacy499/case_labels.csv",
+      "role": "retained_feature_inputs",
+      "size": 7999,
+      "sha256": "9d785bac73d3538260c2b533b79f57604044bc78f332b0cac322479a3bac480e"
+    },
+    {
+      "path": "data/TCGA-HNSC/integrated_full_legacy499/text_metadata_499era_ageyears.csv",
+      "role": "retained_feature_inputs",
+      "size": 69640,
+      "sha256": "8cec5d8624dcaca65fdd1b6483a153cf111d8d8d480771fe9652148e7414820b"
+    },
+    {
+      "path": "data/TCGA-HNSC/integrated/X_img_patches.npz",
+      "role": "retained_feature_inputs",
+      "size": 38896290,
+      "sha256": "aa4f95f89d5b529bfbe36672af56cd3c5f94407abb79f8e4f0ff31307abf266a"
+    },
+    {
+      "path": "data/TCGA-HNSC/integrated/X_img_uni.npy",
+      "role": "retained_feature_inputs",
+      "size": 1007744,
+      "sha256": "a23f6b7256ce7c80c04c28aa3e3effbe499ad194e0ffaf752b4bc6c6188b1394"
+    },
+    {
+      "path": "data/TCGA-HNSC/integrated/X_text_biomedbert.npy",
+      "role": "retained_feature_inputs",
+      "size": 755840,
+      "sha256": "7ccc1e4e1a68c92b3fd78f95610279201a2ba6ef00b1eeb1f1eb405031b2ce81"
+    },
+    {
+      "path": "data/TCGA-HNSC/integrated/y.npy",
+      "role": "retained_feature_inputs",
+      "size": 2096,
+      "sha256": "3718ed1f3660bbf7042fc5477351df050c0bf04a67998ffc86fc793f68c479c8"
+    },
+    {
+      "path": "data/TCGA-HNSC/integrated/case_labels.csv",
+      "role": "retained_feature_inputs",
+      "size": 3951,
+      "sha256": "7dd2bccfec949d28feaf9d54e947135f41e96bf87cea73be54597e9c79fab5d7"
+    },
+    {
+      "path": "data/TCGA-HNSC/integrated/oral_patches.npz",
+      "role": "retained_feature_inputs",
+      "size": 19570698,
+      "sha256": "86034a172341b93a7e6ab23ef369c80d339aafe57a9f9218eea6f787abede58b"
+    },
+    {
+      "path": "data/TCGA-HNSC/experiment_outputs/attention_v2_full_results.json",
+      "role": "primary_and_auxiliary_outputs",
+      "size": 388115,
+      "sha256": "d2e3194500174eafa71d9c1a0bce2596ac375bb98f23efde61523dd72edfb396"
+    },
+    {
+      "path": "data/TCGA-HNSC/experiment_outputs/attention_v2_wide_results.json",
+      "role": "primary_and_auxiliary_outputs",
+      "size": 276662,
+      "sha256": "600337ac5e8c5735eaab934ba1572fc43026894d00f2ab44ca8f32dfebc7140d"
+    },
+    {
+      "path": "data/TCGA-HNSC/experiment_outputs/attention_v2_strict_results.json",
+      "role": "primary_and_auxiliary_outputs",
+      "size": 217160,
+      "sha256": "064da660e46886073466e737a22682d22540a404847d6ba750e8bfbcff5e325c"
+    },
+    {
+      "path": "data/TCGA-HNSC/experiment_outputs/attention_v2_analysis.json",
+      "role": "primary_and_auxiliary_outputs",
+      "size": 38156,
+      "sha256": "e19a0b920b0263a6824089cdf873f2b9e462d64da1b39426a0172f97c7adc93f"
+    },
+    {
+      "path": "data/TCGA-HNSC/experiment_outputs/attention_v2_aux.json",
+      "role": "primary_and_auxiliary_outputs",
+      "size": 239727,
+      "sha256": "49ddecdc233a56a3a4cb2423c63171b27a0396672a76125e97ce6459b39edc9e"
+    },
+    {
+      "path": "data/TCGA-HNSC/experiment_outputs/attention_v2_loso_moddrop.json",
+      "role": "primary_and_auxiliary_outputs",
+      "size": 5211,
+      "sha256": "d61d72fbdb65f67dd23b8e2dcbcfd60e37b18f9f3a020506bbe75f6a0e42bda5"
+    },
+    {
+      "path": "data/TCGA-HNSC/experiment_outputs/attention_v2_mi_matched.json",
+      "role": "primary_and_auxiliary_outputs",
+      "size": 8643,
+      "sha256": "931aec0cff4200d0e05c88ddf09022b7c81da8ff9163339feb28f2853d91ae65"
+    },
+    {
+      "path": "data/TCGA-HNSC/experiment_outputs/attention_v2_rep_match.json",
+      "role": "primary_and_auxiliary_outputs",
+      "size": 495632,
+      "sha256": "f1519416a9fa17de1752f115199bf8989a6f91bd7f0327913b5d81ec42ed80aa"
+    },
+    {
+      "path": "data/TCGA-HNSC/experiment_outputs/attention_v2_skip_ablation.json",
+      "role": "primary_and_auxiliary_outputs",
+      "size": 2683,
+      "sha256": "92e102118bb99d31f5ee0893e2cf8e27138d27276b2a64bd77b2eb9df1818688"
+    },
+    {
+      "path": "data/TCGA-HNSC/experiment_outputs/attention_v2_structured_baseline.json",
+      "role": "primary_and_auxiliary_outputs",
+      "size": 515174,
+      "sha256": "bad4a2cef1259a12d2f81a6f173656a24e2db8b21cc2943bd7ae4b8bf7219082"
+    },
+    {
+      "path": "data/TCGA-HNSC/experiment_outputs/attention_v2_nodx_fourcell.json",
+      "role": "primary_and_auxiliary_outputs",
+      "size": 4623,
+      "sha256": "f65ca7a61146675cdd297176390af6f84eb5fc3b40a748527766ba36de97ac27"
+    },
+    {
+      "path": "data/TCGA-HNSC/experiment_outputs/attention_v2_nodx_prereg.json",
+      "role": "primary_and_auxiliary_outputs",
+      "size": 2405,
+      "sha256": "6c3d5552597ae86bcb777a2adffd444ebe62bdf0c55e5113c96cae7396ab0d9c"
+    },
+    {
+      "path": "data/TCGA-HNSC/experiment_outputs/attention_v2_rederive.json",
+      "role": "primary_and_auxiliary_outputs",
+      "size": 11566,
+      "sha256": "38453212668bb3998baac04ce818e802e0d37cdca45300d295abde2518de922b"
+    },
+    {
+      "path": "data/TCGA-HNSC/experiment_outputs/case_slide_manifest.csv",
+      "role": "primary_and_auxiliary_outputs",
+      "size": 182623,
+      "sha256": "b5ef131104a3c0ad64cf51fa49a6193d36626914f11fe623730d5afc60800231"
+    },
+    {
+      "path": "codex-review/main_grade_replay_verification_2026_11_22.json",
+      "role": "primary_and_auxiliary_outputs",
+      "size": 1520,
+      "sha256": "8b9da43d87b9974e836be23a695f920ac277d66869a416e7a5025c81c36c3b71"
+    },
+    {
+      "path": "paper/prereg_nodx_fourcell.md",
+      "role": "primary_and_auxiliary_outputs",
+      "size": 3511,
+      "sha256": "4abcf1254104da4202b2c26c2a2eacc75ef35def08ade4bde5217af60ef73a35"
+    },
+    {
+      "path": "data/TCGA-HNSC/experiment_outputs/text_latent_attention_archive.npz",
+      "role": "figure_sources",
+      "size": 28496,
+      "sha256": "f6eeaf6bd6ae7bd3606c63ba241cfc14f85db49ebafa0fee01a81dafb7c64a7c"
+    },
+    {
+      "path": "data/TCGA-HNSC/experiment_outputs/text_attention_model.pt",
+      "role": "figure_sources",
+      "size": 5671393,
+      "sha256": "d5c85152a014d4b23453ccfecb68f7093d3e76d83513c759a5c3219c23c2ab2a"
+    },
+    {
+      "path": "data/TCGA-HNSC/experiment_outputs/dndf_learned_params.npz",
+      "role": "figure_sources",
+      "size": 4524,
+      "sha256": "0a9632d7e8465ab6698946af9845b9e8d17075e4fcc80dc3a127630acf07e316"
+    },
+    {
+      "path": "data/TCGA-HNSC/experiment_outputs/image_only_model.pt",
+      "role": "figure_sources",
+      "size": 5283747,
+      "sha256": "9e36e751babd883d03dd927ea76dff7c4788babbbc67e49c7f4c5a4277ac9347"
+    },
+    {
+      "path": "data/TCGA-HNSC/experiment_outputs/gradcam_g1_scores.npy",
+      "role": "figure_sources",
+      "size": 168,
+      "sha256": "04a0138e8668f204d83e35066c4ccdd67424012c91ff51b34ce9ce6ea942a69f"
+    },
+    {
+      "path": "data/TCGA-HNSC/experiment_outputs/gradcam_g3_scores.npy",
+      "role": "figure_sources",
+      "size": 360,
+      "sha256": "219a8c54c93925a32cb592533d4083502171fcc71329d847fb996f3962d5758f"
+    },
+    {
+      "path": "data/TCGA-HNSC/experiment_outputs/oral_gradcam_results.json",
+      "role": "figure_sources",
+      "size": 31079,
+      "sha256": "5d4a247a7aafe33e2f8d38fd1e47d04b8477e688c1f41e5a8ed46aab642605a9"
+    },
+    {
+      "path": "data/TCGA-HNSC/experiment_outputs/oral_gradcam_scores.npz",
+      "role": "figure_sources",
+      "size": 10883,
+      "sha256": "e085a7acd9e910435256ba8f86ed35c902fd4e34c04cd5a0ae3fb2d621f20c4d"
+    },
+    {
+      "path": "data/TCGA-HNSC/experiment_outputs/oral_image_model.pt",
+      "role": "figure_sources",
+      "size": 5278213,
+      "sha256": "4eb1cf976a7c1bed324297667d91136767f662aca8ff3438c3fad4a5c9019cf0"
+    }
+  ]
+}

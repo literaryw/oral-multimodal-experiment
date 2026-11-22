@@ -200,3 +200,30 @@ Output: `data/TCGA-HNSC/experiment_outputs/attention_v2_*.json`. Every file stor
 | `attention_v2_tables.py`          | R16-R20     | LaTeX table bodies                               |
 | `fig1_regenerate.py`              | R16-R20     | Figure 1 (evaluated configurations + protocol)   |
 | `fig4_regenerate.py`              | R16-R20     | Figure 4 (Grad-CAM panels + MI matrix)           |
+| `attention_v2_rederive.py`        | Replay      | Independent per-fold replay of the 45 primary-grid records |
+| `attention_v2_nodx_encode.py`     | Replay      | No-diagnosis text template re-encoding and gates |
+| `attention_v2_nodx_fourcell.py`   | Replay      | Four-cell no-diagnosis comparison (strict subset) |
+| `replay_grade_followup.py`        | Replay      | Offline replay of the 233-patient follow-up table |
+| `build_manuscript_bundle_manifest.py` | Bundle  | SHA-256 manifest for the request bundle          |
+| `verify_manuscript_bundle.py`     | Bundle      | Verify manifest, cohorts, features and OOF consistency |
+
+## Zero-Training Replay
+
+The archived patient-level JSON under `data/TCGA-HNSC/experiment_outputs/` supports replay without retraining:
+
+```powershell
+python code\attention_v2_rederive.py
+python code\attention_v2_tables.py
+```
+
+`attention_v2_rederive.py` re-derives the nested splits from `data/TCGA-HNSC/attention_v2/cohort_index.json` and recomputes all 45 (cohort, arm, seed) records / 225 folds, checking OOF lengths, probability bounds, `pred == argmax(prob)`, five-fold coverage, inner fit/selection disjointness, and three-seed means. Expected output: no failures, maximum metric delta 0.0, and strict-subset average precision 0.29284 (text-only) and 0.27111 (true cross-attention).
+
+The 233-patient follow-up table is replayed separately from its archived run and labels:
+
+```powershell
+python code\replay_grade_followup.py --run <archived-run-directory> --labels <patient_join.csv>
+```
+
+The run directory and labels are held in the research archive; `results/main-grade-improvement-2026-11-09-v1/REPRODUCE.md` lists the required layout. The no-diagnosis preregistration is retained at `paper/prereg_nodx_fourcell.md`.
+
+Feature arrays (`text_tokens.npz`, `img_patches.npz`), patch/UNI arrays and model weights are not committed. Retraining requires the request bundle described in `code/README.md`; this repository supports archive verification and zero-training replay, not public raw-source reconstruction.
