@@ -11,6 +11,7 @@ import hashlib
 import json
 import os
 import shutil
+import subprocess
 from pathlib import Path
 
 import numpy as np
@@ -67,6 +68,32 @@ def check_file(path: Path, entry: dict, mode: str) -> list[str]:
         return []
     digest, size = sha256_lf(path)
     return [] if (digest, size) == (entry["sha256_lf"], entry["size_lf"]) else [f"sha256 mismatch: {entry['path']}"]
+
+
+def check_public_tree(root: Path, rev: str, manifest: dict) -> list[str]:
+    """Compare each entry classified as public with the bytes Git stores for ``rev``."""
+    problems = []
+    for entry in manifest["files"]:
+        published = entry.get("redistribution") == "public"
+        result = subprocess.run(
+            ["git", "-C", str(root), "cat-file", "blob", f"{rev}:{entry['path']}"],
+            capture_output=True,
+        )
+        in_tree = result.returncode == 0
+        if published != in_tree:
+            label = "public" if published else "request_only"
+            state = "found" if in_tree else "absent"
+            problems.append(f"{entry['path']}: marked {label} but {state} in {rev}")
+            continue
+        if not published:
+            continue
+        data = result.stdout
+        if hashlib.sha256(data).hexdigest() == entry["sha256"]:
+            continue
+        if entry.get("sha256_lf") == hashlib.sha256(data.replace(b"\r\n", b"\n")).hexdigest():
+            continue
+        problems.append(f"sha256 mismatch in {rev}: {entry['path']}")
+    return problems
 
 
 def contained(root: Path, relative: str) -> Path:
@@ -320,11 +347,23 @@ def main() -> None:
         default="auto",
         help="auto accepts either the working-tree bytes or their LF-normalized form",
     )
+    parser.add_argument(
+        "--public-rev",
+        help="also check every entry marked public against this Git revision",
+    )
     args = parser.parse_args()
     bundle_root = args.bundle_root.resolve()
     if args.stage_from:
         stage_bundle(args.stage_from.resolve(), bundle_root)
     report = validate(bundle_root, args.line_ending)
+    if args.public_rev:
+        manifest = json.loads(
+            contained(bundle_root, MANIFEST.as_posix()).read_text(encoding="utf-8")
+        )
+        report["public_revision"] = args.public_rev
+        report["public_errors"] = check_public_tree(bundle_root, args.public_rev, manifest)
+        if report["public_errors"]:
+            report["passed"] = False
     if args.report:
         args.report.parent.mkdir(parents=True, exist_ok=True)
         args.report.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")

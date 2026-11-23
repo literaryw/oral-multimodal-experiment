@@ -107,6 +107,26 @@ FILES = {
 
 TEXT_SUFFIXES = {".py", ".md", ".json", ".csv", ".tex", ".txt", ".yaml", ".yml"}
 
+REQUEST_BUNDLE_ONLY = {
+    "code/build_case_slide_manifest.py",
+    "code/fig2_regenerate.py",
+    "code/fig3_regenerate.py",
+    "data/TCGA-HNSC/clinical_data.csv",
+    "data/TCGA-HNSC/clinical_data_oral.csv",
+    "data/TCGA-HNSC/pretrained_features/Slide_Image_UNI.parquet",
+    "data/TCGA-HNSC/attention_v2/img_patches.npz",
+    "data/TCGA-HNSC/attention_v2/text_tokens.npz",
+    "data/TCGA-HNSC/attention_v2/text_tokens_nodx.npz",
+    "data/TCGA-HNSC/attention_v2/text_tokens_nodx_meta.json",
+    "data/TCGA-HNSC/integrated/X_img_patches.npz",
+    "data/TCGA-HNSC/integrated/X_img_uni.npy",
+    "data/TCGA-HNSC/integrated/X_text_biomedbert.npy",
+    "data/TCGA-HNSC/integrated/y.npy",
+    "data/TCGA-HNSC/integrated/case_labels.csv",
+    "data/TCGA-HNSC/integrated/oral_patches.npz",
+    "data/TCGA-HNSC/experiment_outputs/text_latent_attention_archive.npz",
+}
+
 
 def sha256(path: Path) -> str:
     digest = hashlib.sha256()
@@ -151,6 +171,7 @@ def main() -> None:
             record = {
                 "path": relative.replace("\\", "/"),
                 "role": role,
+                "redistribution": "request_only" if relative.replace("\\", "/") in REQUEST_BUNDLE_ONLY else "public",
                 "size": absolute.stat().st_size,
                 "sha256": sha256(absolute),
             }
@@ -169,6 +190,20 @@ def main() -> None:
             "size_lf and sha256_lf, so a clone with either checkout setting can be verified. "
             "Binary files are hashed as-is."
         ),
+        "publication": {
+            "public_entries": sum(1 for entry in entries if entry["redistribution"] == "public"),
+            "request_only_entries": sum(
+                1 for entry in entries if entry["redistribution"] == "request_only"
+            ),
+            "note": (
+                "Entries marked public are byte-identical to the files committed on the publish "
+                "branch of the project repository, so `git cat-file blob <rev>:<path>` reproduces "
+                "sha256 or sha256_lf; check them with code/verify_manuscript_bundle.py "
+                "--public-rev <rev>. Entries marked request_only are retained feature inputs and "
+                "model files that are not redistributed, and are verified from the request bundle "
+                "itself."
+            ),
+        },
         "expected_cohorts": {"full": 499, "wide": 332, "strict": 246},
         "ordering_authority": "data/TCGA-HNSC/attention_v2/cohort_index.json:case_ids",
         "unresolved_upstream_revisions": [
