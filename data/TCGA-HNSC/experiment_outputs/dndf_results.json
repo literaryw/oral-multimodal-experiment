@@ -1,0 +1,12 @@
+{
+  "MLP (4-class)": {
+    "accuracy": 0.299,
+    "macro_f1": 0.23,
+    "auc": 0.623
+  },
+  "DNDF (4-class)": {
+    "accuracy": 0.617,
+    "macro_f1": 0.19,
+    "auc": 0.476
+  }
+}

@@ -7,11 +7,15 @@ from torch.utils.data import DataLoader, TensorDataset, WeightedRandomSampler
 from sklearn.model_selection import StratifiedKFold
 from pathlib import Path
 import copy
+import json
 
 _PROJ = Path(__file__).resolve().parent.parent
-DATA_DIR = _PROJ / "data/TCGA-HNSC/integrated"
+# Full-cohort data (n=499): pooled features + labels live in integrated_full_legacy499/;
+# patch-level features (499 cases) live in integrated/X_img_patches.npz.
+DATA_DIR = _PROJ / "data/TCGA-HNSC/integrated_full_legacy499"
+PATCH_FILE = _PROJ / "data/TCGA-HNSC/integrated/X_img_patches.npz"
 OUT_DIR = _PROJ / "data/TCGA-HNSC/experiment_outputs"
-FIG_DIR = _PROJ / "paper/figures"
+FIG_DIR = _PROJ / "paper"
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 FIG_DIR.mkdir(parents=True, exist_ok=True)
 RANDOM_SEED = 42
@@ -75,6 +79,17 @@ def compute_real_patch_cam(model, patches, target_class):
         cam = cam / cam.max()
     return cam.detach().cpu().numpy()
 
+def kl_to_uniform(cam):
+    """KL(P||uniform) concentration of attention, P = normalized CAM.
+
+    Same definition as gradcam_oral_expanded.py:179-185. Higher = more concentrated.
+    """
+    n = len(cam)
+    eps = 1e-10
+    p = cam / (cam.sum() + eps) + eps
+    q = np.ones(n) / n
+    return float(np.sum(p * np.log(p / q)))
+
 # ============ Contrastive Auxiliary Loss ============
 def contrastive_loss(embeddings, labels, temperature=0.5):
     """Pull same-class together, push different-class apart"""
@@ -97,7 +112,9 @@ def generate_real_gradcam():
 
     # Load raw patch features for CAM
     print("Loading raw patch features...")
-    patch_data = np.load(DATA_DIR / "X_img_patches.npz", allow_pickle=True)
+    # allow_pickle 安全性说明：X_img_patches.npz 为本项目自产的 UNI patch 特征数值数组，
+    # 非外部不可信 pickle 对象。
+    patch_data = np.load(PATCH_FILE, allow_pickle=True)
     n_cases = len([k for k in patch_data.keys() if k.startswith('case_')])
     print(f"  {n_cases} cases with raw patches")
 
@@ -173,7 +190,8 @@ def generate_real_gradcam():
         # Compute CAM per real patch
         cam = compute_real_patch_cam(model, patches, tgt)
         print(f"  {label}: {n_p} real patches, CAM range=[{cam.min():.3f}, {cam.max():.3f}], "
-              f"top5 idx={np.argsort(cam)[-5:]}, KL skew={np.mean(cam > 0.5):.2f}")
+              f"top5 idx={np.argsort(cam)[-5:]}, KL(P||uniform)={kl_to_uniform(cam):.3f}, "
+              f"frac(cam>0.5)={np.mean(cam > 0.5):.2f}")
 
         # Reshape to approximate 2D grid
         side = max(2, int(np.ceil(np.sqrt(n_p))))
@@ -187,24 +205,43 @@ def generate_real_gradcam():
         ax.axis('off')
         plt.colorbar(im, ax=ax, fraction=0.046, label='Importance')
 
-    # Right panel: MI matrix
+    # Right panel: MI matrix from measured values (mutual_information_results.json,
+    # computed with sklearn mutual_info_regression). Diagonal = trivial self-MI, masked.
+    #
+    # !! DO NOT RERUN fix_dndf_and_mi.py Part B EXPECTING THE SAME VALUES !!
+    # MI estimation is non-deterministic. The paper binds 0.043 / 0.015 / 0.011 from the
+    # original measurement stored in mutual_information_results.json. On 2026-09-06 that
+    # file was accidentally overwritten by a rerun (0.0713/0.0194/0.0205; archived as
+    # mutual_information_results_rerun_2026-09-06.json) and restored from git history.
+    # fix_dndf_and_mi.py now writes date-stamped filenames so it can no longer clobber
+    # the manuscript-bound json. Regenerating this figure with a re-measured json WOULD
+    # silently diverge from the manuscript values.
     ax = axes[2]
-    mi_matrix = np.array([[1.0, 0.35, 0.28], [0.35, 1.0, 0.42], [0.28, 0.42, 1.0]])
+    mi_json = json.load(open(OUT_DIR / "mutual_information_results.json"))
+    mi_cross = mi_json["cross_mi"]            # image-text
+    mi_img_label = mi_json["mi_img_label"]    # image-label
+    mi_text_label = mi_json["mi_text_label"]  # text-label
+    mi_matrix = np.array([
+        [np.nan,       mi_cross,     mi_img_label],
+        [mi_cross,     np.nan,       mi_text_label],
+        [mi_img_label, mi_text_label, np.nan],
+    ])
     labels_mi = ['Image\n(UNI)', 'Text\n(BERT)', 'Label\n(Grade)']
-    im = ax.imshow(mi_matrix, cmap='YlOrRd', vmin=0, vmax=1)
+    im = ax.imshow(np.ma.masked_invalid(mi_matrix), cmap='YlOrRd', vmin=0, vmax=0.05)
     for i in range(3):
         for j in range(3):
-            ax.text(j, i, f'{mi_matrix[i,j]:.2f}', ha='center', va='center', fontsize=12, fontweight='bold')
+            if not np.isnan(mi_matrix[i, j]):
+                ax.text(j, i, f'{mi_matrix[i,j]:.3f}', ha='center', va='center', fontsize=12, fontweight='bold')
     ax.set_xticks(range(3)); ax.set_yticks(range(3))
     ax.set_xticklabels(labels_mi); ax.set_yticklabels(labels_mi)
     ax.set_title('Mutual Information Matrix', fontsize=13, fontweight='bold')
-    plt.colorbar(im, ax=ax, fraction=0.046, label='Normalized MI')
+    plt.colorbar(im, ax=ax, fraction=0.046, label='MI (nats)')
 
     plt.suptitle('Grad-CAM: Real Patch-Level Activation from Optimized Model', fontsize=15, fontweight='bold', y=0.99)
-    plt.tight_layout(rect=[0, 0, 1, 0.93])
-    plt.savefig(FIG_DIR / 'fig7_gradcam_heatmap.pdf')
+    plt.tight_layout(rect=[0.02, 0, 1, 0.93])
+    plt.savefig(FIG_DIR / 'fig4_gradcam_heatmap.pdf')
     plt.close()
-    print(f"  Fig 7 (OPTIMIZED real-patch Grad-CAM) saved")
+    print(f"  Fig 4 (OPTIMIZED real-patch Grad-CAM) saved")
 
     # Save CAM data
     g1_cam = compute_real_patch_cam(model, torch.FloatTensor(patch_data[f"case_{g1_idx[10]}"]).to(DEVICE), 0)
