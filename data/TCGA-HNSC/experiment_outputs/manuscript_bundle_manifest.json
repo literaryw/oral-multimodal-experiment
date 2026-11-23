@@ -22,8 +22,8 @@
       "path": "code/README.md",
       "role": "analysis_code",
       "redistribution": "public",
-      "size": 13135,
-      "sha256": "f76945ca20a90f929f5cc6d5b829d394020495624368c12eaae47d538ef6f79b"
+      "size": 13459,
+      "sha256": "924050a1b445c4cb0525adb02c8d6bcbf26aa166cc0e7b0385de8b4b75fb6eda"
     },
     {
       "path": "code/fix_age_units.py",
@@ -159,8 +159,8 @@
       "path": "code/verify_manuscript_bundle.py",
       "role": "analysis_code",
       "redistribution": "public",
-      "size": 17766,
-      "sha256": "70854992b376e2c5a214339252c7361af487439568d7f16a555de4ba3d87db8d"
+      "size": 18857,
+      "sha256": "baa16b80f14ce3588247bfbe742426059728181ffe5b1c84cd88198792242c22"
     },
     {
       "path": "code/fig1_regenerate.py",
