@@ -212,18 +212,19 @@ Output: `data/TCGA-HNSC/experiment_outputs/attention_v2_*.json`. Every file stor
 The archived patient-level JSON under `data/TCGA-HNSC/experiment_outputs/` supports replay without retraining:
 
 ```powershell
+python code\attention_v2_analysis.py
 python code\attention_v2_rederive.py
 python code\attention_v2_tables.py
 ```
 
-`attention_v2_rederive.py` re-derives the nested splits from `data/TCGA-HNSC/attention_v2/cohort_index.json` and recomputes all 45 (cohort, arm, seed) records / 225 folds, checking OOF lengths, probability bounds, `pred == argmax(prob)`, five-fold coverage, inner fit/selection disjointness, and three-seed means. Expected output: no failures, maximum metric delta 0.0, and strict-subset average precision 0.29284 (text-only) and 0.27111 (true cross-attention).
+`attention_v2_rederive.py` re-derives the nested splits from `data/TCGA-HNSC/attention_v2/cohort_index.json` and recomputes all 45 (cohort, arm, seed) records / 225 folds, checking OOF lengths, probability bounds, `pred == argmax(prob)`, five-fold coverage, inner fit/selection disjointness, and three-seed means. Expected output: no failures, maximum metric delta 0.0, and strict-subset average precision 0.29284 (text-only) and 0.27111 (true cross-attention). `attention_v2_tables.py` prints the LaTeX table bodies from the same archived files.
 
-The 233-patient follow-up table is replayed separately from its archived run and labels:
+The 233-patient follow-up table is replayed separately from its archived run and labels, both published under `data/TCGA-HNSC/followup_archive/`:
 
 ```powershell
-python code\replay_grade_followup.py --run <archived-run-directory> --labels <patient_join.csv>
+python code\replay_grade_followup.py --run data\TCGA-HNSC\followup_archive --labels data\TCGA-HNSC\followup_archive\patient_join.csv
 ```
 
-The run directory and labels are held in the research archive, which is supplied on request and carries its own `REPRODUCE.md` with the required layout. The pre-run plan for the no-diagnosis comparison is retained at `data/TCGA-HNSC/experiment_outputs/prereg_nodx_fourcell.md`.
+It needs NumPy and PyArrow. It reproduces the two reference rows (B-main 0.6634, B-v4 0.7098) and the fixed A08-versus-A07 comparison (mean +0.0160, partition differences +0.0570 / -0.0167 / +0.0077, conditional 95% interval [-0.0164, +0.0487]). C1, C2 and C-A1 are not estimable from the published files, because their per-fold eligibility records are not archived. The revision-stage analysis plan for the no-diagnosis comparison is `data/TCGA-HNSC/experiment_outputs/analysis_plan_nodx_fourcell.md`.
 
 Feature arrays (`text_tokens.npz`, `img_patches.npz`), patch/UNI arrays and model weights are not committed. Retraining requires the request bundle described in `code/README.md`; this repository supports archive verification and zero-training replay, not public raw-source reconstruction.

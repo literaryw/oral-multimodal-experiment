@@ -1,6 +1,8 @@
 """
 R16-fix Phase D: aggregate the re-run, compute pooled + per-fold metrics, and run
-exact per-sample McNemar tests with Bonferroni correction.
+exact-binomial McNemar calculations on paired OOF correctness with Bonferroni
+correction. Exactness refers to the discordant-count calculation and does not
+extend to inference over overlapping cross-validation training sets.
 
 Reads  experiment_outputs/attention_v2_{full,wide,strict}_results.json
 Writes experiment_outputs/attention_v2_analysis.json  (+ console report)
@@ -41,7 +43,7 @@ def pooled(pred, y, prob):
 
 
 def mcnemar_exact(a_pred, b_pred, y):
-    """Exact McNemar on per-sample correctness (two-sided binomial)."""
+    """Two-sided exact-binomial McNemar calculation on paired OOF correctness."""
     a_ok, b_ok = (a_pred == y), (b_pred == y)
     b = int(np.sum(a_ok & ~b_ok))
     c = int(np.sum(~a_ok & b_ok))
@@ -151,7 +153,7 @@ def main():
         entry["_mcnemar"] = mcn
 
         # ---- P1-5c: the same tests repeated on every seed ----
-        print("\n-- exact McNemar repeated on all seeds (seed 42 pre-registered as the analysis seed) --")
+        print("\n-- exact McNemar repeated across seeds (seed 42 selected post hoc for detailed reporting) --")
         mcn_seeds = {}
         for s in SEEDS:
             if s not in res[list(ARM_LABEL)[0]]:
@@ -167,27 +169,24 @@ def main():
             print("  seed %-4s significant after Bonferroni: %s" % (s, ", ".join(sig) or "none"))
         entry["_mcnemar_by_seed"] = mcn_seeds
 
-        # ---- P1-5d: paired bootstrap CI, fusion head minus best unimodal arm ----
-        # R19 P1-8: bootstrap every balanced metric, not accuracy alone.  The core claims
-        # are macro F1 / High-Grade F1 / AUC / PR-AUC, so accuracy-only CIs cannot
-        # support them.  Resampling is over samples; the metric is recomputed per draw.
+        # ---- Paired bootstrap: seed-42 pooled-OOF descriptive intervals ----
+        # Bootstrap every balanced metric on seed-42 pooled OOF predictions. These are
+        # pointwise descriptive intervals, not inference on the three-seed fold means.
         from sklearn.metrics import average_precision_score  # noqa: E402
 
-        best_uni = "text_only"     # pre-specified comparator, not chosen per metric
+        best_uni = "text_only"     # primary comparator, selected after inspecting the results
         METRICS = ["accuracy", "macro_f1", "high_f1", "auc", "pr_auc"]
         N_BOOT = 500
 
         def fast_metrics(yy, pred, prob):
-            """Vectorised where possible; only PR-AUC needs sklearn."""
+            """Recompute metrics; sklearn handles ROC-AUC ties by average rank."""
             c = np.bincount(2 * yy + pred, minlength=4)
             tn, fp, fn, tp = c[0], c[1], c[2], c[3]
             f0 = 2 * tn / max(2 * tn + fn + fp, 1)
             f1v = 2 * tp / max(2 * tp + fp + fn, 1)
             n1 = int(yy.sum()); n0 = len(yy) - n1
             if n1 and n0:
-                order = np.argsort(prob, kind="mergesort")
-                ranks = np.empty(len(prob)); ranks[order] = np.arange(1, len(prob) + 1)
-                auc = (ranks[yy == 1].sum() - n1 * (n1 + 1) / 2) / (n0 * n1)
+                auc = float(roc_auc_score(yy, prob))  # sklearn averages ranks for ties
             else:
                 auc = 0.5
             return {"accuracy": (pred == yy).mean(), "macro_f1": (f0 + f1v) / 2,
