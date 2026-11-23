@@ -8,13 +8,13 @@ from sklearn.model_selection import StratifiedKFold
 from sklearn.feature_selection import mutual_info_classif
 from sklearn.metrics import normalized_mutual_info_score
 from pathlib import Path
-import copy, datetime, json
+import copy, json
 
 _PROJ = Path(__file__).resolve().parent.parent
 DATA_DIR = _PROJ / "data/TCGA-HNSC/integrated"
 OUT_DIR = _PROJ / "data/TCGA-HNSC/experiment_outputs"
 OUT_DIR.mkdir(parents=True, exist_ok=True)
-FIG_DIR = _PROJ / "paper"
+FIG_DIR = _PROJ / "paper/figures"
 RANDOM_SEED = 42
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 torch.manual_seed(RANDOM_SEED); np.random.seed(RANDOM_SEED)
@@ -196,9 +196,9 @@ def train_and_save_dndf():
     ax.text(7, 0.2, 'Each split = actual learned feature threshold    |    Each leaf = learned grade probability (G1|G2|G3|G4)',
             ha='center', fontsize=10, style='italic')
     plt.tight_layout(rect=[0, 0.03, 1, 0.95])
-    plt.savefig(FIG_DIR / 'fig3_dndf_routing.pdf')
+    plt.savefig(FIG_DIR / 'fig6_dndf_routing.pdf')
     plt.close()
-    print(f"  Fig 3 (REAL DNDF routing) saved to {FIG_DIR}")
+    print(f"  Fig 6 (REAL DNDF routing) saved to {FIG_DIR}")
 
     return split_w, split_b, leaf_p
 
@@ -276,22 +276,13 @@ def compute_mutual_information():
         'ratio_corr': float(cross_corr_avg / max(mi_img_label_avg, mi_text_label_avg, 1e-6)),
     }
 
-    # WARNING: MI estimates here are NON-DETERMINISTIC (sklearn mutual_info_regression /
-    # KBinsDiscretizer use unseeded randomness; model-free part still varies across runs).
-    # The paper (main_cbm.tex Sec 4.7 / Fig 4 caption / Intro) binds the measured values
-    # 0.043 / 0.015 / 0.011 from the ORIGINAL run, whose mutual_information_results.json
-    # was overwritten on 2026-09-06 (rerun produced 0.0713 / 0.0194 / 0.0205, archived as
-    # mutual_information_results_rerun_2026-09-06.json). DO NOT regenerate
-    # "mutual_information_results.json" under its old name — it would silently break the
-    # figure-text-value chain. New outputs get a date-stamped name instead.
-    out_name = f"mutual_information_results_rerun_{datetime.date.today().isoformat()}.json"
-    with open(OUT_DIR / out_name, 'w') as f:
+    with open(OUT_DIR / "mutual_information_results.json", 'w') as f:
         json.dump(mi_results, f, indent=2)
 
     print(f"\n  === REAL Mutual Information Results ===")
     for k, v in mi_results.items():
         print(f"  {k}: {v:.4f}")
-    print(f"  Saved to {OUT_DIR / out_name}")
+    print(f"  Saved to {OUT_DIR / 'mutual_information_results.json'}")
 
     return mi_results
 

@@ -2,26 +2,8 @@
 __pycache__/
 *.pyc
 
-# Data: raw TCGA tables, feature arrays and the ~96 MB attention_v2 bundle are not
-# redistributed -- regenerate them with code/download_tcga.py, code/extract_text_features.py,
-# code/prep_attention_v2.py and code/download_pretrained_features.py.
-#
-# The archived experiment outputs that the manuscript cites ARE published: they are the
-# per-fold metrics plus per-sample out-of-fold predictions that back every table, the
-# pre-R18 archives kept for audit, and the recovered clinical-text metadata. Each level
-# below has to be re-included explicitly, because git does not descend into an ignored
-# directory to honour a negation.
-data/*
-!data/TCGA-HNSC/
-data/TCGA-HNSC/*
-!data/TCGA-HNSC/experiment_outputs/
-!data/TCGA-HNSC/attention_v2/
-!data/TCGA-HNSC/integrated_full_legacy499/
-
-# Excluded from the published feature bundle: large derived arrays (regenerate via
-# code/prep_attention_v2.py).
-data/TCGA-HNSC/attention_v2/img_patches.npz
-data/TCGA-HNSC/attention_v2/text_tokens.npz
+# Data (not redistributed; regenerate via code/download_tcga.py etc.)
+data/
 
 # Misc
 .playwright-mcp/
