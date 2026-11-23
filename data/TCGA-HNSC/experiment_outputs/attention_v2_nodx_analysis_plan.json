@@ -1,9 +1,13 @@
 {
   "date": "2026-11-22",
   "stage": "revision-stage analysis plan, not a time-stamped public registration",
+  "public_history": {
+    "plan_and_results_first_public": "47e3608",
+    "archived_seed42_no_diagnosis_text_only_run": "96003e0 (2026-10-17)"
+  },
   "known_before_plan": [
     "with_diagnosis text_only and true_cross_attention cells of the primary grid",
-    "one archived seed-42 no-diagnosis text_only auxiliary run, committed 2026-10-17 in e72e032"
+    "one archived seed-42 no-diagnosis text_only auxiliary run, published 2026-10-17 in public commit 96003e0"
   ],
   "new_to_this_comparison": [
     "the other two seeds of the no-diagnosis text_only cell",
