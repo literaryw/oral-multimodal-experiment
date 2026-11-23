@@ -10,11 +10,18 @@ inner selection, training budget, seeds and thresholds are unchanged.
 
 Estimand per seed: D = Macro F1(True CA) - Macro F1(Text-Only), fold mean first, then the
 difference between arms. delta_D = D_nodx - D_full. Descriptive only; no hypothesis test.
+Every difference is computed from unrounded cell values and rounded only when printed.
+
+The three-seed means and the per-seed differences are emitted as LaTeX fragments so the
+manuscript never transcribes them by hand.
 
 Outputs:
-    data/TCGA-HNSC/experiment_outputs/attention_v2_nodx_fourcell.json
-    data/TCGA-HNSC/experiment_outputs/attention_v2_nodx_fourcell.tex
+    data/TCGA-HNSC/experiment_outputs/attention_v2_nodx_fourcell.json   (cells + per-seed OOF)
+    data/TCGA-HNSC/experiment_outputs/attention_v2_nodx_fourcell.tex    (four-cell table body)
+    data/TCGA-HNSC/experiment_outputs/attention_v2_nodx_seed.tex        (per-seed Macro F1 differences)
+    data/TCGA-HNSC/experiment_outputs/attention_v2_nodx_metric.tex      (per-metric differences)
 """
+import datetime
 import json
 import sys
 from pathlib import Path
@@ -32,6 +39,15 @@ BUNDLE = D / "attention_v2"
 OUT = D / "experiment_outputs"
 SEEDS = [42, 123, 456]
 ARMS = ("text_only", "true_cross_attention")
+CELL_METRICS = ("accuracy", "macro_f1", "low_f1", "high_f1", "auc", "average_precision")
+DIFF_METRICS = ("macro_f1", "high_f1", "average_precision", "auc")
+TOL = 1e-12
+
+
+def fx(v, nd=3):
+    """Signed fixed-point with no '-0.000' artefacts."""
+    s = "%+.*f" % (nd, v)
+    return s if float(s) != 0.0 else "%.*f" % (nd, 0.0)
 
 
 def folds_for(y, seed):
@@ -53,7 +69,115 @@ def cell_summary(res, y, seed):
         "high_f1": a["high_f1"]["mean"],
         "auc": a["auc"]["mean"],
         "average_precision": ap_per_fold(y, np.asarray(res["oof_prob"]), seed),
+        "oof_pred": [int(v) for v in res["oof_pred"]],
+        "oof_prob": [float(v) for v in res["oof_prob"]],
     }
+
+
+def cell_metrics(cell):
+    return {k: cell[k] for k in CELL_METRICS}
+
+
+def check_against_archive(report, path):
+    """Refuse to overwrite an archive whose cell values this run does not reproduce."""
+    if not path.exists():
+        return None
+    old = json.load(open(path))
+    worst, bad = 0.0, []
+    for block in ("with_diagnosis", "no_diagnosis"):
+        for arm in ARMS:
+            for s in SEEDS:
+                new_c, old_c = report["cells"][block][arm][str(s)], old["cells"][block][arm][str(s)]
+                for m in CELL_METRICS:
+                    delta = abs(new_c[m] - old_c[m])
+                    worst = max(worst, delta)
+                    if delta > TOL:
+                        bad.append("%s/%s/%d/%s: archive %.12f vs rerun %.12f"
+                                   % (block, arm, s, m, old_c[m], new_c[m]))
+    if bad:
+        print("\nREFUSING TO OVERWRITE: rerun does not reproduce the archived cells")
+        for line in bad:
+            print("  " + line)
+        raise SystemExit(1)
+    print("archive check: all %d cells reproduced (max |delta| = %.3e)"
+          % (4 * 3 * len(CELL_METRICS), worst))
+    return old.get("date")
+
+
+def per_metric_differences(report):
+    out = {}
+    for m in DIFF_METRICS:
+        d_full, d_nodx, d_delta = [], [], []
+        for s in SEEDS:
+            full = report["cells"]["with_diagnosis"]
+            nodx = report["cells"]["no_diagnosis"]
+            a = full["true_cross_attention"][str(s)][m] - full["text_only"][str(s)][m]
+            b = nodx["true_cross_attention"][str(s)][m] - nodx["text_only"][str(s)][m]
+            d_full.append(a)
+            d_nodx.append(b)
+            d_delta.append(b - a)
+        out[m] = {
+            "D_full_values": d_full,
+            "D_full_mean": float(np.mean(d_full)),
+            "D_nodx_values": d_nodx,
+            "D_nodx_mean": float(np.mean(d_nodx)),
+            "delta_D_values": d_delta,
+            "delta_D_mean": float(np.mean(d_delta)),
+            "delta_D_sd": float(np.std(d_delta, ddof=1)),
+            "delta_D_positive": int(sum(x > 0 for x in d_delta)),
+        }
+    return out
+
+
+def write_tex(report):
+    lines = ["% Four-cell no-diagnosis comparison (attention_v2_nodx_fourcell.py).",
+             "\\begin{tabular}{llccccc}", "\\toprule",
+             "Input & Model & Acc & Macro F1 & High F1 & AP & AUC \\\\", "\\midrule"]
+    for block, label in [("with_diagnosis", "With diagnosis"),
+                         ("no_diagnosis", "No diagnosis")]:
+        for arm, arm_label in [("text_only", "Text-Only"),
+                               ("true_cross_attention", "True Cross-Attn.")]:
+            cells = [report["cells"][block][arm][str(s)] for s in SEEDS]
+            vals = {k: float(np.mean([c[k] for c in cells]))
+                    for k in ("accuracy", "macro_f1", "high_f1", "average_precision", "auc")}
+            lines.append("%s & %s & %.3f & %.3f & %.3f & %.3f & %.3f \\\\"
+                         % (label, arm_label, vals["accuracy"], vals["macro_f1"],
+                            vals["high_f1"], vals["average_precision"], vals["auc"]))
+        lines.append("\\midrule")
+    lines[-1] = "\\bottomrule"
+    lines.append("\\end{tabular}")
+    lines.append("")
+    (OUT / "attention_v2_nodx_fourcell.tex").write_text("\n".join(lines), encoding="utf-8")
+
+    pm = report["per_metric_differences"]["macro_f1"]
+    seed_lines = ["% Per-seed fusion-minus-text Macro F1 difference (attention_v2_nodx_fourcell.py).",
+                  "\\begin{tabular}{lccc}", "\\toprule",
+                  "Seed & $D_{\\text{with dx}}$ & $D_{\\text{no dx}}$ & $\\Delta D$ \\\\",
+                  "\\midrule"]
+    for i, s in enumerate(SEEDS):
+        seed_lines.append("%d & %s & %s & %s \\\\"
+                          % (s, fx(pm["D_full_values"][i]), fx(pm["D_nodx_values"][i]),
+                             fx(pm["delta_D_values"][i])))
+    seed_lines += ["\\midrule",
+                   "Mean (SD) & %s & %s & %s (%.3f) \\\\"
+                   % (fx(pm["D_full_mean"]), fx(pm["D_nodx_mean"]),
+                      fx(pm["delta_D_mean"]), pm["delta_D_sd"]),
+                   "\\bottomrule", "\\end{tabular}", ""]
+    (OUT / "attention_v2_nodx_seed.tex").write_text("\n".join(seed_lines), encoding="utf-8")
+
+    labels = {"macro_f1": "Macro F1", "high_f1": "High-Grade F1",
+              "average_precision": "Average precision", "auc": "ROC-AUC"}
+    metric_lines = ["% Per-metric fusion-minus-text differences (attention_v2_nodx_fourcell.py).",
+                    "\\begin{tabular}{lcccc}", "\\toprule",
+                    "Metric & $D_{\\text{with dx}}$ & $D_{\\text{no dx}}$ & $\\Delta D$ (SD) & $\\Delta D>0$ \\\\",
+                    "\\midrule"]
+    for m in DIFF_METRICS:
+        v = report["per_metric_differences"][m]
+        metric_lines.append("%s & %s & %s & %s (%.3f) & %d/3 \\\\"
+                            % (labels[m], fx(v["D_full_mean"]), fx(v["D_nodx_mean"]),
+                               fx(v["delta_D_mean"]), v["delta_D_sd"], v["delta_D_positive"]))
+    metric_lines += ["\\bottomrule", "\\end{tabular}", ""]
+    (OUT / "attention_v2_nodx_metric.tex").write_text("\n".join(metric_lines), encoding="utf-8")
 
 
 def main():
@@ -106,8 +230,7 @@ def main():
         report["cells"]["no_diagnosis"][arm] = {}
         for s in SEEDS:
             print("running no-diagnosis %s, seed %d ..." % (arm, s))
-            report["cells"]["no_diagnosis"][arm][str(s)] = cell_summary(
-                run_cv(arm, c, s), y, s)
+            report["cells"]["no_diagnosis"][arm][str(s)] = cell_summary(run_cv(arm, c, s), y, s)
 
     deltas = []
     for s in SEEDS:
@@ -123,29 +246,24 @@ def main():
         "sign_consistency": "%d/3 positive" % sum(d > 0 for d in deltas),
         "values": deltas,
     }
+    report["per_metric_differences"] = per_metric_differences(report)
 
-    json.dump(report, open(OUT / "attention_v2_nodx_fourcell.json", "w"), indent=2)
+    json_path = OUT / "attention_v2_nodx_fourcell.json"
+    first_run_date = check_against_archive(report, json_path)
+    if first_run_date:
+        report["first_run_date"] = first_run_date
+        report["rerun_date"] = datetime.date.today().isoformat()
 
-    lines = ["% Four-cell no-diagnosis comparison (attention_v2_nodx_fourcell.py).",
-             "\\begin{tabular}{llccccc}", "\\toprule",
-             "Input & Model & Acc & Macro F1 & High F1 & AP & AUC \\\\", "\\midrule"]
-    for block, label in [("with_diagnosis", "With diagnosis"),
-                         ("no_diagnosis", "No diagnosis")]:
-        for arm, arm_label in [("text_only", "Text-Only"),
-                               ("true_cross_attention", "True Cross-Attn.")]:
-            cells = [report["cells"][block][arm][str(s)] for s in SEEDS]
-            vals = {k: float(np.mean([c[k] for c in cells]))
-                    for k in ("accuracy", "macro_f1", "high_f1", "average_precision", "auc")}
-            lines.append("%s & %s & %.3f & %.3f & %.3f & %.3f & %.3f \\\\"
-                         % (label, arm_label, vals["accuracy"], vals["macro_f1"],
-                            vals["high_f1"], vals["average_precision"], vals["auc"]))
-        lines.append("\\midrule")
-    lines[-1] = "\\bottomrule"
-    lines.append("\\end{tabular}")
-    lines.append("")
-    (OUT / "attention_v2_nodx_fourcell.tex").write_text("\n".join(lines), encoding="utf-8")
+    json.dump(report, open(json_path, "w"), indent=2)
+    write_tex(report)
 
-    print(json.dumps(report["differences"], indent=2))
+    print(json.dumps({"macro_f1": report["differences"]["summary"],
+                      "per_metric": {m: {"D_full": round(v["D_full_mean"], 5),
+                                         "D_nodx": round(v["D_nodx_mean"], 5),
+                                         "delta_D": round(v["delta_D_mean"], 5),
+                                         "positive": "%d/3" % v["delta_D_positive"]}
+                                     for m, v in report["per_metric_differences"].items()}},
+                     indent=2))
 
 
 if __name__ == "__main__":

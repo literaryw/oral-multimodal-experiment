@@ -1,6 +1,6 @@
 # Manuscript-version reproduction workflows
 
-This guide describes the current manuscript-version scripts. The public GitHub default branch may lag the local revision; the manuscript Data Availability statement names the current release status. Do not describe the current analyses as publicly reproducible until a versioned release contains the listed scripts, inputs, outputs, and this guide.
+This guide describes the current manuscript-version scripts and the archived outputs that let a reader replay every reported table without training. The `publish` branch of `https://github.com/literaryw/oral-multimodal-experiment` carries these scripts, the patient-level predictions and the regenerated table fragments. Datasets and pre-extracted features are not distributed there: TCGA-HNSC is available from the GDC and the UNI features from the Lab-Rasool/TCGA dataset, so a full retrain starts from those public downloads plus the retained feature bundle described in Section 4.
 
 Run commands from the repository root in the project environment (Python 3.12, environment tcga-oscc). The verified workflow begins with the retained manuscript feature bundle. Public raw data and pretrained assets alone do not yet reconstruct that bundle.
 
@@ -16,7 +16,7 @@ python code\attention_v2_tables.py
 
 The analysis script requires data/TCGA-HNSC/attention_v2/cohort_index.json and data/TCGA-HNSC/experiment_outputs/attention_v2_{full,wide,strict}_results.json. Table generation additionally reads attention_v2_aux.json, attention_v2_loso_moddrop.json, attention_v2_mi_matched.json, and attention_v2_structured_baseline.json. The analysis JSON records exact-binomial McNemar calculations on seed-specific OOF correctness. Binomial exactness does not extend to inference over overlapping cross-validation training sets, and these calculations do not test Macro F1, High-Grade F1, AUC, or average precision. The paired metric bootstrap uses seed-42 pooled OOF predictions and reports conditional pointwise intervals. Main-table estimates remain three-seed means of fold means.
 
-`code\attention_v2_rederive.py` re-derives each seed's outer and inner splits from `cohort_index.json`, recomputes every per-fold metric and three-seed fold mean for the 45 (cohort, arm, seed) records, and checks one out-of-fold prediction per patient, five-fold coverage, inner fit/selection disjointness, aggregate mean/SD, and `pred == argmax(prob)`. It writes `attention_v2_rederive.json` and `.tex`. These checks establish consistency with the stated protocol; they do not prove what the historical training loop touched.
+`code\attention_v2_rederive.py` re-derives each seed's outer and inner splits from `cohort_index.json`, recomputes every per-fold metric and three-seed fold mean for the 45 (cohort, arm, seed) records, and checks one out-of-fold prediction per patient, five-fold coverage, inner fit/selection disjointness, aggregate mean/SD, and `pred == argmax(prob)`. It then replays the representation-matched cells (manuscript Table 3), the reference-dependence differences (Table 4), every structured-baseline record from its per-seed out-of-fold vector (Table 12), and the four no-diagnosis cells with their per-metric differences (Table 13). It writes `attention_v2_rederive.json` and `.tex`. These checks establish consistency with the stated protocol; they do not prove what the historical training loop touched.
 
 ## 1b. Replay the follow-up table
 
@@ -45,7 +45,7 @@ python code\attention_v2_nodx_encode.py
 python code\attention_v2_nodx_fourcell.py
 ```
 
-The encoder re-renders the stored narrative without the primary-diagnosis block and re-encodes it at the base-499 level. Gates: 499/499 template round-trip, no case with empty TNM and demographics, and a full-template re-encoding that reproduces the stored token mask exactly and token values within 1e-5. The comparison script replaces the token, mask and [CLS] inputs, checks that the seed-42 no-diagnosis Text-Only prediction reproduces the archived auxiliary run, then runs Text-Only and True Cross-Attention on the strict subset for seeds 42/123/456. The preregistration and frozen input hashes are in `paper/prereg_nodx_fourcell.md`; outputs are `attention_v2_nodx_fourcell.json` and `.tex`.
+The encoder re-renders the stored narrative without the primary-diagnosis block and re-encodes it at the base-499 level. Gates: 499/499 template round-trip, no case with empty TNM and demographics, and a full-template re-encoding that reproduces the stored token mask exactly and token values within 1e-5. The comparison script replaces the token, mask and [CLS] inputs, checks that the seed-42 no-diagnosis Text-Only prediction reproduces the archived auxiliary run, then runs Text-Only and True Cross-Attention on the strict subset for seeds 42/123/456. The analysis plan and frozen input hashes are in `paper/prereg_nodx_fourcell.md`; the plan was written after the with-diagnosis cells were known from the primary grid and before the no-diagnosis runs, so it documents a pre-run plan rather than a time-stamped public registration. Outputs are `attention_v2_nodx_fourcell.json` (four cells plus per-seed out-of-fold predictions and fold indices), `attention_v2_nodx_fourcell.tex` (table body), `attention_v2_nodx_seed.tex` (per-seed differences) and `attention_v2_nodx_metric.tex` (per-metric differences). All differences are computed from unrounded cell values and rounded only for display. The script refuses to overwrite the archived JSON unless every cell reproduces to 1e-12.
 
 ## 3. Assemble and verify the request-based bundle
 
@@ -78,7 +78,7 @@ python code\attention_v2_tables.py
 
 The auxiliary scripts use separate protocols noted below; their outputs must not be described as primary-grid estimates unless the manuscript states the relevant seed and aggregation.
 
-- code/attention_v2_structured_baseline.py uses the same patient folds and inner-train rows as the primary grid; its metrics are fold means aggregated across three seeds.
+- code/attention_v2_structured_baseline.py uses the same patient folds and inner-train rows as the primary grid; its metrics are fold means aggregated across three seeds. It archives per-seed out-of-fold predictions and fold indices, so Table 12 can be replayed without refitting, and it refuses to overwrite its JSON when a rerun does not reproduce the stored metrics.
 - code/attention_v2_skip_ablation.py keeps the nominal 512-dimensional classifier input, but zero-masking changes active gradient paths. Its archived patch-only path used a different need_weights setting from the full path, so the output is exploratory and does not isolate branch information alone.
 - code/attention_v2_mi_matched.py reports an exploratory mean pairwise coordinate MI for ten standardized features. It is not joint MI, conditional redundancy, or a fusion-selection rule.
 - code/attention_v2_loso_moddrop.py contains seed-42 leave-one-group-out and modality-dropout analyses; these are not three-seed primary-grid results.
@@ -93,4 +93,4 @@ The auxiliary scripts use separate protocols noted below; their outputs must not
 
 ## 6. Release checklist
 
-Before claiming public archive reproducibility, publish the exact commit or archive containing the manifest-listed files and this guide, then update the manuscript with the release URL and commit. Do not claim public raw-source reconstruction until upstream dataset/model revisions, clinical schemas, IDs, masks, ordering, and all feature-building transformations have been independently verified.
+The zero-training path is public: the `publish` branch of `https://github.com/literaryw/oral-multimodal-experiment` contains the manifest-listed scripts, the patient-level predictions and the regenerated table fragments, and the manuscript cites the branch commit. A tagged release can be added later without changing that path. Do not claim public raw-source reconstruction until upstream dataset/model revisions, clinical schemas, IDs, masks, ordering, and all feature-building transformations have been independently verified.

@@ -179,11 +179,9 @@ def arm_mean(block, arm, key):
     return float(np.mean([block[arm][s]["aggregate"][key]["mean"] for s in SEEDS]))
 
 
-def arm_rounded(block, arm, key):
-    return round(arm_mean(block, arm, key), 3)
-
-
-tca = {k: arm_rounded(load("strict"), "true_cross_attention", k)
+# Differences are computed from the unrounded three-seed fold means and rounded only when
+# printed, so that a reader who subtracts the displayed table cells can differ by 0.001.
+tca = {k: arm_mean(load("strict"), "true_cross_attention", k)
        for k in ["macro_f1", "auc", "high_f1"]}
 reference_rows = [
     ("Text-Only, [CLS] (main grid)", load("strict"), "text_only"),
@@ -192,7 +190,7 @@ reference_rows = [
     ("Image-Only, mean-pooled patches", rep, "image_only_patchmean"),
 ]
 for label, block, arm in reference_rows:
-    vals = [round(tca[k] - arm_rounded(block, arm, k), 3)
+    vals = [round(tca[k] - arm_mean(block, arm, k), 3)
             for k in ["macro_f1", "auc", "high_f1"]]
     print("%-44s & %+.3f & %+.3f & %+.3f \\\\" % (label, *vals))
 

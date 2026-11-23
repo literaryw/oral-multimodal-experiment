@@ -3,6 +3,12 @@
 Written before the no-diagnosis neural arms were run. Scope: strict oral cavity subset
 (n=246). This is a revision-stage addition, not part of the original study plan.
 
+What was known at freeze time: the with-diagnosis Text-Only and True Cross-Attention cells
+of the primary grid, including their per-seed and pooled out-of-fold predictions. What had
+not been run: every no-diagnosis cell. The plan and the results were committed in the same
+revision commit, so this document records a pre-run plan rather than a time-stamped public
+registration.
+
 ## Question
 
 Does the True Cross-Attention minus Text-Only difference change when the

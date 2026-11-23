@@ -135,6 +135,134 @@ def check_record(rec, y, seed):
     }
 
 
+def fold_mean(pred, prob, y, va_list, with_ap=False):
+    """Fold-mean metrics recomputed from one OOF vector and the seeded outer partition."""
+    per_fold = [metric_block(y[va], pred[va], prob[va]) for va in va_list]
+    got = {m: float(np.mean([f[m] for f in per_fold])) for m in METRICS}
+    if with_ap:
+        got["average_precision"] = float(np.mean(
+            [average_precision_score(y[va], prob[va]) for va in va_list]))
+    return got
+
+
+def replay_rep_match(index, failures):
+    """Table 3: recompute the representation-matched cells from their OOF vectors."""
+    rep = json.load(open(OUT / "attention_v2_rep_match.json"))["results"]["strict"]
+    y = np.asarray(index["y_binary"])[cohort_mask(index, "strict")].astype(int)
+    worst, cells = 0.0, {}
+    for arm, seeds in rep.items():
+        cells[arm] = {}
+        for seed in SEEDS:
+            rec = seeds[str(seed)]
+            pred = np.asarray(rec["oof_pred"], dtype=int)
+            prob = np.asarray(rec["oof_prob"], dtype=float)
+            got = fold_mean(pred, prob, y, outer_folds(y, seed))
+            present = [m for m in METRICS if m in rec["aggregate"]]
+            deltas = {m: abs(got[m] - rec["aggregate"][m]["mean"]) for m in present}
+            worst = max(worst, max(deltas.values()))
+            for m, d in deltas.items():
+                if d > TOL:
+                    failures.append("rep_match/%s/seed %d/%s delta %.3e" % (arm, seed, m, d))
+            cells[arm][str(seed)] = got
+    return {"max_metric_delta": worst, "cells": cells}
+
+
+def replay_structured(index, failures):
+    """Table 12: recompute every structured-baseline record from its per-seed OOF."""
+    sb = json.load(open(OUT / "attention_v2_structured_baseline.json"))
+    worst, records = 0.0, 0
+    for kind, cohorts in sb.items():
+        for cohort, models in cohorts.items():
+            y = np.asarray(index["y_binary"])[cohort_mask(index, cohort)].astype(int)
+            for name, rec in models.items():
+                for i, seed in enumerate(SEEDS):
+                    oof = rec["oof_by_seed"][str(seed)]
+                    pred = np.asarray(oof["oof_pred"], dtype=int)
+                    prob = np.asarray(oof["oof_prob"], dtype=float)
+                    fold_id = np.asarray(oof["fold_index"], dtype=int)
+                    va_list = [np.where(fold_id == k)[0] for k in range(5)]
+                    got = fold_mean(pred, prob, y, va_list, with_ap=True)
+                    got["pr_auc"] = got.pop("average_precision")
+                    records += 1
+                    for m in ["accuracy", "macro_f1", "high_f1", "auc", "pr_auc"]:
+                        d = abs(got[m] - rec["per_seed"][i][m])
+                        worst = max(worst, d)
+                        if d > TOL:
+                            failures.append("structured/%s/%s/%s/seed %d/%s delta %.3e"
+                                            % (kind, cohort, name, seed, m, d))
+    return {"max_metric_delta": worst, "records": records}
+
+
+def replay_nodx(index, failures):
+    """Table 13 and its per-metric difference block, replayed from cell OOF vectors."""
+    nd = json.load(open(OUT / "attention_v2_nodx_fourcell.json"))
+    y = np.asarray(index["y_binary"])[cohort_mask(index, "strict")].astype(int)
+    worst = 0.0
+    replayed = {"with_diagnosis": {}, "no_diagnosis": {}}
+    for block in ("with_diagnosis", "no_diagnosis"):
+        for arm in ("text_only", "true_cross_attention"):
+            replayed[block][arm] = {}
+            for seed in SEEDS:
+                cell = nd["cells"][block][arm][str(seed)]
+                pred = np.asarray(cell["oof_pred"], dtype=int)
+                prob = np.asarray(cell["oof_prob"], dtype=float)
+                got = fold_mean(pred, prob, y, outer_folds(y, seed), with_ap=True)
+                for m in ("accuracy", "macro_f1", "low_f1", "high_f1", "auc",
+                          "average_precision"):
+                    d = abs(got[m] - cell[m])
+                    worst = max(worst, d)
+                    if d > TOL:
+                        failures.append("nodx/%s/%s/seed %d/%s delta %.3e"
+                                        % (block, arm, seed, m, d))
+                replayed[block][arm][str(seed)] = got
+
+    diffs = {}
+    for m in ("macro_f1", "high_f1", "average_precision", "auc"):
+        d_full, d_nodx, d_delta = [], [], []
+        for seed in SEEDS:
+            a = (replayed["with_diagnosis"]["true_cross_attention"][str(seed)][m]
+                 - replayed["with_diagnosis"]["text_only"][str(seed)][m])
+            b = (replayed["no_diagnosis"]["true_cross_attention"][str(seed)][m]
+                 - replayed["no_diagnosis"]["text_only"][str(seed)][m])
+            d_full.append(a)
+            d_nodx.append(b)
+            d_delta.append(b - a)
+        stored = nd["per_metric_differences"][m]
+        for label, mine, theirs in (("D_full_mean", float(np.mean(d_full)), stored["D_full_mean"]),
+                                    ("D_nodx_mean", float(np.mean(d_nodx)), stored["D_nodx_mean"]),
+                                    ("delta_D_mean", float(np.mean(d_delta)),
+                                     stored["delta_D_mean"])):
+            d = abs(mine - theirs)
+            worst = max(worst, d)
+            if d > TOL:
+                failures.append("nodx/%s/%s delta %.3e" % (m, label, d))
+        diffs[m] = {"D_full_mean": float(np.mean(d_full)),
+                    "D_nodx_mean": float(np.mean(d_nodx)),
+                    "delta_D_mean": float(np.mean(d_delta)),
+                    "delta_D_sd": float(np.std(d_delta, ddof=1)),
+                    "delta_D_positive": int(sum(x > 0 for x in d_delta))}
+    return {"max_metric_delta": worst, "differences": diffs}
+
+
+def reference_dependence():
+    """Table 4 values recomputed from unrounded three-seed arm means."""
+    strict = load_results("strict")
+    rep = json.load(open(OUT / "attention_v2_rep_match.json"))["results"]["strict"]
+
+    def arm_mean(block, arm, key):
+        return float(np.mean([block[arm][str(s)]["aggregate"][key]["mean"] for s in SEEDS]))
+
+    keys = ["macro_f1", "auc", "high_f1"]
+    base = {k: arm_mean(strict, "true_cross_attention", k) for k in keys}
+    rows = {}
+    for label, block, arm in (("text_only_cls", strict, "text_only"),
+                              ("text_only_tokmean", rep, "text_only_tokmean"),
+                              ("image_only_stored", strict, "image_only"),
+                              ("image_only_patchmean", rep, "image_only_patchmean")):
+        rows[label] = {k: round(base[k] - arm_mean(block, arm, k), 3) for k in keys}
+    return rows
+
+
 def main():
     index = load_index()
     report = {"tolerance": TOL, "date": "2026-11-22", "cohorts": {},
@@ -176,6 +304,14 @@ def main():
                 aps = [arm_block[str(s)]["average_precision"] for s in SEEDS]
                 arm_block["average_precision_three_seed_mean"] = float(np.mean(aps))
                 report["cohorts"][cohort]["arms"][arm] = arm_block
+
+    # Tables 3, 4, 12 and 13 replayed from archived patient-level predictions.
+    report["tables"] = {
+        "rep_match": replay_rep_match(index, failures),
+        "structured": replay_structured(index, failures),
+        "nodx": replay_nodx(index, failures),
+        "reference_dependence": reference_dependence(),
+    }
 
     # The manuscript's strict-subset text-only and true-cross-attention AP are 0.293/0.271.
     report["manuscript_ap_check"] = {

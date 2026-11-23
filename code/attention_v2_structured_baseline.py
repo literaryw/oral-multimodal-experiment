@@ -6,9 +6,9 @@ tabular model on the same underlying fields reaches comparable balanced metrics,
 whatever the text arm contributes comes from simple tabular associations rather than
 from clinical semantics, and the paper should say so.
 
-The design matrix is built from the SAME narratives the encoder sees (parsed with the
-template of Section 3.2), so the information content is identical; only the model class
-differs.  Fold splits, seeds and metrics match attention_v2_experiments.py exactly.
+The design matrix encodes the same structured fields as the text arm using one-hot and numeric features.
+It uses the same patient-level outer folds and inner-train fit rows as attention_v2_experiments.py,
+with fold-mean metrics averaged across seeds. Representation and model family differ.
 
 Variants:
     structured_all    age + gender + T/N/M/stage one-hot + diagnosis one-hot
@@ -105,6 +105,37 @@ def make_models():
     }
 
 
+def inner_fit_idx(y, outer_train, seed):
+    """Use the primary grid's 80/20 inner split and the same fit rows."""
+    splitter = StratifiedKFold(n_splits=5, shuffle=True, random_state=seed + 10000)
+    fit_rel, _ = next(splitter.split(np.zeros(len(outer_train)), y[outer_train]))
+    return outer_train[fit_rel]
+
+
+def check_against_archive(results, path, tol=1e-12):
+    """Refuse to overwrite an archive whose fold-mean metrics this run does not reproduce."""
+    if not path.exists():
+        return
+    old = json.load(open(path))
+    bad, worst = [], 0.0
+    for kind, cohorts in results.items():
+        for cohort, models in cohorts.items():
+            for name, rec in models.items():
+                for m in ["accuracy", "macro_f1", "high_f1", "auc", "pr_auc"]:
+                    delta = abs(rec[m] - old[kind][cohort][name][m])
+                    worst = max(worst, delta)
+                    if delta > tol:
+                        bad.append("%s/%s/%s/%s: archive %.12f vs rerun %.12f"
+                                   % (kind, cohort, name, m,
+                                      old[kind][cohort][name][m], rec[m]))
+    if bad:
+        print("\nREFUSING TO OVERWRITE: rerun does not reproduce the archived metrics")
+        for line in bad:
+            print("  " + line)
+        raise SystemExit(1)
+    print("archive check: all fold-mean metrics reproduced (max |delta| = %.3e)" % worst)
+
+
 def main():
     index = json.load(open(D / "attention_v2" / "cohort_index.json"))
     case_ids = index["case_ids"]
@@ -123,33 +154,59 @@ def main():
         X_all = build(rows, kind)
         results[kind] = {}
         print("\n=== variant %s  (n_features=%d) ===" % (kind, X_all.shape[1]))
-        for coh in ["full", "wide", "strict"]:
-            m = masks[coh]
-            X, y = X_all[m], y_all[m]
-            results[kind][coh] = {}
+        for cohort in ["full", "wide", "strict"]:
+            mask = masks[cohort]
+            X, y = X_all[mask], y_all[mask]
+            results[kind][cohort] = {}
             for name, factory in make_models().items():
-                per_seed, oof_store = [], {}
+                per_seed, oof_by_seed, seed42_store = [], {}, {}
                 for seed in SEEDS:
                     kf = StratifiedKFold(n_splits=5, shuffle=True, random_state=seed)
                     pred = np.zeros(len(y), dtype=int)
-                    prob = np.zeros(len(y))
-                    for tr, va in kf.split(X, y):
-                        mdl = factory()
-                        mdl.fit(X[tr], y[tr])
-                        pred[va] = mdl.predict(X[va])
-                        prob[va] = mdl.predict_proba(X[va])[:, 1]
-                    r = metrics(y, pred, prob)
-                    per_seed.append(r)
+                    prob = np.zeros(len(y), dtype=float)
+                    fold_id = np.full(len(y), -1, dtype=int)
+                    fold_metrics, fit_sizes = [], []
+                    for fold, (outer_train, outer_test) in enumerate(kf.split(X, y)):
+                        fit = inner_fit_idx(y, outer_train, seed)
+                        model = factory()
+                        model.fit(X[fit], y[fit])
+                        pred[outer_test] = model.predict(X[outer_test])
+                        prob[outer_test] = model.predict_proba(X[outer_test])[:, 1]
+                        fold_id[outer_test] = fold
+                        fold_metrics.append(metrics(y[outer_test], pred[outer_test], prob[outer_test]))
+                        fit_sizes.append(int(len(fit)))
+                    assert (fold_id >= 0).all(), "outer folds do not cover every patient"
+                    seed_result = {k: float(np.mean([m[k] for m in fold_metrics]))
+                                   for k in fold_metrics[0]}
+                    seed_result["n_fit_mean"] = float(np.mean(fit_sizes))
+                    per_seed.append(seed_result)
+                    oof_by_seed[str(seed)] = {
+                        "oof_pred": pred.tolist(),
+                        "oof_prob": prob.tolist(),
+                        "fold_index": fold_id.tolist(),
+                        "folds": fold_metrics,
+                        "n_fit_by_fold": fit_sizes,
+                    }
                     if seed == 42:
-                        oof_store = {"oof_pred": pred.tolist(), "oof_prob": prob.tolist()}
+                        seed42_store = {
+                            "oof_pred": pred.tolist(),
+                            "oof_prob": prob.tolist(),
+                            "folds": fold_metrics,
+                            "n_fit_by_fold": fit_sizes,
+                        }
                 agg = {k: float(np.mean([r[k] for r in per_seed])) for k in per_seed[0]}
-                agg["sd_accuracy"] = float(np.std([r["accuracy"] for r in per_seed], ddof=1))
-                results[kind][coh][name] = dict(agg, **oof_store)
-                print("  %-7s %-6s Acc=%.3f MacroF1=%.3f HighF1=%.3f AUC=%.3f PR-AUC=%.3f" % (
-                    coh, name, agg["accuracy"], agg["macro_f1"], agg["high_f1"],
-                    agg["auc"], agg["pr_auc"]))
+                agg["sd_by_seed"] = {k: float(np.std([r[k] for r in per_seed], ddof=1))
+                                      for k in ["accuracy", "macro_f1", "high_f1", "auc", "pr_auc"]}
+                agg["per_seed"] = per_seed
+                agg["oof_by_seed"] = oof_by_seed
+                results[kind][cohort][name] = dict(agg, **seed42_store)
+                print("  %-7s %-8s Acc=%.3f MacroF1=%.3f HighF1=%.3f AUC=%.3f PR-AUC=%.3f n_fit≈%.1f" % (
+                    cohort, name, agg["accuracy"], agg["macro_f1"], agg["high_f1"],
+                    agg["auc"], agg["pr_auc"], agg["n_fit_mean"]))
 
-    json.dump(results, open(OUT / "attention_v2_structured_baseline.json", "w"), indent=2)
+    out_path = OUT / "attention_v2_structured_baseline.json"
+    check_against_archive(results, out_path)
+    json.dump(results, open(out_path, "w"), indent=2)
     print("\nSaved attention_v2_structured_baseline.json")
     print("DONE")
 
