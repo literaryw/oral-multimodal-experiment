@@ -88,8 +88,8 @@ FILES = {
         "data/TCGA-HNSC/experiment_outputs/attention_v2_rederive.json",
         "data/TCGA-HNSC/experiment_outputs/attention_v2_rederive.tex",
         "data/TCGA-HNSC/experiment_outputs/case_slide_manifest.csv",
-        "codex-review/main_grade_replay_verification_2026_11_22.json",
-        "paper/prereg_nodx_fourcell.md",
+        "data/TCGA-HNSC/experiment_outputs/main_grade_replay_verification_2026_11_22.json",
+        "data/TCGA-HNSC/experiment_outputs/prereg_nodx_fourcell.md",
     ],
     "figure_sources": [
         "data/TCGA-HNSC/experiment_outputs/text_latent_attention_archive.npz",

@@ -15,8 +15,8 @@
     {
       "path": "code/README.md",
       "role": "analysis_code",
-      "size": 12112,
-      "sha256": "15b3becd507da0cb4978e6cf22707ff123ee3c56ae2c86f2a64993b85dbc9464"
+      "size": 12141,
+      "sha256": "d2e6ca33e4900b36517eeb8db38118ba91abeca28a52c2f5a1d2b817f439abf5"
     },
     {
       "path": "code/fix_age_units.py",
@@ -123,8 +123,8 @@
     {
       "path": "code/build_manuscript_bundle_manifest.py",
       "role": "analysis_code",
-      "size": 6825,
-      "sha256": "e06cd206ea8637e967dc254930cea80b069eefe871a28038f22fd60d4e12482b"
+      "size": 6874,
+      "sha256": "6a3d81fe60eef5bc57723c5d96990d55eebb7a9e19473bad6b03e14c24d87929"
     },
     {
       "path": "code/verify_manuscript_bundle.py",
@@ -415,13 +415,13 @@
       "sha256": "b5ef131104a3c0ad64cf51fa49a6193d36626914f11fe623730d5afc60800231"
     },
     {
-      "path": "codex-review/main_grade_replay_verification_2026_11_22.json",
+      "path": "data/TCGA-HNSC/experiment_outputs/main_grade_replay_verification_2026_11_22.json",
       "role": "primary_and_auxiliary_outputs",
       "size": 1520,
       "sha256": "8b9da43d87b9974e836be23a695f920ac277d66869a416e7a5025c81c36c3b71"
     },
     {
-      "path": "paper/prereg_nodx_fourcell.md",
+      "path": "data/TCGA-HNSC/experiment_outputs/prereg_nodx_fourcell.md",
       "role": "primary_and_auxiliary_outputs",
       "size": 3890,
       "sha256": "897c543e6c88294017fcde2ab7a3d98905da5fe2acb70a7519fe26465c8138e7"
