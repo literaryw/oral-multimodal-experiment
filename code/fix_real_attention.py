@@ -1,5 +1,7 @@
-"""
-修复 #2: 从训练好的 BiomedBERT 模型提取真实注意力权重
+"""Train the auxiliary text proxy and archive its latent-chunk attention.
+
+The model operates on four chunks created after a learned dense projection of the
+768-dimensional embedding.  The chunks have no validated clinical-field meaning.
 """
 import numpy as np
 import torch, torch.nn as nn
@@ -9,7 +11,7 @@ from pathlib import Path
 import copy
 
 _PROJ = Path(__file__).resolve().parent.parent
-DATA_DIR = _PROJ / "data/TCGA-HNSC/integrated"
+DATA_DIR = _PROJ / "data/TCGA-HNSC/integrated_full_legacy499"
 OUT_DIR = _PROJ / "data/TCGA-HNSC/experiment_outputs"
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 FIG_DIR = _PROJ / "paper"
@@ -19,13 +21,11 @@ torch.manual_seed(RANDOM_SEED); np.random.seed(RANDOM_SEED)
 
 class TextClassifierWithAttention(nn.Module):
     """
-    BiomedBERT 文本分类器, 带可解释的注意力权重
-    对 768-dim 文本特征使用 self-attention 产生 token-level 权重
+    Auxiliary classifier with self-attention over four latent chunks.
     """
     def __init__(self, in_dim=768, hidden=512, num_classes=2, dropout=0.4, n_heads=4):
         super().__init__()
-        # 将 768-dim 文本嵌入分割为 4 个 "token" 对应不同特征组
-        # T_stage(192) + N_stage(192) + M_stage(192) + Diagnosis+Demographics(192)
+        # A learned dense projection is divided into four structural chunks.
         self.token_dim = in_dim // 4  # 192
         self.n_tokens = 4
         self.token_proj = nn.Linear(in_dim, in_dim)
@@ -46,11 +46,11 @@ class TextClassifierWithAttention(nn.Module):
 
     def forward(self, x):
         B = x.size(0)
-        # 将 768 维拆分为 4 个 semantic tokens
+        # Divide the learned projection into four contiguous latent chunks.
         h = self.token_proj(x)  # (B, 768)
         tokens = h.view(B, self.n_tokens, self.token_dim)  # (B, 4, 192)
 
-        # Self-attention over 4 semantic tokens
+        # Self-attention over four latent chunks.
         attn_out, attn_weights = self.attention(tokens, tokens, tokens)
         # attn_out: (B, 4, 192), attn_weights: (B, 4, 4)
         self.saved_attn_weights = attn_weights.detach()
@@ -67,6 +67,8 @@ def train_and_extract_attention():
     # 加载数据
     X = np.load(DATA_DIR / "X_text_biomedbert.npy")
     y4 = np.load(DATA_DIR / "y.npy")
+    if X.shape != (499, 768) or y4.shape[0] != 499:
+        raise RuntimeError("The archived auxiliary proxy requires the retained ordered 499-case inputs")
     y = np.where(np.isin(y4, [0, 1]), 0, 1)
 
     # 5-fold CV
@@ -116,86 +118,30 @@ def train_and_extract_attention():
     # 合并所有 fold 的注意力权重
     all_attn = np.concatenate(all_attn_weights, axis=0)  # (499, 4, 4)
 
-    # 聚合: 对 [CLS] token (位置0) 的 query 计算每个 key token 的平均注意力
-    # 4 个 token 对应: TNM_staging, Diagnosis_text, Demographics, Other
+    # Aggregate raw attention without assigning clinical semantics to chunks.
     mean_attn = all_attn.mean(axis=0)  # (4, 4)
-    # 取第一个 token 对其他 token 的注意力作为特征重要性
-    # 更直观: 取所有 query 对所有 key 的平均注意力
     avg_per_key = mean_attn.mean(axis=0)  # (4,) — 每个 key token 被关注的程度
 
-    # 按特征组聚合
-    # Token 0 = T_stage fields
-    # Token 1 = N_stage + M_stage fields
-    # Token 2 = Diagnosis text
-    # Token 3 = Demographics
-    # 重新映射为论文中的 3 组: TNM(0+1), Diagnosis(2), Demographics(3)
-    tnm_weight = (avg_per_key[0] + avg_per_key[1]) / 2
-    diag_weight = avg_per_key[2]
-    demo_weight = avg_per_key[3]
+    clean_archive = OUT_DIR / "text_latent_attention_archive.npz"
+    np.savez_compressed(
+        clean_archive,
+        raw_attn=all_attn.astype(np.float32),
+        avg_per_key=avg_per_key.astype(np.float32),
+        chunk_width=np.int64(192),
+        definition=np.array(
+            "Four contiguous chunks after learned dense projection; no clinical-field mapping"
+        ),
+    )
 
-    # 归一化
-    total = tnm_weight + diag_weight + demo_weight
-    tnm_weight /= total
-    diag_weight /= total
-    demo_weight /= total
+    from fig2_regenerate import render_latent_chunk_attention
 
-    print(f"\n  === REAL BiomedBERT Attention Weights ===")
-    print(f"  TNM Staging:      {tnm_weight:.3f}")
-    print(f"  Diagnosis Text:   {diag_weight:.3f}")
-    print(f"  Demographics:     {demo_weight:.3f}")
-
-    # 保存注意力权重
-    np.save(OUT_DIR / "biomedbert_attention_weights.npy", {
-        'tnm': tnm_weight, 'diagnosis': diag_weight, 'demographics': demo_weight,
-        'raw_attn': all_attn, 'avg_per_key': avg_per_key
-    }, allow_pickle=True)
-
-    # 生成真实文本权重图
-    import matplotlib
-    matplotlib.use('Agg')
-    import matplotlib.pyplot as plt
-
-    fig, ax = plt.subplots(figsize=(8, 5))
-    features = ['T Stage', 'N Stage', 'M Stage', 'Diagnosis\nText', 'Age', 'Gender']
-
-    # 从聚合的注意力中提取子特征权重
-    t_weight = tnm_weight * 0.52  # T 在 TNM 中占 ~52%
-    n_weight = tnm_weight * 0.29  # N 占 ~29%
-    m_weight = tnm_weight * 0.19  # M 占 ~19%
-    diag_text_weight = diag_weight
-    age_weight = demo_weight * 0.55
-    gender_weight = demo_weight * 0.45
-
-    weights = [t_weight, n_weight, m_weight, diag_text_weight, age_weight, gender_weight]
-    colors = ['#1565C0', '#1565C0', '#1565C0', '#2E7D32', '#FF8F00', '#FF8F00']
-
-    bars = ax.bar(features, weights, color=colors, edgecolor='white', linewidth=0.5)
-    for bar, w in zip(bars, weights):
-        ax.text(bar.get_x()+bar.get_width()/2, bar.get_height()+0.005, f'{w:.3f}',
-                ha='center', fontsize=11, fontweight='bold')
-
-    ax.set_ylabel('Mean Attention Weight', fontsize=13)
-    ax.set_title('BiomedBERT Clinical Feature Contribution to OSCC Grading\n(Real Attention Weights from Trained Model)',
-                 fontsize=14, fontweight='bold')
-    ax.set_ylim(0, max(weights) * 1.3)
-
-    from matplotlib.patches import Patch
-    legend_elements = [
-        Patch(facecolor='#1565C0', label=f'TNM Staging (total: {tnm_weight:.3f})'),
-        Patch(facecolor='#2E7D32', label=f'Diagnosis Text ({diag_weight:.3f})'),
-        Patch(facecolor='#FF8F00', label=f'Demographics ({demo_weight:.3f})')
-    ]
-    ax.legend(handles=legend_elements, loc='upper right', fontsize=10)
-
-    plt.tight_layout()
-    plt.savefig(FIG_DIR / 'fig2_text_weights.pdf')
-    plt.close()
-    print(f"\n  Fig 2 (REAL text weights) saved to {FIG_DIR}")
+    render_latent_chunk_attention(clean_archive, FIG_DIR / "fig2_text_weights.pdf")
+    print("\n  Latent-chunk attention archive and manuscript figure saved")
 
     # 保存模型
     torch.save(model.state_dict(), OUT_DIR / "text_attention_model.pt")
 
-    return tnm_weight, diag_weight, demo_weight
+    return avg_per_key
 
 if __name__ == "__main__":
     train_and_extract_attention()

@@ -271,6 +271,8 @@ def main():
                 print("  %-22s seed=%-4d Acc=%.3f+-%.3f MacroF1=%.3f HighF1=%.3f AUC=%.3f  (%.0fs)" % (
                     arm, seed, a["accuracy"]["mean"], a["accuracy"]["std"],
                     a["macro_f1"]["mean"], a["high_f1"]["mean"], a["auc"]["mean"], dt))
+                json.dump({cname: out[cname]},
+                          open(OUT_DIR / ("%s_%s_results.json" % (args.tag, cname)), "w"), indent=2)
                 json.dump(out, open(OUT_DIR / ("%s_results.json" % args.tag), "w"), indent=2)
 
     json.dump(out, open(OUT_DIR / ("%s_results.json" % args.tag), "w"), indent=2)

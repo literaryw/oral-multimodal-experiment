@@ -1,5 +1,5 @@
 """
-口腔亚组 Grad-CAM 扩展: G1和G3各15例 + KL skew统计 + Faithfulness
+口腔亚组输入梯度扩展: G1和G3各15例 + KL concentration统计 + 描述性删除曲线
 """
 import sys, os
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
@@ -126,7 +126,7 @@ for i in range(n_cases):
     arr = patches_data[f"patches_{i}"]
     patch_lookup[cid] = arr.astype(np.float32)
 
-# ====== Grad-CAM computation ======
+# ====== Absolute input-gradient patch score ======
 def compute_patch_cam(model, patches):
     """Per-patch importance via input gradient magnitude"""
     model.eval()
@@ -140,7 +140,7 @@ def compute_patch_cam(model, patches):
         logits, _ = model(x_j)
         score = logits[0, 1] - logits[0, 0]  # High - Low logit
         score.backward()
-        # Input gradient magnitude = feature importance
+        # Descriptive absolute input-gradient magnitude for this stored patch.
         cam_scores[j] = x_j.grad.abs().mean().item()
 
     # Min-max normalize
@@ -149,7 +149,7 @@ def compute_patch_cam(model, patches):
     return cam_scores
 
 # ====== Process G1 and G3 cases ======
-print("\n=== Computing Grad-CAM for G1 and G3 cases ===")
+print("\n=== Computing input-gradient patch scores for G1 and G3 cases ===")
 # Get case IDs by grade from integrated data
 case_labels_df = __import__('pandas').read_csv(DATA_DIR / "integrated" / "case_labels.csv")
 g1_cases = case_labels_df[case_labels_df['label'] == 0]['case_id'].tolist()  # G1
@@ -166,7 +166,7 @@ rng = np.random.RandomState(RANDOM_SEED)
 g1_selected = rng.choice(g1_with_patches, min(15, len(g1_with_patches)), replace=False).tolist()
 g3_selected = rng.choice(g3_with_patches, min(15, len(g3_with_patches)), replace=False).tolist()
 
-# Compute Grad-CAM for each selected case
+# Compute the input-gradient score for each selected case.
 results = {"G1": {}, "G3": {}}
 
 for grade_name, case_list in [("G1", g1_selected), ("G3", g3_selected)]:
@@ -202,13 +202,17 @@ print(f"  G1 KL: {np.mean(g1_kl):.3f}+-{np.std(g1_kl):.3f}")
 print(f"  G3 KL: {np.mean(g3_kl):.3f}+-{np.std(g3_kl):.3f}")
 print(f"  U={stat:.1f}, p={p_mw:.4f}")
 
-# ====== Faithfulness: Delete-AUC ======
-print("\n=== Faithfulness: Delete-AUC ===")
+# ====== Descriptive High-Grade-probability deletion curve ======
+print("\n=== Descriptive deletion-curve area ===")
 # Train a simple classifier on the original features to measure AUC
 from sklearn.linear_model import LogisticRegression
 
 def compute_delete_auc(case_id, cam_scores, patches, model_orig):
-    """Delete patches in order of decreasing importance, measure AUC drop"""
+    """Delete patches by score and integrate High-Grade probability.
+
+    Without random/reverse controls this area is descriptive, not a validated
+    faithfulness measure. The vertical quantity is prob_high for both grades.
+    """
     order = np.argsort(-cam_scores)  # highest importance first
     n = len(order)
     n_steps = min(10, n)
@@ -228,12 +232,12 @@ def compute_delete_auc(case_id, cam_scores, patches, model_orig):
             prob_high = torch.softmax(logits, 1)[0, 1].item()
         aucs.append(prob_high)
 
-    # AUC of "importance-deleted" curve: lower = more faithful
+    # Area under the prob_high deletion curve; no faithfulness interpretation.
     x_axis = np.linspace(0, 1, len(aucs))
     del_auc = float(np.trapezoid(aucs, x_axis)) if hasattr(np, 'trapezoid') else float(sum(aucs) / len(aucs))
     return del_auc, aucs
 
-# Compute Delete-AUC for selected cases using the trained model
+# Compute the descriptive curve area for only the first five cases per grade.
 for grade_name, case_list in [("G1", g1_selected[:5]), ("G3", g3_selected[:5])]:
     for cid in case_list:
         cam = np.array(results[grade_name][cid]["cam_scores"])
@@ -264,10 +268,7 @@ output = {
             f"G3 KL skew {np.mean(g3_kl):.3f}+-{np.std(g3_kl):.3f}, "
             f"p={p_mw:.4f} ({'significant' if p_mw < 0.05 else 'not significant'})"
         ),
-        "verdict": (
-            "G1 attention is more concentrated than G3" if np.mean(g1_kl) > np.mean(g3_kl) + 0.1
-            else "G1 and G3 attention patterns are not clearly distinguishable"
-        ),
+        "verdict": "single-seed input-gradient comparison; no cohort or mechanism inference",
     },
 }
 json.dump(output, open(OUTPUT_DIR / "oral_gradcam_results.json", "w"), indent=2)

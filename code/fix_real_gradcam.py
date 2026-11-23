@@ -48,12 +48,13 @@ class OptimizedImageModel(nn.Module):
     def _save_grad(self, grad):
         self.gradients = grad
 
-# ============ Patch-level Grad-CAM ============
+# ============ Patch-level activation-gradient score ============
 def compute_real_patch_cam(model, patches, target_class):
     """
-    Compute per-patch importance for REAL WSI patches.
+    Compute a Grad-CAM-like activation-gradient score for stored WSI patches.
     patches: (N_patches, 1024) — actual UNI features per patch location
-    Returns: cam_scores (N_patches,) — importance score per patch
+    Returns a normalized score per stored patch index. The index has no WSI
+    coordinate mapping in this archive.
     """
     model.eval()
     model.zero_grad()
@@ -239,9 +240,9 @@ def generate_real_gradcam():
 
     plt.suptitle('Grad-CAM: Real Patch-Level Activation from Optimized Model', fontsize=15, fontweight='bold', y=0.99)
     plt.tight_layout(rect=[0.02, 0, 1, 0.93])
-    plt.savefig(FIG_DIR / 'fig4_gradcam_heatmap.pdf')
+    plt.savefig(OUT_DIR / 'fig4_gradcam_heatmap_legacy.pdf')
     plt.close()
-    print(f"  Fig 4 (OPTIMIZED real-patch Grad-CAM) saved")
+    print("  Legacy Grad-CAM-plus-MI composite saved outside paper/; use fig4_regenerate.py for the manuscript figure")
 
     # Save CAM data
     g1_cam = compute_real_patch_cam(model, torch.FloatTensor(patch_data[f"case_{g1_idx[10]}"]).to(DEVICE), 0)

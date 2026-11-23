@@ -1,14 +1,11 @@
-"""
-Regenerate Figure 4 with the re-measured mutual-information panel.
+"""Regenerate two illustrative activation-gradient patch-score panels.
 
-The Grad-CAM panels are produced from the *saved* classifier (image_only_model.pt) and
-the same patch file and sample indices as the original script, so the left/centre
-panels are unchanged; only the MI panel is refreshed to the values measured on the
-unified feature set (code/attention_v2_aux.py), which is what the manuscript now reports.
+The classifier is loaded from its archived checkpoint. The panels are qualitative
+one-dimensional score sequences over stored patch indices, not spatial heatmaps,
+input-gradient explanations, or held-out performance estimates.
 """
-import json
-import sys
 from pathlib import Path
+import sys
 
 import matplotlib
 matplotlib.use("Agg")
@@ -27,53 +24,37 @@ DEVICE = torch.device("cpu")
 
 y4 = np.load(DATA / "integrated_full_legacy499" / "y.npy").ravel()
 patches = np.load(DATA / "integrated" / "X_img_patches.npz")
-
 model = OptimizedImageModel().to(DEVICE)
 model.load_state_dict(torch.load(OUT / "image_only_model.pt", map_location=DEVICE,
                                  weights_only=True))
 model.eval()
 
-# MI measured on the unified features (full HNSCC cohort, n=499)
-aux = json.load(open(OUT / "attention_v2_aux.json"))
-mi = aux["mutual_information"]["full"]
-mi_cross, mi_img_label, mi_text_label = mi["cross_mi"], mi["img_label_mi"], mi["text_label_mi"]
-print("MI panel (full cohort): cross=%.4f img-label=%.4f text-label=%.4f"
-      % (mi_cross, mi_img_label, mi_text_label))
-
-fig, axes = plt.subplots(1, 3, figsize=(15, 5))
-for col, (label, sidx) in enumerate([("G1", np.where(y4 == 0)[0][10]), ("G3", np.where(y4 == 2)[0][10])]):
-    key = "case_%d" % sidx
-    p = torch.FloatTensor(patches[key]).to(DEVICE)
-    n_p = p.shape[0]
-    cam = compute_real_patch_cam(model, p, 0 if label == "G1" else 1)
-    print("  %s: %d patches  KL=%.3f" % (label, n_p, kl_to_uniform(cam)))
-    side = max(2, int(np.ceil(np.sqrt(n_p))))
-    grid = np.zeros((side, side))
-    for i in range(n_p):
-        grid[i // side, i % side] = cam[i]
+fig, axes = plt.subplots(1, 2, figsize=(10, 4.8))
+selected = [("G1", np.where(y4 == 0)[0][10]), ("G3", np.where(y4 == 2)[0][10])]
+for col, (label, sample_idx) in enumerate(selected):
+    patch_array = torch.FloatTensor(patches["case_%d" % sample_idx]).to(DEVICE)
+    n_patches = patch_array.shape[0]
+    importance = compute_real_patch_cam(model, patch_array, 0 if label == "G1" else 1)
+    print("  %s: %d patches  KL=%.3f" % (label, n_patches, kl_to_uniform(importance)))
     ax = axes[col]
-    im = ax.imshow(grid, cmap="jet", interpolation="bilinear")
-    ax.set_title("%s — Real Patch Grad-CAM (%d patches)" % (label, n_p), fontsize=13, fontweight="bold")
-    ax.axis("off")
-    plt.colorbar(im, ax=ax, fraction=0.046, label="Importance")
+    patch_index = np.arange(n_patches)
+    top = np.argsort(importance)[-5:]
+    colours = np.full(n_patches, "#5B8DB8", dtype=object)
+    colours[top] = "#C65D47"
+    ax.bar(patch_index, importance, color=colours, width=0.85)
+    ax.set_title("%s case (%d stored patches)" % (label, n_patches),
+                 fontsize=11, fontweight="bold")
+    ax.set_xlabel("Stored patch index (no WSI coordinate mapping)")
+    ax.set_ylabel("Normalized activation-gradient score")
+    ax.set_ylim(0, 1.05)
+    ax.grid(axis="y", alpha=0.25)
 
-ax = axes[2]
-M = np.array([[np.nan, mi_cross, mi_img_label],
-              [mi_cross, np.nan, mi_text_label],
-              [mi_img_label, mi_text_label, np.nan]])
-im = ax.imshow(np.ma.masked_invalid(M), cmap="YlOrRd", vmin=0, vmax=0.05)
-for i in range(3):
-    for j in range(3):
-        if not np.isnan(M[i, j]):
-            ax.text(j, i, "%.3f" % M[i, j], ha="center", va="center", fontsize=12, fontweight="bold")
-ax.set_xticks(range(3)); ax.set_yticks(range(3))
-ax.set_xticklabels(["Image\n(UNI)", "Text\n(BERT)", "Label\n(Grade)"])
-ax.set_yticklabels(["Image\n(UNI)", "Text\n(BERT)", "Label\n(Grade)"])
-ax.set_title("Mutual Information Matrix", fontsize=13, fontweight="bold")
-plt.colorbar(im, ax=ax, fraction=0.046, label="MI (nats)")
-
-plt.suptitle("Grad-CAM: Real Patch-Level Activation from Optimized Model", fontsize=15, fontweight="bold", y=0.99)
-plt.tight_layout(rect=[0.02, 0, 1, 0.93])
-plt.savefig(FIG / "fig4_gradcam_heatmap.pdf")
-plt.close()
-print("saved fig4_gradcam_heatmap.pdf")
+fig.suptitle("Illustrative activation-gradient patch scores (not held-out evaluation)",
+             fontsize=13, fontweight="bold")
+fig.tight_layout(rect=[0.02, 0, 1, 0.92])
+fig.savefig(FIG / "fig4_gradcam_heatmap.pdf")
+preview = PROJ / "codex-review" / "fig4_preview.png"
+preview.parent.mkdir(exist_ok=True)
+fig.savefig(preview, dpi=140)
+plt.close(fig)
+print("saved paper/fig4_gradcam_heatmap.pdf")
