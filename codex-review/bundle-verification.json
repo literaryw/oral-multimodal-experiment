@@ -1,7 +1,7 @@
 {
   "passed": true,
   "scope": "request-based archive verification; not public raw-source reconstruction",
-  "files_verified": 74,
+  "files_verified": 78,
   "case_ids": 499,
   "unique_case_ids": 499,
   "cohort_counts": {

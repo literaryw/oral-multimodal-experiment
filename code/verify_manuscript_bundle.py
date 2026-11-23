@@ -204,6 +204,52 @@ def validate(root: Path) -> dict:
                         errors.append(f"{cohort}/{arm}/{seed}: invalid inner split size")
                         break
 
+    structured = json.loads(
+        (data / "experiment_outputs" / "attention_v2_structured_baseline.json").read_text(
+            encoding="utf-8"))
+    cohort_counts = {"full": 499, "wide": 332, "strict": 246}
+    for kind, cohorts in structured.items():
+        for cohort, models in cohorts.items():
+            for name, record in models.items():
+                if set(record.get("oof_by_seed", {})) != EXPECTED_SEEDS:
+                    errors.append(f"structured/{kind}/{cohort}/{name}: missing per-seed OOF")
+                    continue
+                for seed, oof in record["oof_by_seed"].items():
+                    pred = np.asarray(oof["oof_pred"], dtype=int)
+                    prob = np.asarray(oof["oof_prob"], dtype=float)
+                    folds = np.asarray(oof["fold_index"], dtype=int)
+                    count = cohort_counts[cohort]
+                    if len(pred) != count or len(prob) != count or len(folds) != count:
+                        errors.append(
+                            f"structured/{kind}/{cohort}/{name}/{seed}: OOF length mismatch")
+                        continue
+                    expected = np.argmax(np.stack([1.0 - prob, prob], axis=0), axis=0)
+                    if not np.array_equal(pred, expected):
+                        errors.append(
+                            f"structured/{kind}/{cohort}/{name}/{seed}: prediction is not argmax(prob)")
+                    if sorted(set(folds.tolist())) != [0, 1, 2, 3, 4]:
+                        errors.append(
+                            f"structured/{kind}/{cohort}/{name}/{seed}: folds do not cover 0-4")
+
+    nodx = json.loads(
+        (data / "experiment_outputs" / "attention_v2_nodx_fourcell.json").read_text(
+            encoding="utf-8"))
+    for block, arms in nodx["cells"].items():
+        for arm, seeds in arms.items():
+            for seed, cell in seeds.items():
+                pred = np.asarray(cell["oof_pred"], dtype=int)
+                prob = np.asarray(cell["oof_prob"], dtype=float)
+                if len(pred) != 246 or len(prob) != 246:
+                    errors.append(f"nodx/{block}/{arm}/{seed}: OOF length mismatch")
+                    continue
+                expected = np.argmax(np.stack([1.0 - prob, prob], axis=0), axis=0)
+                if not np.array_equal(pred, expected):
+                    errors.append(f"nodx/{block}/{arm}/{seed}: prediction is not argmax(prob)")
+    for metric, block in nodx["per_metric_differences"].items():
+        values = np.asarray(block["delta_D_values"], dtype=float)
+        if len(values) != 3 or abs(float(values.mean()) - block["delta_D_mean"]) > 1e-12:
+            errors.append(f"nodx/{metric}: per-seed differences do not reproduce their mean")
+
     with np.load(data / "experiment_outputs" / "text_latent_attention_archive.npz") as attn:
         raw = attn["raw_attn"]
         avg = attn["avg_per_key"]
