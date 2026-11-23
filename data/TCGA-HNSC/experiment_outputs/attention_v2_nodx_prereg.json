@@ -1,0 +1,47 @@
+{
+  "date": "2026-11-22",
+  "stage": "revision-stage addition, written before running the no-diagnosis neural arms",
+  "cohort": "strict",
+  "n": 246,
+  "cells": {
+    "with_diagnosis": ["text_only", "true_cross_attention"],
+    "no_diagnosis": ["text_only", "true_cross_attention"]
+  },
+  "reused_cells": "with_diagnosis cells come from attention_v2_strict_results.json",
+  "protocol": {
+    "seeds": [42, 123, 456],
+    "outer": "StratifiedKFold(n_splits=5, shuffle=True, random_state=seed)",
+    "inner": "StratifiedKFold(n_splits=5, shuffle=True, random_state=seed+10000), first fold, 80/20",
+    "epochs": 100,
+    "patience": 15,
+    "threshold": "argmax over two logits"
+  },
+  "estimands": {
+    "D_full": "MacroF1(True CA) - MacroF1(Text-Only), with diagnosis, fold mean first",
+    "D_nodx": "same difference without diagnosis",
+    "delta_D": "D_nodx - D_full",
+    "primary_metric": "macro_f1",
+    "secondary_metrics": ["high_f1", "average_precision", "auc", "accuracy", "low_f1"],
+    "average_precision": "per-fold AP averaged over five folds and three seeds"
+  },
+  "analysis_commitments": [
+    "no directional hypothesis",
+    "no significance or equivalence test",
+    "report all four cells and all three per-seed differences",
+    "stop if the seed-42 no-diagnosis text-only run does not reproduce the archive",
+    "interpretation follows the observed pattern; the manuscript states which one occurred"
+  ],
+  "seed42_parity_rule": {
+    "pred_agreement": 1.0,
+    "max_abs_prob_delta_max": 1e-06
+  },
+  "inputs_sha256": {
+    "code/attention_v2_nodx_encode.py": "cbe82516b006ebced4e9db25adc2735d688090765785feb082a36cfd7cea46f8",
+    "code/attention_v2_nodx_fourcell.py": "6fad4b3bef6a4f24edb871121bc45cf4ec0a1c812a9b13107f3a44c335be6e74",
+    "data/TCGA-HNSC/attention_v2/text_tokens_nodx.npz": "df88d0b0811b24a8e97b19311e13dad7ee109456bc437a7f12e218334985a7ba",
+    "data/TCGA-HNSC/attention_v2/cohort_index.json": "24d4093d2dcc65b750025be93352c39f171ee902383d2859697a7307e9f29536",
+    "data/TCGA-HNSC/attention_v2/text_tokens.npz": "5d159d5b559998d4da788c6009da6c7d921da9590969047a6f3a87228171d3fa",
+    "data/TCGA-HNSC/experiment_outputs/attention_v2_aux.json": "49ddecdc233a56a3a4cb2423c63171b27a0396672a76125e97ce6459b39edc9e",
+    "data/TCGA-HNSC/experiment_outputs/attention_v2_strict_results.json": "064da660e46886073466e737a22682d22540a404847d6ba750e8bfbcff5e325c"
+  }
+}

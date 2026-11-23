@@ -1,0 +1,7 @@
+comparison,macro_f1_or_delta,status,source,locator
+B-main,0.6634,internal_reference,strict_outer_reference_summary_2026-11-10.md,B-main row
+B-v4,0.7098,internal_reference,strict_outer_reference_summary_2026-11-10.md,B-v4 row
+C1,,not_estimable,protocol.json,C1 4/15
+C2,,not_estimable,protocol.json,C2 5/15
+C-A1,,not_estimable,architecture_outer_results_2026-11-10.md,C-A1 14/15
+C-A2,+0.0160,stability_gate_failed,architecture_outer_results_2026-11-10.md,"C-A2 row: +0.0570/-0.0167/+0.0077; conditional 95% CI [-0.0164,+0.0487]"

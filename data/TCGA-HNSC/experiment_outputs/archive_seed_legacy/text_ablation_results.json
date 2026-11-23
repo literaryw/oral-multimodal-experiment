@@ -1,0 +1,14 @@
+{
+  "Full (diagnosis + TNM + demographics)": {
+    "accuracy": 0.673,
+    "macro_f1": 0.605
+  },
+  "TNM only": {
+    "accuracy": 0.613,
+    "macro_f1": 0.556
+  },
+  "Demographics only (age, gender)": {
+    "accuracy": 0.554,
+    "macro_f1": 0.418
+  }
+}

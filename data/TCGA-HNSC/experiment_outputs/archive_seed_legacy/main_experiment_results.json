@@ -1,0 +1,78 @@
+{
+  "results": {
+    "Image-Only (UNI)": {
+      "accuracy": 0.685,
+      "macro_f1": 0.568,
+      "auc": 0.59,
+      "low_f1": 0.79,
+      "high_f1": 0.34
+    },
+    "Text-Only (BiomedBERT)": {
+      "accuracy": 0.673,
+      "macro_f1": 0.605,
+      "auc": 0.615,
+      "low_f1": 0.77,
+      "high_f1": 0.44
+    },
+    "Late Fusion": {
+      "accuracy": 0.393,
+      "macro_f1": 0.393,
+      "auc": 0.518,
+      "low_f1": 0.4,
+      "high_f1": 0.39
+    },
+    "Cross-Attention Fusion": {
+      "accuracy": 0.589,
+      "macro_f1": 0.528,
+      "auc": 0.541,
+      "low_f1": 0.7,
+      "high_f1": 0.36
+    }
+  },
+  "confusion_matrices": {
+    "Image-Only (UNI)": [
+      [
+        301,
+        69
+      ],
+      [
+        88,
+        41
+      ]
+    ],
+    "Text-Only (BiomedBERT)": [
+      [
+        272,
+        98
+      ],
+      [
+        65,
+        64
+      ]
+    ],
+    "Late Fusion": [
+      [
+        100,
+        270
+      ],
+      [
+        33,
+        96
+      ]
+    ],
+    "Cross-Attention Fusion": [
+      [
+        237,
+        133
+      ],
+      [
+        72,
+        57
+      ]
+    ]
+  },
+  "metadata": {
+    "dataset": "TCGA-HNSC",
+    "cv": "5-fold stratified"
+  }
+}

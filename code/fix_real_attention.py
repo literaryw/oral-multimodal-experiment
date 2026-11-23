@@ -12,7 +12,7 @@ _PROJ = Path(__file__).resolve().parent.parent
 DATA_DIR = _PROJ / "data/TCGA-HNSC/integrated"
 OUT_DIR = _PROJ / "data/TCGA-HNSC/experiment_outputs"
 OUT_DIR.mkdir(parents=True, exist_ok=True)
-FIG_DIR = _PROJ / "paper/figures"
+FIG_DIR = _PROJ / "paper"
 RANDOM_SEED = 42
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 torch.manual_seed(RANDOM_SEED); np.random.seed(RANDOM_SEED)
@@ -188,9 +188,9 @@ def train_and_extract_attention():
     ax.legend(handles=legend_elements, loc='upper right', fontsize=10)
 
     plt.tight_layout()
-    plt.savefig(FIG_DIR / 'fig5_text_weights.pdf')
+    plt.savefig(FIG_DIR / 'fig2_text_weights.pdf')
     plt.close()
-    print(f"\n  Fig 5 (REAL text weights) saved to {FIG_DIR}")
+    print(f"\n  Fig 2 (REAL text weights) saved to {FIG_DIR}")
 
     # 保存模型
     torch.save(model.state_dict(), OUT_DIR / "text_attention_model.pt")
