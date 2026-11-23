@@ -36,6 +36,39 @@ def sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
+def sha256_lf(path: Path) -> tuple[str, int]:
+    """Hash the same bytes with CRLF collapsed to LF, which is what Git stores."""
+    digest = hashlib.sha256()
+    size = 0
+    carry = b""
+    with path.open("rb") as stream:
+        for block in iter(lambda: stream.read(1024 * 1024), b""):
+            data = carry + block
+            carry = b""
+            if data.endswith(b"\r"):
+                data, carry = data[:-1], b"\r"
+            data = data.replace(b"\r\n", b"\n")
+            size += len(data)
+            digest.update(data)
+    size += len(carry)
+    digest.update(carry)
+    return digest.hexdigest(), size
+
+
+def check_file(path: Path, entry: dict, mode: str) -> list[str]:
+    if mode == "raw" or "sha256_lf" not in entry:
+        problems = []
+        if path.stat().st_size != entry["size"]:
+            problems.append(f"size mismatch: {entry['path']}")
+        if sha256(path) != entry["sha256"]:
+            problems.append(f"sha256 mismatch: {entry['path']}")
+        return problems
+    if mode == "auto" and path.stat().st_size == entry["size"] and sha256(path) == entry["sha256"]:
+        return []
+    digest, size = sha256_lf(path)
+    return [] if (digest, size) == (entry["sha256_lf"], entry["size_lf"]) else [f"sha256 mismatch: {entry['path']}"]
+
+
 def contained(root: Path, relative: str) -> Path:
     path = (root / relative).resolve()
     path.relative_to(root.resolve())
@@ -60,7 +93,7 @@ def stage_bundle(source: Path, destination: Path) -> None:
     shutil.copy2(source / MANIFEST, target_manifest)
 
 
-def validate(root: Path) -> dict:
+def validate(root: Path, line_ending: str = "auto") -> dict:
     errors = []
     manifest_path = contained(root, MANIFEST.as_posix())
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
@@ -70,10 +103,7 @@ def validate(root: Path) -> dict:
         if not path.is_file():
             errors.append(f"missing: {entry['path']}")
             continue
-        if path.stat().st_size != entry["size"]:
-            errors.append(f"size mismatch: {entry['path']}")
-        if sha256(path) != entry["sha256"]:
-            errors.append(f"sha256 mismatch: {entry['path']}")
+        errors.extend(check_file(path, entry, line_ending))
 
     data = root / "data" / "TCGA-HNSC"
     index = json.loads((data / "attention_v2" / "cohort_index.json").read_text(encoding="utf-8"))
@@ -284,11 +314,17 @@ def main() -> None:
     parser.add_argument("--bundle-root", type=Path, required=True)
     parser.add_argument("--stage-from", type=Path)
     parser.add_argument("--report", type=Path)
+    parser.add_argument(
+        "--line-ending",
+        choices=("auto", "raw", "lf"),
+        default="auto",
+        help="auto accepts either the working-tree bytes or their LF-normalized form",
+    )
     args = parser.parse_args()
     bundle_root = args.bundle_root.resolve()
     if args.stage_from:
         stage_bundle(args.stage_from.resolve(), bundle_root)
-    report = validate(bundle_root)
+    report = validate(bundle_root, args.line_ending)
     if args.report:
         args.report.parent.mkdir(parents=True, exist_ok=True)
         args.report.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")

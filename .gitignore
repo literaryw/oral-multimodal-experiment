@@ -17,6 +17,7 @@ data/TCGA-HNSC/*
 !data/TCGA-HNSC/experiment_outputs/
 !data/TCGA-HNSC/attention_v2/
 !data/TCGA-HNSC/integrated_full_legacy499/
+!data/TCGA-HNSC/followup_archive/
 
 # Excluded from the published feature bundle: large derived arrays (regenerate via
 # code/prep_attention_v2.py).

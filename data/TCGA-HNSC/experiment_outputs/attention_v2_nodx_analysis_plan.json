@@ -1,6 +1,15 @@
 {
   "date": "2026-11-22",
-  "stage": "revision-stage addition, written before running the no-diagnosis neural arms",
+  "stage": "revision-stage analysis plan, not a time-stamped public registration",
+  "known_before_plan": [
+    "with_diagnosis text_only and true_cross_attention cells of the primary grid",
+    "one archived seed-42 no-diagnosis text_only auxiliary run, committed 2026-10-17 in e72e032"
+  ],
+  "new_to_this_comparison": [
+    "the other two seeds of the no-diagnosis text_only cell",
+    "the three no-diagnosis true_cross_attention seeds",
+    "the four-cell contrast"
+  ],
   "cohort": "strict",
   "n": 246,
   "cells": {

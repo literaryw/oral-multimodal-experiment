@@ -84,12 +84,12 @@ FILES = {
         "data/TCGA-HNSC/experiment_outputs/attention_v2_nodx_fourcell.tex",
         "data/TCGA-HNSC/experiment_outputs/attention_v2_nodx_seed.tex",
         "data/TCGA-HNSC/experiment_outputs/attention_v2_nodx_metric.tex",
-        "data/TCGA-HNSC/experiment_outputs/attention_v2_nodx_prereg.json",
+        "data/TCGA-HNSC/experiment_outputs/attention_v2_nodx_analysis_plan.json",
         "data/TCGA-HNSC/experiment_outputs/attention_v2_rederive.json",
         "data/TCGA-HNSC/experiment_outputs/attention_v2_rederive.tex",
         "data/TCGA-HNSC/experiment_outputs/case_slide_manifest.csv",
         "data/TCGA-HNSC/experiment_outputs/main_grade_replay_verification_2026_11_22.json",
-        "data/TCGA-HNSC/experiment_outputs/prereg_nodx_fourcell.md",
+        "data/TCGA-HNSC/experiment_outputs/analysis_plan_nodx_fourcell.md",
     ],
     "figure_sources": [
         "data/TCGA-HNSC/experiment_outputs/text_latent_attention_archive.npz",
@@ -105,12 +105,34 @@ FILES = {
 }
 
 
+TEXT_SUFFIXES = {".py", ".md", ".json", ".csv", ".tex", ".txt", ".yaml", ".yml"}
+
+
 def sha256(path: Path) -> str:
     digest = hashlib.sha256()
     with path.open("rb") as stream:
         for block in iter(lambda: stream.read(1024 * 1024), b""):
             digest.update(block)
     return digest.hexdigest()
+
+
+def sha256_lf(path: Path) -> tuple[str, int]:
+    """Hash the same bytes with CRLF collapsed to LF, which is what Git stores."""
+    digest = hashlib.sha256()
+    size = 0
+    carry = b""
+    with path.open("rb") as stream:
+        for block in iter(lambda: stream.read(1024 * 1024), b""):
+            data = carry + block
+            carry = b""
+            if data.endswith(b"\r"):
+                data, carry = data[:-1], b"\r"
+            data = data.replace(b"\r\n", b"\n")
+            size += len(data)
+            digest.update(data)
+    size += len(carry)
+    digest.update(carry)
+    return digest.hexdigest(), size
 
 
 def main() -> None:
@@ -126,18 +148,27 @@ def main() -> None:
             absolute = (root / relative).resolve()
             if not absolute.is_file():
                 raise FileNotFoundError(relative)
-            entries.append(
-                {
-                    "path": relative.replace("\\", "/"),
-                    "role": role,
-                    "size": absolute.stat().st_size,
-                    "sha256": sha256(absolute),
-                }
-            )
+            record = {
+                "path": relative.replace("\\", "/"),
+                "role": role,
+                "size": absolute.stat().st_size,
+                "sha256": sha256(absolute),
+            }
+            lf_digest, lf_size = sha256_lf(absolute)
+            if absolute.suffix.lower() in TEXT_SUFFIXES and lf_digest != record["sha256"]:
+                record["size_lf"] = lf_size
+                record["sha256_lf"] = lf_digest
+            entries.append(record)
 
     manifest = {
         "schema_version": 1,
         "scope": "request-based archive verification; not public raw-source reconstruction",
+        "line_ending_note": (
+            "size and sha256 are those of the working-tree bytes, which include CRLF on a "
+            "Windows checkout. Text files whose Git blob stores LF instead also record "
+            "size_lf and sha256_lf, so a clone with either checkout setting can be verified. "
+            "Binary files are hashed as-is."
+        ),
         "expected_cohorts": {"full": 499, "wide": 332, "strict": 246},
         "ordering_authority": "data/TCGA-HNSC/attention_v2/cohort_index.json:case_ids",
         "unresolved_upstream_revisions": [

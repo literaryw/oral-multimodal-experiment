@@ -1,6 +1,6 @@
 # Manuscript-version reproduction workflows
 
-This guide describes the current manuscript-version scripts and the archived outputs that let a reader replay every reported table without training. The `publish` branch of `https://github.com/literaryw/oral-multimodal-experiment` carries these scripts, the patient-level predictions and the regenerated table fragments. Datasets and pre-extracted features are not distributed there: TCGA-HNSC is available from the GDC and the UNI features from the Lab-Rasool/TCGA dataset, so a full retrain starts from those public downloads plus the retained feature bundle described in Section 4.
+This guide describes the current manuscript-version scripts and the archived outputs that let a reader replay every reported table without training. The `publish` branch of `https://github.com/literaryw/oral-multimodal-experiment` carries these scripts, the patient-level predictions and the regenerated table fragments. Datasets and pre-extracted features are not distributed there: TCGA-HNSC is available from the GDC and the UNI features from the Lab-Rasool/TCGA dataset, so a full retrain starts from those public downloads plus the retained feature bundle described in Section 4 of this guide.
 
 Run commands from the repository root in the project environment (Python 3.12, environment tcga-oscc). The verified workflow begins with the retained manuscript feature bundle. Public raw data and pretrained assets alone do not yet reconstruct that bundle.
 
@@ -21,10 +21,10 @@ The analysis script requires data/TCGA-HNSC/attention_v2/cohort_index.json and d
 ## 1b. Replay the follow-up table
 
 ```powershell
-python code\replay_grade_followup.py --run <archived-run-directory> --labels <patient_join.csv>
+python code\replay_grade_followup.py --run data\TCGA-HNSC\followup_archive --labels data\TCGA-HNSC\followup_archive\patient_join.csv
 ```
 
-The script verifies the archived SHA-256 hashes, requires complete patient/member prediction coverage, and recomputes the B-main/B-v4 references, the three A08-A07 partition differences, and the conditional 95% interval from the original 4,000 paired bootstrap draws. The archived run directory and `patient_join.csv` are held in the research archive; `results/main-grade-improvement-2026-11-09-v1/REPRODUCE.md` records the required layout. The replay covers Section 4.10 and Table 17 only; C1, C2 and C-A1 remain not estimable.
+This script needs NumPy and PyArrow; everything else it reads is in `data/TCGA-HNSC/followup_archive/` on the `publish` branch — `outer_evaluation_v4/strict_outer_oof_v4.parquet`, `architecture_outer_evaluation_v2/metrics.json`, the A07/A08 `prediction.npz` files under `architecture_outer_predictions_v2/`, and `patient_join.csv`. It verifies the archived SHA-256 hashes, requires complete patient/member prediction coverage, and recomputes the B-main/B-v4 references, the three A08-A07 partition differences, and the conditional 95% interval from the original 4,000 paired bootstrap draws. The request bundle carries the same layout with the surrounding run record; `results/main-grade-improvement-2026-11-09-v1/REPRODUCE.md` describes it. The replay covers Section 4.10 and Table 17 only; C1, C2 and C-A1 remain not estimable because their per-fold eligibility records are not archived.
 
 ## 2. Rerun the primary grid from retained manuscript features
 
@@ -45,7 +45,7 @@ python code\attention_v2_nodx_encode.py
 python code\attention_v2_nodx_fourcell.py
 ```
 
-The encoder re-renders the stored narrative without the primary-diagnosis block and re-encodes it at the base-499 level. Gates: 499/499 template round-trip, no case with empty TNM and demographics, and a full-template re-encoding that reproduces the stored token mask exactly and token values within 1e-5. The comparison script replaces the token, mask and [CLS] inputs, checks that the seed-42 no-diagnosis Text-Only prediction reproduces the archived auxiliary run, then runs Text-Only and True Cross-Attention on the strict subset for seeds 42/123/456. The analysis plan and frozen input hashes are in `data/TCGA-HNSC/experiment_outputs/prereg_nodx_fourcell.md`; the plan was written after the with-diagnosis cells were known from the primary grid and before the no-diagnosis runs, so it documents a pre-run plan rather than a time-stamped public registration. Outputs are `attention_v2_nodx_fourcell.json` (four cells plus per-seed out-of-fold predictions and fold indices), `attention_v2_nodx_fourcell.tex` (table body), `attention_v2_nodx_seed.tex` (per-seed differences) and `attention_v2_nodx_metric.tex` (per-metric differences). All differences are computed from unrounded cell values and rounded only for display. The script refuses to overwrite the archived JSON unless every cell reproduces to 1e-12.
+The encoder re-renders the stored narrative without the primary-diagnosis block and re-encodes it at the base-499 level. Gates: 499/499 template round-trip, no case with empty TNM and demographics, and a full-template re-encoding that reproduces the stored token mask exactly and token values within 1e-5. The comparison script replaces the token, mask and [CLS] inputs, checks that the seed-42 no-diagnosis Text-Only prediction reproduces the archived auxiliary run, then runs Text-Only and True Cross-Attention on the strict subset for seeds 42/123/456. The revision-stage analysis plan and the frozen input hashes are in `data/TCGA-HNSC/experiment_outputs/analysis_plan_nodx_fourcell.md`. That plan postdates the with-diagnosis cells and one seed-42 auxiliary no-diagnosis Text-Only run, and shares a revision commit with the results, so it records an analysis plan rather than a time-stamped public registration. Outputs are `attention_v2_nodx_fourcell.json` (four cells plus per-seed out-of-fold predictions and fold indices), `attention_v2_nodx_fourcell.tex` (table body), `attention_v2_nodx_seed.tex` (per-seed differences) and `attention_v2_nodx_metric.tex` (per-metric differences). All differences are computed from unrounded cell values and rounded only for display. The script refuses to overwrite the archived JSON unless every cell reproduces to 1e-12.
 
 ## 3. Assemble and verify the request-based bundle
 
@@ -55,6 +55,8 @@ python code\verify_manuscript_bundle.py --bundle-root codex-review\bundle-stage 
 ```
 
 The first command writes file roles, sizes, and SHA-256 hashes for the retained inputs, analysis code, OOF outputs, and figure sources, including the source-parquet columns needed to audit slide selection. The second command hard-links or copies only manifest-listed files into an independent staging directory and validates them there. Checks cover 499 unique ordered case IDs, 499/332/246 nested masks, binary-label derivation, slide-manifest IDs and order against the source parquet, pooled and token feature shapes, patch-array order, five neural arms, three seeds, five folds, OOF lengths, and the $499\times4\times4$ latent-attention archive. The staging directory must be absent or empty.
+
+Not every listed file is published: the retained feature inputs are not redistributed, so the verifier runs against the request bundle. Text files that are published also record `size_lf` and `sha256_lf`, which are the size and digest of the Git blob, so a published entry can be checked without the bundle: `git cat-file blob <rev>:<path>` piped through `sha256sum` reproduces `sha256_lf`. `--line-ending auto` accepts either the working-tree bytes or their LF-normalized form, `raw` requires the former and `lf` the latter.
 
 ## 4. Public raw-source reconstruction boundary
 

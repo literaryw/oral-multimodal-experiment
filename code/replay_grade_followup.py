@@ -1,4 +1,4 @@
-"""Replay Table 12 from archived predictions. Requires numpy and pyarrow."""
+"""Replay Table 17 from archived predictions. Requires numpy and pyarrow."""
 import argparse
 import csv
 import hashlib

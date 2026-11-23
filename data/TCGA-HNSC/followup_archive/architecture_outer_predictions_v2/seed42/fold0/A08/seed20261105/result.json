@@ -1,0 +1,17 @@
+{
+  "job": {
+    "cohort": "strict",
+    "engine": "architecture",
+    "model": "A08",
+    "outer_fold": 0,
+    "outer_seed": 42,
+    "training_seed": 20261105
+  },
+  "identity": "{\"checkpoint_sha256\": \"a4b0266cf19ce27c1e07cb489fa23f3470525c4131130d41889a2b0a79b1ccf8\", \"job\": {\"cohort\": \"strict\", \"engine\": \"architecture\", \"model\": \"A08\", \"outer_fold\": 0, \"outer_seed\": 42, \"training_seed\": 20261105}, \"plan_sha256\": \"73119325d4186cada927e00644e27a3d3587ae922110fdd108eea2d2d2f2e8b5\", \"refit_result_sha256\": \"3470889fa127be8160e529c63784f29a860d275bb94e49ec5e82bd15c7283524\", \"test_report_sha256\": \"95cd88c6f7229befd8f807cf06c14aac79fe30accae058dbff334b6a6efb3fa9\"}",
+  "prediction_sha256": "0a9a43603f673c0e098aa6a2168f4cd1c66cc98d429848cf93bda861fa192231",
+  "test_report_sha256": "95cd88c6f7229befd8f807cf06c14aac79fe30accae058dbff334b6a6efb3fa9",
+  "refit_result_sha256": "3470889fa127be8160e529c63784f29a860d275bb94e49ec5e82bd15c7283524",
+  "checkpoint_sha256": "a4b0266cf19ce27c1e07cb489fa23f3470525c4131130d41889a2b0a79b1ccf8",
+  "peak_allocated_bytes": 53176320,
+  "scope": "Label-free architecture test probabilities; no metric or model selection."
+}

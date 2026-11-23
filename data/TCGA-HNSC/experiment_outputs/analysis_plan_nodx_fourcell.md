@@ -1,13 +1,22 @@
-# Preregistration: no-diagnosis four-cell comparison (strict oral subset)
+# Revision-stage analysis plan: no-diagnosis four-cell comparison (strict oral subset)
 
-Written before the no-diagnosis neural arms were run. Scope: strict oral cavity subset
-(n=246). This is a revision-stage addition, not part of the original study plan.
+Scope: strict oral cavity subset (n=246). This is a revision-stage addition, not part of
+the original study plan. It is recorded as an analysis plan rather than as a time-stamped
+public registration.
 
-What was known at freeze time: the with-diagnosis Text-Only and True Cross-Attention cells
-of the primary grid, including their per-seed and pooled out-of-fold predictions. What had
-not been run: every no-diagnosis cell. The plan and the results were committed in the same
-revision commit, so this document records a pre-run plan rather than a time-stamped public
-registration.
+What already existed when this plan was written: the with-diagnosis Text-Only and True
+Cross-Attention cells of the primary grid, including their per-seed and pooled out-of-fold
+predictions; and one archived auxiliary run of the no-diagnosis Text-Only arm at seed 42,
+committed on 2026-10-17 in `e72e032` as part of the text-ablation grid, whose patient-level
+predictions the new run reproduces exactly (100% agreement, maximum probability difference
+0.0). New to this comparison were the other two seeds of that cell, the three no-diagnosis
+True Cross-Attention seeds, and the four-cell contrast itself.
+
+What the public record can and cannot show. The plan and the results first appear in the
+same revision commit, so the history shows that both were written for one revision, not
+that the plan predates the runs. The seed-42 auxiliary run cited above is the only element
+with an independent earlier timestamp; the ordering of the remaining cells rests on the
+commit record alone.
 
 ## Question
 
