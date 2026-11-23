@@ -351,8 +351,34 @@ def main() -> None:
         "--public-rev",
         help="also check every entry marked public against this Git revision",
     )
+    parser.add_argument(
+        "--public-only",
+        action="store_true",
+        help="check only the published entries, so a plain clone can be verified",
+    )
     args = parser.parse_args()
     bundle_root = args.bundle_root.resolve()
+    if args.public_only:
+        if not args.public_rev:
+            parser.error("--public-only requires --public-rev")
+        manifest = json.loads(
+            contained(bundle_root, MANIFEST.as_posix()).read_text(encoding="utf-8")
+        )
+        public_errors = check_public_tree(bundle_root, args.public_rev, manifest)
+        report = {
+            "passed": not public_errors,
+            "scope": manifest.get("scope"),
+            "public_revision": args.public_rev,
+            "public_entries": manifest.get("publication", {}).get("public_entries"),
+            "public_errors": public_errors,
+        }
+        if args.report:
+            args.report.parent.mkdir(parents=True, exist_ok=True)
+            args.report.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
+        print(json.dumps(report, indent=2))
+        if not report["passed"]:
+            raise SystemExit(1)
+        return
     if args.stage_from:
         stage_bundle(args.stage_from.resolve(), bundle_root)
     report = validate(bundle_root, args.line_ending)
