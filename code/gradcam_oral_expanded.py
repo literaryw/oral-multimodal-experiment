@@ -20,7 +20,7 @@ import copy
 BASE_DIR = Path(".").resolve().parent
 DATA_DIR = BASE_DIR / "data" / "TCGA-HNSC"
 OUTPUT_DIR = DATA_DIR / "experiment_outputs"
-FIGURE_DIR = BASE_DIR / "paper"
+FIGURE_DIR = BASE_DIR / "paper" / "figures"
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 RANDOM_SEED = 42
 torch.manual_seed(RANDOM_SEED); np.random.seed(RANDOM_SEED)
